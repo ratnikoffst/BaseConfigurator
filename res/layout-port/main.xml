@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:foregroundGravity="center">
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_gradient_base"
+                    android:src="@drawable/drawable_base"
+                    android:id="@+id/button_base"
+                    android:onClick="OnClick"
+
+                    />
+
+            <ImageView
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/red"
+                    android:id="@+id/line_base__color"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_gradient_config"
+                    android:src="@drawable/drawable_config"
+                    android:id="@+id/button_config"
+                    android:onClick="OnClick"/>
+
+            <ImageView
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/green"
+                    android:id="@+id/line_config_color"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_gradient_shop"
+                    android:src="@drawable/drawable_shop"
+                    android:id="@+id/button_shop"
+                    android:onClick="OnClick"
+                    />
+
+            <ImageView
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/yellow"
+                    android:id="@+id/line_shop_color"
+                    />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawable_gradient_helpmy"
+                    android:src="@drawable/drawable_helpmy"
+                    android:id="@+id/button_helpmy"
+                    android:onClick="OnClick"/>
+
+            <ImageView
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/accent"
+                    android:id="@+id/line_helpmy_color"/>
+        </LinearLayout>
+        <ImageView android:layout_width="3dp"
+                   android:layout_height="match_parent"
+                   android:layout_gravity="right"
+                   android:id="@+id/line_free_color"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/FragmentView">
+
+
+    </LinearLayout>
+</LinearLayout>
+
