@@ -33,7 +33,8 @@
               android:layout_height="wrap_content"
               android:id="@+id/InnOwner"
               android:textColor="@color/white"
-              android:layout_alignParentTop="true" android:layout_alignParentLeft="true"/>
+              android:layout_alignParentTop="true"
+              android:layout_alignParentLeft="true"/>
     <TextView android:paddingLeft="20dp"
               android:focusable="false"
               android:paddingBottom="5dp"

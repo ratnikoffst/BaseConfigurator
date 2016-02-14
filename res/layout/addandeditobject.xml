@@ -13,6 +13,7 @@
               android:layout_height="wrap_content"
               android:text="@string/InnOwner"
               android:layout_gravity="center_horizontal"
+
     />
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -21,7 +22,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/editNumInn"
+                android:id="@+id/editNameInn"
                 android:inputType="number"
                 android:lines="1"
                 android:numeric="integer"
@@ -41,7 +42,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText3"/>
+            android:id="@+id/editNameOwner"/>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/NameObject"
@@ -51,7 +52,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText10"/>
+            android:id="@+id/editNameObject"/>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/AdressObject"
@@ -61,7 +62,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText8"/>
+            android:id="@+id/editNameAdress"/>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/CommentObject"
@@ -71,7 +72,7 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"/>
+            android:id="@+id/editNameComment"/>
     <Button android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

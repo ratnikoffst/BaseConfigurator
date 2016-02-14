@@ -8,6 +8,8 @@ import android.view.View;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.BaseFragment;
 import com.ratnikoff.BaseConfigurator.FragmentMenuShop.ShopFragment;
 
+import java.util.ArrayList;
+
 public class BaseConfigurator extends Activity {
     private final static int Set_Base_Fragment = 1;        // Установлен fragment с базой данных
     private final static String Set_base_Tag = "Base";      // Тег Fragment базы данных
@@ -19,6 +21,7 @@ public class BaseConfigurator extends Activity {
     private final static String Set_HelpMy_Tag = "Help";  // Тег Fragment помощь
 
     private int current_fragment = 0; // Номер текущего fragment
+    private ArrayList<String> fragmentTag = new ArrayList<String>();
     String currentTag = "";           // Текущий Тег fragment
 
 
@@ -53,11 +56,15 @@ public class BaseConfigurator extends Activity {
     // Установка fragment
     private void SetFragment(int set_fragment) {
 
-        if (current_fragment != set_fragment) {
+        String stre = fragmentTag.get(fragmentTag.size());
+
+        if (set_fragment != current_fragment) {
             if (currentTag != "") {
-                getFragmentManager().beginTransaction()
-                        .remove(getFragmentManager().findFragmentByTag(currentTag))
-                        .commit();
+                getFragmentManager().popBackStackImmediate();
+//                getFragmentManager().beginTransaction()
+//                        .
+//                        //.remove(getFragmentManager().findFragmentByTag(currentTag))
+//                        .commit();
             }
             switch (set_fragment) {
                 case Set_Base_Fragment:
@@ -68,11 +75,13 @@ public class BaseConfigurator extends Activity {
                             .add(R.id.FragmentView, CurrentFragment, Set_base_Tag)
                             .commit();
                     currentTag = Set_base_Tag;
+                    addTagFragment(Set_base_Tag);
                     break;
                 case Set_Config_Fragment:
                     SetLineBackground(R.color.green);
                     findViewById(R.id.button_config).setBackgroundResource(R.color.green);
-                    currentTag = "";
+                    //addTagFragment();
+                    currentTag = ""; //Set_Config_Tag
                     break;
                 case Set_Shop_Fragment:
                     SetLineBackground(R.color.yellow);
@@ -82,11 +91,13 @@ public class BaseConfigurator extends Activity {
                             .add(R.id.FragmentView, sh, Set_Shop_Tag)
                             .commit();
                     currentTag = Set_Shop_Tag;
+                    addTagFragment(Set_Shop_Tag);
+                    //Fragment(Set_Shop_Tag);
                     break;
                 case Set_HelpMy_Fragment:
                     SetLineBackground(R.color.accent);
                     findViewById(R.id.button_helpmy).setBackgroundResource(R.color.accent);
-                    currentTag = Set_HelpMy_Tag;
+                    currentTag = ""; //Set_HelpMy_Tag;
                     break;
             }
             setDrawableInUse(set_fragment);// Установка старого цвета и нового клавиши меню
@@ -150,4 +161,13 @@ public class BaseConfigurator extends Activity {
         df.setCancelable(true);
         df.show();
     }
+
+    // Классы для управления fragmentami
+    public void addTagFragment(String tag) {
+
+        int i;
+        i = 1;
+        fragmentTag.add(tag);
+    }
+
 }

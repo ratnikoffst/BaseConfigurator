@@ -17,8 +17,6 @@ import java.util.ArrayList;
 public class ObjectListAdapter extends BaseAdapter {
     private ArrayList<DataObject> objectOwner;
     private BaseFragment c;
-    //  private OnClickOject ob=new OnClickOject();
-
 
     public ObjectListAdapter(ArrayList<DataObject> object, BaseFragment c) {
         this.objectOwner = object;
