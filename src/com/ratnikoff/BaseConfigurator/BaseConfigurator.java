@@ -2,6 +2,7 @@ package com.ratnikoff.BaseConfigurator;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -70,12 +71,8 @@ public class BaseConfigurator extends Activity {
                 case Set_Base_Fragment:
                     SetLineBackground(R.color.red);
                     findViewById(R.id.button_base).setBackgroundResource(R.color.red);
-                    BaseFragment CurrentFragment = new BaseFragment();
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.FragmentView, CurrentFragment, Set_base_Tag)
-                            .commit();
                     currentTag = Set_base_Tag;
-                    addTagFragment(Set_base_Tag);
+                    addFragment(Set_base_Tag, new BaseFragment, true);
                     break;
                 case Set_Config_Fragment:
                     SetLineBackground(R.color.green);
@@ -86,13 +83,8 @@ public class BaseConfigurator extends Activity {
                 case Set_Shop_Fragment:
                     SetLineBackground(R.color.yellow);
                     findViewById(R.id.button_shop).setBackgroundResource(R.color.yellow);
-                    ShopFragment sh = new ShopFragment();
-                    getFragmentManager().beginTransaction()
-                            .add(R.id.FragmentView, sh, Set_Shop_Tag)
-                            .commit();
                     currentTag = Set_Shop_Tag;
-                    addTagFragment(Set_Shop_Tag);
-                    //Fragment(Set_Shop_Tag);
+                    addFragment(Set_Shop_Tag, new ShopFragment(), true);
                     break;
                 case Set_HelpMy_Fragment:
                     SetLineBackground(R.color.accent);
@@ -161,12 +153,15 @@ public class BaseConfigurator extends Activity {
         df.setCancelable(true);
         df.show();
     }
+// Методы управления fragment
 
-    // Классы для управления fragmentami
-    public void addTagFragment(String tag) {
+    public void addFragment(String tag, Fragment frag, boolean delete) {
 
         int i;
         i = 1;
+        getFragmentManager().beginTransaction()
+                .add(R.id.FragmentView, CurrentFragment, Set_base_Tag)
+                .commit();
         fragmentTag.add(tag);
     }
 
