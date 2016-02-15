@@ -171,18 +171,12 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 bundle.putString("NameOwner", object.getNameOwner());
                 addBase.setArguments(bundle);
 
-                getFragmentManager().beginTransaction()
-                        .addToBackStack("Base")
-                        .hide(getFragmentManager().findFragmentByTag("Base"))
-                        .add(R.id.FragmentView, addBase, "EditObject")
-                        .show(addBase)
-                        .commit();
-                //act = (BaseConfigurator) getActivity();
-                act.addTagFragment("EditObject");
+                act.addFragment("EditObject", addBase, false);
+
                 break;
             case TYPE_DELETE:
                 RegistryObject.remove(CurrentItem);
-                //  RegistryObject.
+
                 CurrentItem = -1;
                 ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
                 break;
@@ -194,13 +188,13 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 bundle.putString("TYPE", "AddObject");
                 addBase.setArguments(bundle);
 
-                getFragmentManager().beginTransaction()
-                        .addToBackStack("Base")
-                        .hide(getFragmentManager().findFragmentByTag("Base"))
-                        .add(R.id.FragmentView, addBase, "AddObject")
-                        .show(addBase)
-                        .commit();
-                act.addTagFragment("AddObject");
+//                getFragmentManager().beginTransaction()
+//                        .addToBackStack("Base")
+//                        .hide(getFragmentManager().findFragmentByTag("Base"))
+//                        .add(R.id.FragmentView, addBase, "AddObject")
+//                        .show(addBase)
+//                        .commit();
+                act.addFragment("AddObject", addBase, false);
                 break;
         }
         //getFragmentManager();

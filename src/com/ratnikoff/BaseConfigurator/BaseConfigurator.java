@@ -57,22 +57,15 @@ public class BaseConfigurator extends Activity {
     // Установка fragment
     private void SetFragment(int set_fragment) {
 
-        String stre = fragmentTag.get(fragmentTag.size());
+        //   String stre = fragmentTag.get(fragmentTag.size());
 
         if (set_fragment != current_fragment) {
-            if (currentTag != "") {
-                getFragmentManager().popBackStackImmediate();
-//                getFragmentManager().beginTransaction()
-//                        .
-//                        //.remove(getFragmentManager().findFragmentByTag(currentTag))
-//                        .commit();
-            }
             switch (set_fragment) {
                 case Set_Base_Fragment:
                     SetLineBackground(R.color.red);
                     findViewById(R.id.button_base).setBackgroundResource(R.color.red);
                     currentTag = Set_base_Tag;
-                    addFragment(Set_base_Tag, new BaseFragment, true);
+                    addFragment(Set_base_Tag, new BaseFragment(), true);
                     break;
                 case Set_Config_Fragment:
                     SetLineBackground(R.color.green);
@@ -154,7 +147,7 @@ public class BaseConfigurator extends Activity {
         df.show();
     }
 
-    /* Классы для управления fragment
+
  /* Классы для управления fragment
     * tag - тэг вновь устанавливаемого обьекта
     * frag - вновь устанавливаемый фрагмент
@@ -164,7 +157,7 @@ public class BaseConfigurator extends Activity {
         int i;
         i = fragmentTag.size();
         if (del == true && i != 0) {
-            deleteAllFragment();//Fragment();
+            deleteAllFragment();
         }
         if (fragmentTag.size() != 0) {
             i--;
