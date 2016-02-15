@@ -54,7 +54,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
         RegistryObject = new ArrayList<DataObject>();
         for (int i = 1; i < 30; i++) {
             DataObject v = new DataObject();
-            v.setNameObject("Обьект №" + i);
+            //    v.setNameObject("Обьект №" + i);
             v.setNameOwner("Заказчик " + i);
             v.setAddressObject("Расположение " + i);
             v.setCommentObject("Комментарий " + i);
@@ -124,12 +124,12 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     * Первая переменная указывает редактирование или добавление !!!
     *
      */
-    public void setNewDataItem(int operation, String nameInn, String nameObject, String nameAdress, String nameOwner, String commentObject) {
+    public void setNewDataItem(int operation, String nameInn, String nameAdress, String nameOwner, String commentObject) {
         switch (operation) {
             case 1:
                 DataObject object = (DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 object.setInnObject(nameInn);
-                object.setNameObject(nameObject);
+                //   object.setNameObject(nameObject);
                 object.setAddressObject(nameAdress);
                 object.setNameOwner(nameOwner);
                 object.setCommentObject(commentObject);
@@ -139,7 +139,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
             case 2:
                 DataObject object2 = new DataObject();//(DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 object2.setInnObject(nameInn);
-                object2.setNameObject(nameObject);
+                //   object2.setNameObject(nameObject);
                 object2.setAddressObject(nameAdress);
                 object2.setNameOwner(nameOwner);
                 object2.setCommentObject(commentObject);
@@ -167,7 +167,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 bundle.putString("AddressObject", object.getAddressObject());
                 bundle.putString("InnObject", object.getInnObject());
                 bundle.putString("CommentObject", object.getCommentObject());
-                bundle.putString("NameObject", object.getNameObject());
+                // bundle.putString("NameObject", object.getNameObject());
                 bundle.putString("NameOwner", object.getNameOwner());
                 addBase.setArguments(bundle);
 
@@ -187,32 +187,8 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 bundle = new Bundle();
                 bundle.putString("TYPE", "AddObject");
                 addBase.setArguments(bundle);
-
-//                getFragmentManager().beginTransaction()
-//                        .addToBackStack("Base")
-//                        .hide(getFragmentManager().findFragmentByTag("Base"))
-//                        .add(R.id.FragmentView, addBase, "AddObject")
-//                        .show(addBase)
-//                        .commit();
                 act.addFragment("AddObject", addBase, false);
                 break;
         }
-        //getFragmentManager();
-//        BaseConfigurator act = (BaseConfigurator) getActivity();
-//        act.onAttachTestFragment();
-        /// act.
-
     }
-//    public interface FragmentListener {
-//        public void onAttachTestFragment();
-//    }
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        FragmentListener mListener;
-//
-//       act   mListener = (FragmentListener) activity;
-//
-//        mListener.onAttachTestFragment();
-//    }
 }

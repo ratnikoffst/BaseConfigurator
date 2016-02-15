@@ -52,10 +52,10 @@ public class ObjectListAdapter extends BaseAdapter {
     private void fillView(View convertView, int position) {
         final DataObject ObjectPosition = (DataObject) getItem(position); // Обьект по позиции .
 
-        TextView temp = (TextView) convertView.findViewById(R.id.NameObject); // Поиск соотвествующего объекта для заполнения
-        temp.setText(ObjectPosition.getNameObject()); // Установка Имени обьекта
+//        TextView temp = (TextView) convertView.findViewById(R.id.NameObject); // Поиск соотвествующего объекта для заполнения
+//        temp.setText(ObjectPosition.getNameObject()); // Установка Имени обьекта
 
-        temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
+        TextView temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
         temp.setText(ObjectPosition.getNameOwner()); // Установка имени заказчика
 
         temp = (TextView) convertView.findViewById(R.id.InnOwner); // Поиск соотвестmвующего объекта для заполнения

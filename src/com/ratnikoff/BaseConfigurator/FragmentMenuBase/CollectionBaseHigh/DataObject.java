@@ -6,7 +6,7 @@ package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseHigh;
  */
 public class DataObject {
 
-    private String nameObject; // Наименование Объекта
+    // private String nameObject; // Наименование Объекта
     private String nameOwner; // Наименование Заказчика
     private String InnObject;
     private String CommentObject;
@@ -38,13 +38,13 @@ public class DataObject {
         return InnObject;
     }
 
-    public String getNameObject() {
-        return nameObject;
-    }
-
-    public void setNameObject(String nameObject) {
-        this.nameObject = nameObject;
-    }
+//    public String getNameObject() {
+//        return nameObject;
+//    }
+//
+//    public void setNameObject(String nameObject) {
+//        this.nameObject = nameObject;
+//    }
 
     public String getNameOwner() {
         return nameOwner;

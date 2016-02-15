@@ -43,16 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editNameOwner"/>
-    <TextView android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/NameObject"
-              android:layout_gravity="center_horizontal"
-    />
 
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/editNameObject"/>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/AdressObject"
