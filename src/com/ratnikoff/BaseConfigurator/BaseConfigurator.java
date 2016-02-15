@@ -153,16 +153,60 @@ public class BaseConfigurator extends Activity {
         df.setCancelable(true);
         df.show();
     }
-// Методы управления fragment
 
-    public void addFragment(String tag, Fragment frag, boolean delete) {
-
+    /* Классы для управления fragment
+ /* Классы для управления fragment
+    * tag - тэг вновь устанавливаемого обьекта
+    * frag - вновь устанавливаемый фрагмент
+    * флаг уничтожение предыдущего fragment true - да, false - нет
+    */
+    public void addFragment(String tag, Fragment frag, boolean del) {
         int i;
-        i = 1;
-        getFragmentManager().beginTransaction()
-                .add(R.id.FragmentView, CurrentFragment, Set_base_Tag)
-                .commit();
+        i = fragmentTag.size();
+        if (del == true && i != 0) {
+            deleteAllFragment();//Fragment();
+        }
+        if (fragmentTag.size() != 0) {
+            i--;
+            String currents = fragmentTag.get(i);
+            getFragmentManager().beginTransaction()
+                    .addToBackStack(currents)
+                    .hide(getFragmentManager().findFragmentByTag(currents))
+                    .add(R.id.FragmentView, frag, tag)
+                    .show(frag)
+                    .commit();
+        } else {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.FragmentView, frag, tag)
+                    .show(frag)
+                    .commit();
+        }
         fragmentTag.add(tag);
     }
 
+    // Удаление fragment всех fragment
+    public void deleteAllFragment() {
+
+        for (int i = fragmentTag.size() - 1; i == -1; i--) {
+            String tag = fragmentTag.get(i);
+            getFragmentManager().beginTransaction()
+                    .remove(getFragmentManager().findFragmentByTag(tag))
+                    .commit();
+            fragmentTag.remove(i);
+        }
+
+    }
+
+    // удаление текущего со всплытием
+    public void removePop() {
+        int i = fragmentTag.size() - 1;
+        String tag = fragmentTag.get(i);
+        fragmentTag.remove(i);
+        i--;
+
+        getFragmentManager().beginTransaction()
+                .remove(getFragmentManager().findFragmentByTag(tag))
+                .show(getFragmentManager().findFragmentByTag(fragmentTag.get(i)))
+                .commit();
+    }
 }
