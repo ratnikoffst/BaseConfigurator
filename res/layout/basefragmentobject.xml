@@ -3,9 +3,11 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <Button android:layout_width="wrap_content"
+    <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/dataOwner"
+    />
 
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
@@ -13,7 +15,7 @@
                   android:layout_height="wrap_content"
                   android:id="@+id/listBaseObject"
         />
-        <ImageButton android:id="@+id/AddButton"
+        <ImageButton android:id="@+id/AddButtonObject"
                      android:layout_width="@dimen/round_button_diameter"
                      android:layout_height="@dimen/round_button_diameter"
                      android:layout_gravity="end|bottom"
@@ -21,6 +23,7 @@
                      android:layout_marginRight="@dimen/add_button_margin"
                      android:src="@android:drawable/ic_input_add"
                      android:tint="@android:color/white"
+
                      android:background="@drawable/fab_background"
 
         />

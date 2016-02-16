@@ -129,17 +129,14 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
             case 1:
                 DataObject object = (DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 object.setInnObject(nameInn);
-                //   object.setNameObject(nameObject);
                 object.setAddressObject(nameAdress);
                 object.setNameOwner(nameOwner);
                 object.setCommentObject(commentObject);
-
                 ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
                 break;
             case 2:
-                DataObject object2 = new DataObject();//(DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
+                DataObject object2 = new DataObject();
                 object2.setInnObject(nameInn);
-                //   object2.setNameObject(nameObject);
                 object2.setAddressObject(nameAdress);
                 object2.setNameOwner(nameOwner);
                 object2.setCommentObject(commentObject);
@@ -147,9 +144,8 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
                 lvRegistryObject.setSelection(lvRegistryObject.getCount());
                 break;
-}
+        }
         CurrentItem = -1;
-
     }
 
     public void enterFAB(int type) {
@@ -163,15 +159,14 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 addBase = new AddEditFrag();
                 object = (DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 bundle = new Bundle();
-                bundle.putString("TYPE", "EditObject");
-                bundle.putString("AddressObject", object.getAddressObject());
-                bundle.putString("InnObject", object.getInnObject());
-                bundle.putString("CommentObject", object.getCommentObject());
-                // bundle.putString("NameObject", object.getNameObject());
+                bundle.putString("TYPE", "EditOwner");
+                bundle.putString("AddressOwner", object.getAddressObject());
+                bundle.putString("InnOwner", object.getInnObject());
+                bundle.putString("CommentOwner", object.getCommentObject());
                 bundle.putString("NameOwner", object.getNameOwner());
                 addBase.setArguments(bundle);
 
-                act.addFragment("EditObject", addBase, false);
+                act.addFragment("EditOwner", addBase, false);
 
                 break;
             case TYPE_DELETE:

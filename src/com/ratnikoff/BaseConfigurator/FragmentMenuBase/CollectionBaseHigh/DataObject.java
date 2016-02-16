@@ -38,14 +38,6 @@ public class DataObject {
         return InnObject;
     }
 
-//    public String getNameObject() {
-//        return nameObject;
-//    }
-//
-//    public void setNameObject(String nameObject) {
-//        this.nameObject = nameObject;
-//    }
-
     public String getNameOwner() {
         return nameOwner;
     }
