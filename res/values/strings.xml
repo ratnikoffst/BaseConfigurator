@@ -5,8 +5,9 @@
     <string name="InnOwner">ИНН Заказчика:</string>
     <string name="NameObject">Наименование Объектов:</string>
     <string name="CommentObject">Комментарий к объекту:</string>
-    <string name="AdressObject">Юридический Адрес Заказчика:</string>
+    <string name="AdressObject">Адрес Обьекта:</string>
     <string name="EnterNewOwner">Ввод данных нового Заказчика</string>
+    <string name="AdressOwner">Юридический Адрес Заказчика:</string>
     <string name="NumberZnakInn">14 знаков</string>
     <string name="exit">Вы хотите выйти ???</string>
     <string name="new_game">Новая игра</string>
