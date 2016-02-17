@@ -38,6 +38,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
         CreateObjectList();// Тестовое создание объектов
         fillListObject();  // Заполнение коллекции
         registerForContextMenu(root); // Регистрация контекстного меню
+
         return root;
     }
 
