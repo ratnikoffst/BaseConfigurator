@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.BaseFragment;
+import com.ratnikoff.BaseConfigurator.FragmentHelpMy.HelpMyFragment;
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.OwnerBaseFragment;
+import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.ConfigFragment;
 import com.ratnikoff.BaseConfigurator.FragmentMenuShop.ShopFragment;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ public class BaseConfigurator extends Activity {
     private int current_fragment = 0; // Номер текущего fragment
     private ArrayList<String> fragmentTag = new ArrayList<String>();
     String currentTag = "";           // Текущий Тег fragment
-    Drawable c;
+    Drawable c; // Тестовая переменная !!!
 
     /**
      * Called when the activity is first created.
@@ -65,13 +67,14 @@ public class BaseConfigurator extends Activity {
                     setLineBackground(R.color.red);
                     findViewById(R.id.button_base).setBackgroundResource(R.color.red);
                     currentTag = Set_base_Tag;
-                    addFragment(Set_base_Tag, new BaseFragment(), true);
+                    addFragment(Set_base_Tag, new OwnerBaseFragment(), true);
                     break;
                 case Set_Config_Fragment:
                     setLineBackground(R.color.green);
                     findViewById(R.id.button_config).setBackgroundResource(R.color.green);
                     //addTagFragment();
-                    currentTag = ""; //Set_Config_Tag
+                    currentTag = Set_Config_Tag; //Set_Config_Tag
+                    addFragment(Set_Config_Tag, new ConfigFragment(), true);
                     break;
                 case Set_Shop_Fragment:
                     setLineBackground(R.color.yellow);
@@ -82,7 +85,8 @@ public class BaseConfigurator extends Activity {
                 case Set_HelpMy_Fragment:
                     setLineBackground(R.color.accent);
                     findViewById(R.id.button_helpmy).setBackgroundResource(R.color.accent);
-                    currentTag = ""; //Set_HelpMy_Tag;
+                    currentTag = Set_HelpMy_Tag; //Set_HelpMy_Tag;
+                    addFragment(Set_HelpMy_Tag, new HelpMyFragment(), true);
                     break;
             }
             setDrawableInUse(set_fragment);// Установка старого цвета и нового клавиши меню
@@ -99,9 +103,9 @@ public class BaseConfigurator extends Activity {
         findViewById(R.id.line_free_color).setBackgroundResource(set_background_Line);
     }
 
+    // Восстановление исходного вида меню
     private void setDefaultMenu() {
         int i = fragmentTag.size() - 1;
-
         switch (fragmentTag.get(i)) {
             case Set_base_Tag:
                 setDrawableInUse(Set_Base_Fragment);
@@ -120,11 +124,11 @@ public class BaseConfigurator extends Activity {
         findViewById(R.id.line_config_color).setBackgroundResource(R.color.green);
         findViewById(R.id.line_shop_color).setBackgroundResource(R.color.yellow);
         findViewById(R.id.line_helpmy_color).setBackgroundResource(R.color.accent);
-        // findViewById(R.id.line_free_color).setBackgroundResource(c );
+        findViewById(R.id.line_free_color).setBackgroundDrawable(c);
         current_fragment = 0;
     }
 
-    // Установка старого фона предыдущей используемой кнопки
+    // Установка старого фона предыдущей используемой кнопки меню
     private void setDrawableInUse(int set_fragment) {
         switch (current_fragment) {
             case Set_Base_Fragment:
@@ -142,20 +146,20 @@ public class BaseConfigurator extends Activity {
         }
         current_fragment = set_fragment;
     }
+
     // Перехват кнопки назад !!! C диалогом о желании выйти !!! Версия отработана !!!
     @Override
     public void onBackPressed() {
-        //  super.onBackPressed();
         int i = fragmentTag.size() - 1;
         if (i == -1) {
             DialogExit();
         } else {
-            //      super.onBackPressed();
+            //      super.onBackPressed(); Оставил на всякий случай !!!
             if (i >= 1) {
-                removePop();
+                removePopFragment();
             } else {
                 setDefaultMenu();
-                deleteFragment();
+                deleteCurrentFragment();///Fragment();
             }
         }
     }
@@ -163,8 +167,9 @@ public class BaseConfigurator extends Activity {
     // Диалог запроса подтверждения выхода из activity
     private void DialogExit() {
         AlertDialog.Builder df = new AlertDialog.Builder(this);
-        df.setTitle("Вы хотите выйти ?");
+        df.setTitle(R.string.exitapplication);
         df.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            // Тупая заглушк
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -172,9 +177,7 @@ public class BaseConfigurator extends Activity {
         df.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // super.onBackPressed();
                         finish();
-
                     }
                 }
         );
@@ -212,24 +215,23 @@ public class BaseConfigurator extends Activity {
         fragmentTag.add(tag);
     }
 
-    // Удаление fragment всех fragment
+    // Удаление  всех fragment
     public void deleteAllFragment() {
+        int i = fragmentTag.size() - 1;
 
-        for (int i = fragmentTag.size() - 1; i == -1; i--) {
-            String tag = fragmentTag.get(i);
-            //Fragment fm=getFragmentManager();
-            //  i=getFragmentManager().findFragmentByTag(tag);
+        do {
+            deleteFragment(i);
+            i--;
 
-            getFragmentManager().beginTransaction()
-                    .remove(getFragmentManager().findFragmentByTag(tag))
-                    .commit();
-            fragmentTag.remove(i);
-        }
+        } while (i != -1);
+
     }
 
-    public void deleteFragment() {
-        int i = fragmentTag.size() - 1; //i == -1; i--) {
+    // Удаление последнего fragmenta
+    public void deleteCurrentFragment() {
+        int i = fragmentTag.size() - 1;
         String tag = fragmentTag.get(i);
+
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))
                 .commit();
@@ -237,8 +239,18 @@ public class BaseConfigurator extends Activity {
 
     }
 
+    // Удаление fragmenta по номеру
+    private void deleteFragment(int i) {
+
+        String tag = fragmentTag.get(i);
+        getFragmentManager().beginTransaction()
+                .remove(getFragmentManager().findFragmentByTag(tag))
+                .commit();
+        fragmentTag.remove(i);
+    }
+
     // удаление текущего со всплытием
-    public void removePop() {
+    public void removePopFragment() {
         int i = fragmentTag.size() - 1;
         String tag = fragmentTag.get(i);
         fragmentTag.remove(i);

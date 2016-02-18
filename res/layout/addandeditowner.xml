@@ -3,12 +3,24 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/EnterNewOwner"
-     />
-
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal">
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/NameTextOwner"
+                android:text="@string/EnterNewOwner"
+        />
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/yes"
+                android:id="@+id/yesAdd"/>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Cancel"
+                android:id="@+id/yesNo"/>
+    </LinearLayout>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/InnOwner"
@@ -25,6 +37,8 @@
                 android:id="@+id/editNameInn"
                 android:inputType="number"
                 android:lines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
                 android:numeric="integer"
                 android:hint="@string/NumberZnakInn"/>
         <Button android:layout_width="wrap_content"
@@ -42,7 +56,11 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editNameOwner"/>
+            android:id="@+id/editNameOwner"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+    />
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -53,20 +71,26 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editNameAdress"/>
+            android:id="@+id/editNameAdress"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+
+
+    />
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/CommentObject"
               android:layout_gravity="center_horizontal"
     />
-
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editNameComment"/>
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@android:string/yes"
-            android:id="@+id/yesAdd"/>
+            android:id="@+id/editNameComment"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+
+
+    />
 </LinearLayout>

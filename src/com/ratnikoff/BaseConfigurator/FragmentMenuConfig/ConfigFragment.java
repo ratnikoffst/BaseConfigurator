@@ -1,4 +1,4 @@
-package com.ratnikoff.BaseConfigurator.FragmentMenuShop;
+package com.ratnikoff.BaseConfigurator.FragmentMenuConfig;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,14 +8,14 @@ import android.view.ViewGroup;
 import com.ratnikoff.BaseConfigurator.R;
 
 /**
- * Created by SM on 29.01.2016.
+ * Created by SM on 17.02.2016.
  */
-public class ShopFragment extends Fragment {
+public class ConfigFragment extends Fragment {
     private View root;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.shop, container, false);
+        root = inflater.inflate(R.layout.configfragment, container, false);
         return root;
     }
 }

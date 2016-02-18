@@ -5,7 +5,8 @@
     <string name="InnOwner">ИНН:</string>
     <string name="CommentObject">Комментарий:</string>
     <string name="AdressObject">Адрес:</string>
-    <string name="EnterNewOwner">Ввод данных нового Заказчика</string>
+    <string name="EnterNewOwner">Новый Заказчик:</string>
+    <string name="EnterEDitOwner">Текущий Заказчик:</string>
     <string name="AdressOwner">Адрес Заказчика:</string>
     <string name="NumberZnakInn">10 знаков</string>
     <string name="exit">Вы хотите выйти ???</string>
@@ -13,4 +14,5 @@
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
     <string name="Cancel">Отмена</string>
+    <string name="exitapplication">Вы хотите выйти из приложения ?</string>
 </resources>

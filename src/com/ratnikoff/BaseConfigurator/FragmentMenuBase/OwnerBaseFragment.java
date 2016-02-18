@@ -7,9 +7,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseHigh.AddEditFrag;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseHigh.DataObject;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseHigh.ObjectListAdapter;
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFrag;
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerData;
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
 
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ import java.util.ArrayList;
 /**
  * Created by SM on 13.01.2016.
  */
-public class BaseFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
-    private ArrayList<DataObject> RegistryObject; // Список коллекции
+public class OwnerBaseFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+    private ArrayList<OwnerData> RegistryObject; // Список коллекции
     private ListView lvRegistryObject;// ListView Коллекции
     private View root;//
     private final static int TYPE_EDIT = 1;
@@ -27,12 +27,10 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     private final static int TYPE_CANCEL = 3;
     private final static int TYPE_ADD = 4;
     private int CurrentItem = -1;
-//    private LayoutInflater menuInflater;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.basefragment, container, false);
+        root = inflater.inflate(R.layout.basefragmentowner, container, false);
         lvRegistryObject = (ListView) root.findViewById(R.id.listObject);
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
         CreateObjectList();// Тестовое создание объектов
@@ -43,8 +41,8 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     }
 
     private void fillListObject() {
-        ObjectListAdapter adapter;
-        adapter = new ObjectListAdapter(RegistryObject, this);
+        OwnerListAdapter adapter;
+        adapter = new OwnerListAdapter(RegistryObject, this);
         lvRegistryObject.setAdapter(adapter);
         lvRegistryObject.setOnItemClickListener(this);
         lvRegistryObject.setOnItemLongClickListener(this);
@@ -52,9 +50,9 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
 
     // Заполнение адаптера основного вида здесь будет работа с базой SQlite
     private void CreateObjectList() {
-        RegistryObject = new ArrayList<DataObject>();
+        RegistryObject = new ArrayList<OwnerData>();
         for (int i = 1; i < 30; i++) {
-            DataObject v = new DataObject();
+            OwnerData v = new OwnerData();
             //    v.setNameObject("Обьект №" + i);
             v.setNameOwner("Заказчик " + i);
             v.setAddressObject("Расположение " + i);
@@ -67,17 +65,32 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     // Слушатель кнопок
     @Override
     public void onClick(View v) {
-
-
         enterFAB(TYPE_ADD);
     }
 
 
-    // Слушатель выбранных item
+    // Слушатель выбранных item переход на список обьектов
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int i = 1;
-        i++;
+        ObjectBaseFragment addBase;
+        Bundle bundle;
+        OwnerData object;
+        BaseConfigurator act = (BaseConfigurator) getActivity();
+
+        //  addBase = new OwnerAddEditFrag();
+//        object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
+//        bundle = new Bundle();
+//        bundle.putString("TYPE", "EditOwner");
+//        bundle.putString("AddressOwner", object.getAddressObject());
+//        bundle.putString("InnOwner", object.getInnObject());
+//        bundle.putString("CommentOwner", object.getCommentObject());
+//        bundle.putString("NameOwner", object.getNameOwner());
+//        addBase.setArguments(bundle);
+//        act.addFragment("EditOwner", addBase, false);
+
+
+
+
     }
 
     //Слушатель долгого нажатия item
@@ -114,11 +127,6 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
         return true;
     }
 
-    // Класс временный переделать под
-    public ArrayList<DataObject> getArray() {
-        return RegistryObject;
-    }
-
     // Установка изменений после применения AddEdit
 
     /*
@@ -128,7 +136,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     public void setNewDataItem(int operation, String nameInn, String nameAdress, String nameOwner, String commentObject) {
         switch (operation) {
             case 1:
-                DataObject object = (DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
+                OwnerData object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 object.setInnObject(nameInn);
                 object.setAddressObject(nameAdress);
                 object.setNameOwner(nameOwner);
@@ -136,7 +144,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
                 break;
             case 2:
-                DataObject object2 = new DataObject();
+                OwnerData object2 = new OwnerData();
                 object2.setInnObject(nameInn);
                 object2.setAddressObject(nameAdress);
                 object2.setNameOwner(nameOwner);
@@ -150,15 +158,15 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
     }
 
     public void enterFAB(int type) {
-        AddEditFrag addBase;
+        OwnerAddEditFrag addBase;
         Bundle bundle;
-        DataObject object;
+        OwnerData object;
         BaseConfigurator act = (BaseConfigurator) getActivity();
 
         switch (type) {
             case TYPE_EDIT:
-                addBase = new AddEditFrag();
-                object = (DataObject) lvRegistryObject.getAdapter().getItem(CurrentItem);
+                addBase = new OwnerAddEditFrag();
+                object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
                 bundle = new Bundle();
                 bundle.putString("TYPE", "EditOwner");
                 bundle.putString("AddressOwner", object.getAddressObject());
@@ -166,9 +174,7 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
                 bundle.putString("CommentOwner", object.getCommentObject());
                 bundle.putString("NameOwner", object.getNameOwner());
                 addBase.setArguments(bundle);
-
                 act.addFragment("EditOwner", addBase, false);
-
                 break;
             case TYPE_DELETE:
                 RegistryObject.remove(CurrentItem);
@@ -179,11 +185,11 @@ public class BaseFragment extends Fragment implements View.OnClickListener, Adap
             case TYPE_CANCEL:
                 break;
             case TYPE_ADD:
-                addBase = new AddEditFrag();
+                addBase = new OwnerAddEditFrag();
                 bundle = new Bundle();
-                bundle.putString("TYPE", "AddObject");
+                bundle.putString("TYPE", "AddOwner");
                 addBase.setArguments(bundle);
-                act.addFragment("AddObject", addBase, false);
+                act.addFragment("AddOwner", addBase, false);
                 break;
         }
     }

@@ -1,10 +1,10 @@
-package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseHigh;
+package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner;
 
 /**
  * Created by SM on 14.01.2016.
  * Класс являеться содержимым элементов коллекцией элементов основной базы
  */
-public class DataObject {
+public class OwnerData {
 
     // private String nameObject; // Наименование Объекта
     private String nameOwner; // Наименование Заказчика
@@ -12,7 +12,7 @@ public class DataObject {
     private String CommentObject;
     private String AddressObject;
 
-    //    private BaseFragment onClickListener;
+    //    private OwnerBaseFragment onClickListener;
 
     public void setAddressObject(String addressObject) {
         this.AddressObject = addressObject;
