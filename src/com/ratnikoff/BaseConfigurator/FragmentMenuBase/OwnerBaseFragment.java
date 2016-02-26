@@ -6,6 +6,7 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import com.ratnikoff.BaseConfigurator.Base.DataBaseHelper;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFrag;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerData;
@@ -27,6 +28,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
     private final static int TYPE_CANCEL = 3;
     private final static int TYPE_ADD = 4;
     private int CurrentItem = -1;
+    private DataBaseHelper db;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         RegistryObject = new ArrayList<OwnerData>();
         for (int i = 1; i < 30; i++) {
             OwnerData v = new OwnerData();
-            //    v.setNameObject("Обьект №" + i);
+
             v.setNameOwner("Заказчик " + i);
             v.setAddressObject("Расположение " + i);
             v.setCommentObject("Комментарий " + i);
