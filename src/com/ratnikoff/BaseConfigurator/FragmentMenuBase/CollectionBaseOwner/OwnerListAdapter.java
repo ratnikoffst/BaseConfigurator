@@ -41,7 +41,7 @@ public class OwnerListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.listitem_object, null);
+            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_item_owner, null);
 
         }
         fillView(convertView, position);
@@ -52,17 +52,22 @@ public class OwnerListAdapter extends BaseAdapter {
     private void fillView(View convertView, int position) {
         final OwnerData ObjectPosition = (OwnerData) getItem(position); // Обьект по позиции .
 
-        TextView temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
+        TextView temp = (TextView) convertView.findViewById(R.id.ownerID); // Поиск соотвестmвующего объекта для заполнения
+        String s = ObjectPosition.getIdOwner();
+        temp.setText(ObjectPosition.getIdOwner()); // Установка имени заказчика
+
+
+        temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
         temp.setText(ObjectPosition.getNameOwner()); // Установка имени заказчика
 
         temp = (TextView) convertView.findViewById(R.id.InnOwner); // Поиск соотвестmвующего объекта для заполнения
-        temp.setText(ObjectPosition.getInnObject()); // Установка ИНН заказчика
+        temp.setText(ObjectPosition.getInnOwner()); // Установка ИНН заказчика
 
         temp = (TextView) convertView.findViewById(R.id.AdressOwner); // Поиск соотвесттвующего объекта для заполнения
-        temp.setText(ObjectPosition.getAddressObject()); // Установка Адреса заказчика
+        temp.setText(ObjectPosition.getAddressOwner()); // Установка Адреса заказчика
 
         temp = (TextView) convertView.findViewById(R.id.CommentOwner); // Поиск соотвестemвующего объекта для заполнения
-        temp.setText(ObjectPosition.getCommentObject()); // Установка имени заказчика
+        temp.setText(ObjectPosition.getCommentOwner()); // Установка имени заказчика
     }
 
 }

@@ -15,11 +15,11 @@
         <Button android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@android:string/yes"
-                android:id="@+id/yesAdd"/>
+                android:id="@+id/OwnerAdd"/>
         <Button android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Cancel"
-                android:id="@+id/yesNo"/>
+                android:id="@+id/OwnerNo"/>
     </LinearLayout>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"

@@ -3,8 +3,24 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@drawable/list_item_selector"
->
+              android:background="@drawable/list_item_selector">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="ID: "
+                  android:textColor="@color/blue"
+                  android:textStyle="bold"
+                  android:textSize="@dimen/textOwner"
+        />
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/blue"
+                  android:textStyle="bold"
+                  android:textSize="@dimen/textOwner"
+                  android:id="@+id/ownerID"/>
+    </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">

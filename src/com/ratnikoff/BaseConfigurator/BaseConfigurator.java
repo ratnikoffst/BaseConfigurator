@@ -42,7 +42,6 @@ public class BaseConfigurator extends Activity {
 
     // Общий слушатель основных кнопок задан через layout
     public void OnClick(View view) {
-        //c = findViewById(R.id.line_free_color).getBackground();
         switch (view.getId()) {
             case R.id.button_base:
                 SetFragment(Set_Base_Fragment);

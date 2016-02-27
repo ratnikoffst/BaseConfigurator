@@ -1,16 +1,20 @@
 package com.ratnikoff.BaseConfigurator.Base;
 
+import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SM on 15.02.2016.
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
-    public static final String BASE_NAME = "test.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final String BASE_NAME = "test4.db";
+    public static final int DATABASE_VERSION = 6;
     private static final String KEY_ID = "_id";
 
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
@@ -43,78 +47,124 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TCP_IP = "TCP_IP";// text,
     public static final String PORT = "PORT";//integer
 
-    public DataBaseHelper(Context context) {
+    public DataBaseHelper(Activity context) {
 
         super(context, BASE_NAME, null, DATABASE_VERSION);
 
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE " + TABLE_OWNER + "(" + KEY_ID + "PRIMARY KEY AUTOINCREMENT," +
+        db.execSQL("CREATE TABLE " + TABLE_OWNER + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 NAME_OWNER + " TEXT," +
                 INN_OWNER + " INTEGER," +
                 ADDRESS_OWNER + " TEXT," +
                 COMMENT_OWNER + " TEXT);");
 
-        db.execSQL("CREATE TABLE" + TABLE_OBJECT + "(" + KEY_ID + "PRIMARY KEY AUTOINCREMENT," +
-                ID_OWNER + " integer," +
-                ID_OWNER_OBJECT + " integer," +
-                DOGOVOR_OBJECT + " integer," +
-                ADDRESS_OBJECT + " text," +
-                COMMENT_OBJECT + " text," +
-                NAME_OBJECT + " text);");
+        db.execSQL("CREATE TABLE " + TABLE_OBJECT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ID_OWNER + " INTEGER," +
+                ID_OWNER_OBJECT + " INTEGER," +
+                DOGOVOR_OBJECT + " INTEGER," +
+                ADDRESS_OBJECT + " TEXT," +
+                COMMENT_OBJECT + " TEXT," +
+                NAME_OBJECT + " TEXT);");
 
         db.execSQL("CREATE TABLE " + TABLE_PRIBOR +
-                "(" + KEY_ID + "PRIMARY KEY AUTOINCREMENT," +
-                ID_OWNER_OBJECT + " integer," +
-                TYPE_PRIBOR + " text," +
-                NUMBER_PRIBOR + " integer," +
-                ADRESS_PRIBOR + " integer," +
-                BAUD_PRIBOR + " integer," +
-                PASSWORD_USER + " integer," +
-                PASSWORD_ADMIN + " integer," +
-                PU_PRIBOR + "integer," +
-                PI_PRIBOR + " integer," +
-                TYPE_CONNECT + " integer," +
-                TCP_IP + "text," +
-                PORT + " integer);");
+                "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                ID_OWNEROBJECT + " INTEGER," +
+                TYPE_PRIBOR + " TEXT," +
+                NUMBER_PRIBOR + " INTEGER," +
+                ADRESS_PRIBOR + " INTEGER," +
+                BAUD_PRIBOR + " INTEGER," +
+                PASSWORD_USER + " INTEGER," +
+                PASSWORD_ADMIN + " INTEGER," +
+                PU_PRIBOR + "INTEGER," +
+                PI_PRIBOR + " INTEGER," +
+                TYPE_CONNECT + " INTEGER," +
+                TCP_IP + "TEXT," +
+                PORT + " INTEGER);");
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OWNER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_OBJECT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PRIBOR);
+        // и создаём их снова
+        onCreate(db);
     }
 
-    void addOwner(String nameOwner, Integer innOwner, String addressOwner, String commentOwner) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
+    // Классы для работы с таблицей заказчиков
+    // Класс для добавления заказчика
+    public void addOwner(String nameOwner, Integer innOwner, String addressOwner, String commentOwner) {
         ContentValues values = new ContentValues();
         values.put(NAME_OWNER, nameOwner);
         values.put(INN_OWNER, innOwner);
         values.put(ADDRESS_OWNER, addressOwner);
         values.put(COMMENT_OWNER, commentOwner);
 
+        SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_OWNER, null, values);
         db.close();
     }
 
-    void getOwner() {
+    // получение данных о одном заказчике
+    public Owner getOwner(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        Cursor cursor = db.query(TABLE_OWNER, new String[]{KEY_ID,
+                        NAME_OWNER, INN_OWNER, ADDRESS_OWNER, COMMENT_OWNER}, KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
 
+        Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
+        return owner;
     }
-//    public int updateOwner(String nameOner, Integer innOwner, String addressOwner, String commentOwner) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(NAME_OWNER, nameOner);
-//        values.put(INN_OWNER, innOwner);
-//        values.put(ADDRESS_OWNER, addressOwner);
-//        values.put(COMMENT_OWNER, commentOwner);
-//
-//        return db.update(TABLE_OWNER, values, KEY_ID + " = ?",
-//                new String[] { String.valueOf(contact.getID()) });
-//    }
+
+    // Класс удаления Owner
+    public void removeOwner(int id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_OWNER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void editOwner(int id, String nameOwner, int nameInn, String nameAdress, String commentObject) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(NAME_OWNER, nameOwner);
+        values.put(INN_OWNER, nameInn);
+        values.put(ADDRESS_OWNER, nameAdress);
+        values.put(COMMENT_OWNER, commentObject);
+
+        db.update(TABLE_OWNER, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
+    }
+
+    // Получение всего списка заказчиков
+    public List<Owner> getAllOwner() {
+        List<Owner> OwnerList = new ArrayList<Owner>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_OWNER;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+                        Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
+                OwnerList.add(owner);
+            } while (cursor.moveToNext());
+        }
+        return OwnerList;
+    }
+
 }

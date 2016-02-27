@@ -7,6 +7,7 @@ package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner;
 public class OwnerData {
 
     // private String nameObject; // Наименование Объекта
+    private String ID;
     private String nameOwner; // Наименование Заказчика
     private String InnObject;
     private String CommentObject;
@@ -14,27 +15,27 @@ public class OwnerData {
 
     //    private OwnerBaseFragment onClickListener;
 
-    public void setAddressObject(String addressObject) {
+    public void setAddressOwner(String addressObject) {
         this.AddressObject = addressObject;
     }
 
-    public String getAddressObject() {
+    public String getAddressOwner() {
         return AddressObject;
     }
 
-    public void setCommentObject(String commentObject) {
+    public void setCommentOwner(String commentObject) {
         this.CommentObject = commentObject;
     }
 
-    public String getCommentObject() {
+    public String getCommentOwner() {
         return CommentObject;
     }
 
-    public void setInnObject(String innObject) {
+    public void setInnOwner(String innObject) {
         this.InnObject = innObject;
     }
 
-    public String getInnObject() {
+    public String getInnOwner() {
         return InnObject;
     }
 
@@ -44,6 +45,15 @@ public class OwnerData {
 
     public void setNameOwner(String nameOwner) {
         this.nameOwner = nameOwner;
+    }
+
+    public String getIdOwner() {
+        return ID;
+    }
+
+    public void setIdOwner(String ID) {
+
+        this.ID = ID;
     }
 
 }
