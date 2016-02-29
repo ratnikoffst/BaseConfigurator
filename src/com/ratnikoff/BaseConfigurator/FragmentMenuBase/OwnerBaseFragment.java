@@ -22,28 +22,30 @@ import java.util.List;
  * Created by SM on 13.01.2016.
  */
 public class OwnerBaseFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
-    private ArrayList<OwnerData> RegistryObject; // Список коллекции
-    private ListView lvRegistryObject;// ListView Коллекции
+    private ArrayList<OwnerData> RegistryOwner; // Список коллекции
+    private ListView lvRegistryOwner;// ListView Коллекции
     private View root;//
     private final static int TYPE_EDIT = 1;
     private final static int TYPE_DELETE = 2;
     private final static int TYPE_CANCEL = 3;
     private final static int TYPE_ADD = 4;
+    private final static String OWNER_OBJECT = "OBJECT_FRAGMENT";
     private int CurrentItem = -1;
-    private DataBaseHelper db;//=new DataBaseHelper(getActivity());
+    private DataBaseHelper db;//= new DataBaseHelper(getActivity());//=new DataBaseHelper(getActivity());
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.basefragmentowner, container, false);
-        lvRegistryObject = (ListView) root.findViewById(R.id.listObject);
+        root = inflater.inflate(R.layout.ownerfragment, container, false);
+        lvRegistryOwner = (ListView) root.findViewById(R.id.listOwner);
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
         db = new DataBaseHelper(getActivity());
 
         // CreateTestBase();
-        CreateObjectList();// Тестовое создание объектов
+        CreateOwnerList();// Тестовое создание объектов
         return root;
     }
 
+    // Временный класс для теста
     private void CreateTestBase() {
 
         int i;
@@ -52,18 +54,38 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             int inncreat = 772 * i * 15;
 
             db.addOwner("Заказчик " + i, inncreat, "Адрес" + i, "Комментарий " + i);
+//
+//            int j;
+//            for (j = 1; j < 30; j++) {
+//                db.addObject("Заказчик " + i, inncreat, "Адрес" + i, "Комментарий " + i);
+//            }
         }
+        List<Owner> ownerList = db.getAllOwner();
+        for (int j = 0; j < ownerList.size(); j++) {
+            /// OwnerData v = new OwnerData();
+
+            ownerList.get(j).getID();
+
+//            v.setIdOwner(String.valueOf());
+//            v.setNameOwner(list.get(i).getName());
+//            v.setAddressOwner(list.get(i).getAddress());
+//            v.setCommentOwner(list.get(i).getComment());
+//            v.setInnOwner(String.valueOf(list.get(i).getInn()));
+//            RegistryOwner.add(v);
+        }
+
+
 
     }
 
-    // Заполнение адаптера основного вида здесь будет работа  SQlite
-    private void CreateObjectList() {
+    // Заполнение адаптера основного вида
+    private void CreateOwnerList() {
 
         List<Owner> list = db.getAllOwner();
-        list.size();
+        //  list.size();
 
 
-        RegistryObject = new ArrayList<OwnerData>();
+        RegistryOwner = new ArrayList<OwnerData>();
         for (int i = 0; i < list.size(); i++) {
             OwnerData v = new OwnerData();
             v.setIdOwner(String.valueOf(list.get(i).getID()));
@@ -71,20 +93,19 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             v.setAddressOwner(list.get(i).getAddress());
             v.setCommentOwner(list.get(i).getComment());
             v.setInnOwner(String.valueOf(list.get(i).getInn()));
-            RegistryObject.add(v);
+            RegistryOwner.add(v);
         }
         OwnerListAdapter adapter;
-        adapter = new OwnerListAdapter(RegistryObject, this);
-        lvRegistryObject.setAdapter(adapter);
-        lvRegistryObject.setOnItemClickListener(this);
-        lvRegistryObject.setOnItemLongClickListener(this);
+        adapter = new OwnerListAdapter(RegistryOwner, this);
+        lvRegistryOwner.setAdapter(adapter);
+        lvRegistryOwner.setOnItemClickListener(this);
+        lvRegistryOwner.setOnItemLongClickListener(this);
         registerForContextMenu(root); // Регистрация контекстного меню
     }
 
     // Слушатель кнопок
     @Override
     public void onClick(View v) {
-
         enterFAB(TYPE_ADD);
     }
 
@@ -95,19 +116,19 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         ObjectBaseFragment addBase;
         Bundle bundle;
         OwnerData object;
+
         BaseConfigurator act = (BaseConfigurator) getActivity();
-
-        //  addBase = new OwnerAddEditFrag();
-//        object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
-//        bundle = new Bundle();
-//        bundle.putString("TYPE", "EditOwner");
-//        bundle.putString("AddressOwner", object.getAddressObject());
-//        bundle.putString("InnOwner", object.getInnObject());
-//        bundle.putString("CommentOwner", object.getCommentObject());
-//        bundle.putString("NameOwner", object.getNameOwner());
-//        addBase.setArguments(bundle);
-//        act.addFragment("EditOwner", addBase, false);
-
+        addBase = new ObjectBaseFragment();//AddEditFrag();
+        object = (OwnerData) lvRegistryOwner.getAdapter().getItem(position);// Летить здесь !!!!
+        bundle = new Bundle();
+        // bundle.putString("TYPE", "EditOwner");
+        bundle.putInt("ID", Integer.parseInt(object.getIdOwner()));
+        bundle.putString("AddressOwner", object.getAddressOwner());
+        bundle.putString("InnOwner", object.getInnOwner());
+        bundle.putString("CommentOwner", object.getCommentOwner());
+        bundle.putString("NameOwner", object.getNameOwner());
+        addBase.setArguments(bundle);
+        act.addFragment(OWNER_OBJECT, addBase, false);
 
     }
 
@@ -156,7 +177,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         switch (type) {
             case TYPE_EDIT:
                 addBase = new OwnerAddEditFrag();
-                object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
+                object = (OwnerData) lvRegistryOwner.getAdapter().getItem(CurrentItem);
                 bundle = new Bundle();
                 bundle.putString("TYPE", "EditOwner");
                 bundle.putInt("ID", Integer.parseInt(object.getIdOwner()));
@@ -168,13 +189,13 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
                 act.addFragment("EditOwner", addBase, false);
                 break;
             case TYPE_DELETE:
-                object = (OwnerData) lvRegistryObject.getAdapter().getItem(CurrentItem);
+                object = (OwnerData) lvRegistryOwner.getAdapter().getItem(CurrentItem);
                 String id = object.getIdOwner();
                 db.removeOwner(Integer.parseInt(id));
-                RegistryObject.remove(CurrentItem);
+                RegistryOwner.remove(CurrentItem);
 
                 CurrentItem = -1;
-                ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
+                ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 break;
             case TYPE_CANCEL:
                 break;
@@ -196,14 +217,15 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         switch (operation) {
             case 1:
                 db.editOwner(id, nameOwner, Integer.valueOf(nameInn), nameAdress, commentObject);
-                CreateObjectList();
-                ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
+                CreateOwnerList();
+                lvRegistryOwner.setSelection(id - 1);
+                ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 break;
             case 2:
                 db.addOwner(nameOwner, Integer.valueOf(nameInn), nameAdress, commentObject);
-                CreateObjectList();
-                ((BaseAdapter) lvRegistryObject.getAdapter()).notifyDataSetChanged();
-                lvRegistryObject.setSelection(lvRegistryObject.getCount());
+                CreateOwnerList();
+                ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
+                lvRegistryOwner.setSelection(lvRegistryOwner.getCount());
                 break;
         }
         CurrentItem = -1;

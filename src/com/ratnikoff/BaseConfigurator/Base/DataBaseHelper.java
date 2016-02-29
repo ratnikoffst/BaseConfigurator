@@ -13,8 +13,8 @@ import java.util.List;
  * Created by SM on 15.02.2016.
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
-    public static final String BASE_NAME = "test4.db";
-    public static final int DATABASE_VERSION = 6;
+    public static final String BASE_NAME = "test5.db";
+    public static final int DATABASE_VERSION = 2;
     private static final String KEY_ID = "_id";
 
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
@@ -26,7 +26,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_OBJECT = "BASE_OBJECT"; // Таблица обьектов заказчика
     public static final String ID_OWNER = "ID_OWNER"; // ID заказчика для связи с первой таблицей
-    public static final String ID_OWNER_OBJECT = "ID_OBJECT"; // ID OWNER  OBJECT ключ для связи с третьей таблицой
+    //    public static final String ID_OWNER_OBJECT = "ID_OBJECT"; // ID OWNER  OBJECT ключ для связи с третьей таблицой
     public static final String DOGOVOR_OBJECT = "DOGOVOR_OBJECT"; //Номер договора со сбытом
     public static final String NAME_OBJECT = "NAME_OWNER"; //ИНН заказчика
     public static final String ADDRESS_OBJECT = "ADDRESS_OBJECT"; //Адрес заказчика
@@ -46,6 +46,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TYPE_CONNECT = "TYPE_CONNECT";// integer,
     public static final String TCP_IP = "TCP_IP";// text,
     public static final String PORT = "PORT";//integer
+    //private List<Object> allObject;
 
     public DataBaseHelper(Activity context) {
 
@@ -65,8 +66,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_OBJECT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ID_OWNER + " INTEGER," +
-                ID_OWNER_OBJECT + " INTEGER," +
-                DOGOVOR_OBJECT + " INTEGER," +
+                //   ID_OWNER_OBJECT + " INTEGER," +
+                DOGOVOR_OBJECT + " TEXT," +
                 ADDRESS_OBJECT + " TEXT," +
                 COMMENT_OBJECT + " TEXT," +
                 NAME_OBJECT + " TEXT);");
@@ -127,6 +128,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // Класс удаления Owner
+    // Добавить уничтожение субьобектов и приборов
     public void removeOwner(int id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -134,15 +136,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void editOwner(int id, String nameOwner, int nameInn, String nameAdress, String commentObject) {
+    // Редактирование элемента первой таблицы
+    public void editOwner(int id, String nameOwner, int nameInn, String nameAddress, String commentOwner) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(NAME_OWNER, nameOwner);
         values.put(INN_OWNER, nameInn);
-        values.put(ADDRESS_OWNER, nameAdress);
-        values.put(COMMENT_OWNER, commentObject);
+        values.put(ADDRESS_OWNER, nameAddress);
+        values.put(COMMENT_OWNER, commentOwner);
 
         db.update(TABLE_OWNER, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
@@ -153,9 +156,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         List<Owner> OwnerList = new ArrayList<Owner>();
 
         String selectQuery = "SELECT * FROM " + TABLE_OWNER;
-
+        Cursor cursor;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -167,4 +170,51 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return OwnerList;
     }
 
+
+    // Классы для работы с object
+
+    public List<Object> getAllObjectOwner(int idOwner) {
+        List<Object> ObjectList = new ArrayList<Object>();
+
+        String selectQuery = "SELECT * FROM " + TABLE_OBJECT + " WHERE " + ID_OWNER + "=" + idOwner;
+//  SELECT * FROM tbl_info WHERE age < 15;
+
+        Cursor cursor;
+        SQLiteDatabase db = this.getWritableDatabase();
+        cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//                Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+//                        Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
+//                OwnerList.add(owner);
+//            } while (cursor.moveToNext());
+//        }
+        return ObjectList;
+
+    }
+
+    /* idOwner -ключ заказчика integer
+    *   NAME_OBJECT - Название Обьекта TEXT
+    *  DOGOVOR_OBJECT - договор по обьекту Integer
+    *   ADDRESS_OBJECT - адрес обьекта TEXT
+    *   COMMENT_OBJECT - Комментарий к обьекту TEXT
+    */
+    public void addObject(int idOwner, String NameObject, int dogovor, String address, String comment) {
+
+        ContentValues values = new ContentValues();
+        values.put(ID_OWNER, idOwner);
+        values.put(NAME_OBJECT, NameObject);
+        values.put(DOGOVOR_OBJECT, dogovor);
+        values.put(ADDRESS_OBJECT, address);
+        values.put(COMMENT_OBJECT, comment);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(TABLE_OBJECT, null, values);
+        db.close();
+    }
+
+//    public List<Object> getAllObject() {
+//        return allObject;
+//    }
 }

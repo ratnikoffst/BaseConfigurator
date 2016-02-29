@@ -53,9 +53,7 @@ public class OwnerListAdapter extends BaseAdapter {
         final OwnerData ObjectPosition = (OwnerData) getItem(position); // Обьект по позиции .
 
         TextView temp = (TextView) convertView.findViewById(R.id.ownerID); // Поиск соотвестmвующего объекта для заполнения
-        String s = ObjectPosition.getIdOwner();
         temp.setText(ObjectPosition.getIdOwner()); // Установка имени заказчика
-
 
         temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
         temp.setText(ObjectPosition.getNameOwner()); // Установка имени заказчика

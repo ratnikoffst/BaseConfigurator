@@ -1,15 +1,17 @@
-package com.ratnikoff.BaseConfigurator.Base;
+package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseObject;
 
 /**
- * Created by SM on 26.02.2016.
+ * Created by SM on 14.01.2016.
+ * Класс являеться содержимым элементов коллекцией элементов основной базы
  */
-public class Object {
+public class ObjectData extends DataSubObject {
     private int idObject;
     private int idOwwner;// -ключ заказчика integer
     private String NAME_OBJECT;// - Название Обьекта TEXT
     private String DOGOVOR_OBJECT;// - договор по обьекту Integer
     private String ADDRESS_OBJECT;// - адрес обьекта TEXT
     private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
+
 
     public int getIdObject() {
         return idObject;
@@ -23,8 +25,8 @@ public class Object {
         return idOwwner;
     }
 
-    public void setIdOwwner(int idOwwner) {
-        this.idOwwner = idOwwner;
+    public void setIdOwner(int idOwner) {
+        this.idOwwner = idOwner;
     }
 
     public String getNAME_OBJECT() {

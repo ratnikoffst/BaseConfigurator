@@ -1,42 +1,44 @@
 package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner;
 
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseObject.DataSubObject;
+
 /**
  * Created by SM on 14.01.2016.
  * Класс являеться содержимым элементов коллекцией элементов основной базы
  */
-public class OwnerData {
+public class OwnerData extends DataSubObject {
 
     // private String nameObject; // Наименование Объекта
     private String ID;
     private String nameOwner; // Наименование Заказчика
-    private String InnObject;
-    private String CommentObject;
-    private String AddressObject;
+    private String InnOwner;
+    private String CommentOwner;
+    private String AddressOwner;
 
     //    private OwnerBaseFragment onClickListener;
 
     public void setAddressOwner(String addressObject) {
-        this.AddressObject = addressObject;
+        this.AddressOwner = addressObject;
     }
 
     public String getAddressOwner() {
-        return AddressObject;
+        return AddressOwner;
     }
 
     public void setCommentOwner(String commentObject) {
-        this.CommentObject = commentObject;
+        this.CommentOwner = commentObject;
     }
 
     public String getCommentOwner() {
-        return CommentObject;
+        return CommentOwner;
     }
 
     public void setInnOwner(String innObject) {
-        this.InnObject = innObject;
+        this.InnOwner = innObject;
     }
 
     public String getInnOwner() {
-        return InnObject;
+        return InnOwner;
     }
 
     public String getNameOwner() {
@@ -52,7 +54,6 @@ public class OwnerData {
     }
 
     public void setIdOwner(String ID) {
-
         this.ID = ID;
     }
 
