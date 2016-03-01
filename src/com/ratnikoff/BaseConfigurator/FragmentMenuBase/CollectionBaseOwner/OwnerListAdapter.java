@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import com.ratnikoff.BaseConfigurator.Base.Owner;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.OwnerBaseFragment;
 import com.ratnikoff.BaseConfigurator.R;
 
@@ -15,22 +16,22 @@ import java.util.ArrayList;
  * Класс являеться адаптером для коллекции базы обьектов
  */
 public class OwnerListAdapter extends BaseAdapter {
-    private ArrayList<OwnerData> objectOwner;
+    private ArrayList<Owner> owner;
     private OwnerBaseFragment c;
 
-    public OwnerListAdapter(ArrayList<OwnerData> object, OwnerBaseFragment c) {
-        this.objectOwner = object;
+    public OwnerListAdapter(ArrayList<Owner> owner, OwnerBaseFragment c) {
+        this.owner = owner;
         this.c = c;
     }
 
     @Override
     public int getCount() {
-        return objectOwner.size();
+        return owner.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return objectOwner.get(position);
+        return owner.get(position);
     }
 
     @Override
@@ -50,22 +51,22 @@ public class OwnerListAdapter extends BaseAdapter {
 
     // Наполнение Вида позиции
     private void fillView(View convertView, int position) {
-        final OwnerData ObjectPosition = (OwnerData) getItem(position); // Обьект по позиции .
+        final Owner ownerPosition = (Owner) getItem(position); // Обьект по позиции .
 
         TextView temp = (TextView) convertView.findViewById(R.id.ownerID); // Поиск соотвестmвующего объекта для заполнения
-        temp.setText(ObjectPosition.getIdOwner()); // Установка имени заказчика
+        temp.setText(String.valueOf(ownerPosition.getID())); // Установка имени ID заказчика
 
         temp = (TextView) convertView.findViewById(R.id.nameOwner); // Поиск соотвестmвующего объекта для заполнения
-        temp.setText(ObjectPosition.getNameOwner()); // Установка имени заказчика
+        temp.setText(ownerPosition.getName()); // Установка имени заказчика
 
         temp = (TextView) convertView.findViewById(R.id.InnOwner); // Поиск соотвестmвующего объекта для заполнения
-        temp.setText(ObjectPosition.getInnOwner()); // Установка ИНН заказчика
+        temp.setText(String.valueOf(ownerPosition.getInn())); // Установка ИНН заказчика
 
         temp = (TextView) convertView.findViewById(R.id.AdressOwner); // Поиск соотвесттвующего объекта для заполнения
-        temp.setText(ObjectPosition.getAddressOwner()); // Установка Адреса заказчика
+        temp.setText(ownerPosition.getAddress()); // Установка Адреса заказчика
 
         temp = (TextView) convertView.findViewById(R.id.CommentOwner); // Поиск соотвестemвующего объекта для заполнения
-        temp.setText(ObjectPosition.getCommentOwner()); // Установка имени заказчика
+        temp.setText(ownerPosition.getComment()); // Установка Комментрия заказчика
     }
 
 }

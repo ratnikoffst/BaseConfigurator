@@ -12,9 +12,9 @@ public class Owner {
 
 //    private String ID;
 //    private String nameOwner; // Наименование Заказчика
-//    private String InnOwner;
-//    private String CommentOwner;
-//    private String AddressOwner;
+//    private String InnOwner;  // ИНН Заказчика
+//    private String CommentOwner; // Комментарий Заказчику
+//    private String AddressOwner; // Адресс Заказчика
 
     public Owner(int id, String name, int inn, String address, String comment) {
         this.ID = id;

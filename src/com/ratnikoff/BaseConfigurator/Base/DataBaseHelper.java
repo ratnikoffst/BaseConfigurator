@@ -14,25 +14,19 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test5.db";
-    public static final int DATABASE_VERSION = 12;
-    private static final String KEY_ID = "_id";
-
+    public static final int DATABASE_VERSION = 13;
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
     public static final String NAME_OWNER = "NAME_OWNER"; //Наименование заказчика
     public static final String INN_OWNER = "INN_OWNER"; //ИНН заказчика
     public static final String ADDRESS_OWNER = "ADDRESS_OWNER"; //Адрес заказчика
     public static final String COMMENT_OWNER = "COMMENT_OWNER"; //Комментарий о  заказчике
-
-
     public static final String TABLE_OBJECT = "BASE_OBJECT"; // Таблица обьектов заказчика
     public static final String ID_OWNER = "ID_OWNER"; // ID заказчика для связи с первой таблицей
     public static final String DOGOVOR_OBJECT = "DOGOVOR_OBJECT"; //Номер договора со сбытом
     public static final String NAME_OBJECT = "NAME_OWNER"; //ИНН заказчика
     public static final String ADDRESS_OBJECT = "ADDRESS_OBJECT"; //Адрес заказчика
     public static final String COMMENT_OBJECT = "COMMENT_OBJECT"; //Комментарий о Обьекте
-
     public static final String TABLE_PRIBOR = "BASE_PRIBOR";
-
     public static final String ID_OWNEROBJECT = "ID_OWNER_OBJECT";
     public static final String TYPE_PRIBOR = "TYPE_PRIBOR";
     public static final String NUMBER_PRIBOR = "NUMBER_PRIBOR";
@@ -45,6 +39,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TYPE_CONNECT = "TYPE_CONNECT";// integer,
     public static final String TCP_IP = "TCP_IP";// text,
     public static final String PORT = "PORT";//integer
+    private static final String KEY_ID = "_id";
     //private List<Object> allObject;
     SQLiteDatabase db = this.getWritableDatabase();
 
