@@ -40,7 +40,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
         db = new DataBaseHelper(getActivity());
 
-        // CreateTestBase();
+        //  CreateTestBase();
         CreateOwnerList();// Тестовое создание объектов
         return root;
     }
@@ -53,19 +53,25 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         for (i = 1; i < 50; i++) {
             int inncreat = 772 * i * 15;
 
-            db.addOwner("Заказчик " + i, inncreat, "Адрес" + i, "Комментарий " + i);
-//
-//            int j;
-//            for (j = 1; j < 30; j++) {
-//                db.addObject("Заказчик " + i, inncreat, "Адрес" + i, "Комментарий " + i);
-//            }
+            db.addOwner("Заказчик " + i, inncreat, "Адрес " + i, "Комментарий " + i);
+
         }
         List<Owner> ownerList = db.getAllOwner();
         for (int j = 0; j < ownerList.size(); j++) {
             /// OwnerData v = new OwnerData();
 
-            ownerList.get(j).getID();
+            //   int k = ownerList.get(j).getID();
+            for (int k = 0; k < 10; k++) {
+                db.addObject(ownerList.get(j).getID(), "Подстанция " + i + j, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
+            }
 
+            //  ownerList.get(j).getID();
+//            private int idObject;+++
+//            private int idOwwner;// -ключ заказчика integer
+//            private String NAME_OBJECT;// - Название Обьекта TEXT
+//            private String DOGOVOR_OBJECT;// - договор по обьекту Integer
+//            private String ADDRESS_OBJECT;// - адрес обьекта TEXT
+//            private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
 //            v.setIdOwner(String.valueOf());
 //            v.setNameOwner(list.get(i).getName());
 //            v.setAddressOwner(list.get(i).getAddress());
@@ -75,16 +81,12 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         }
 
 
-
     }
 
     // Заполнение адаптера основного вида
     private void CreateOwnerList() {
 
         List<Owner> list = db.getAllOwner();
-        //  list.size();
-
-
         RegistryOwner = new ArrayList<OwnerData>();
         for (int i = 0; i < list.size(); i++) {
             OwnerData v = new OwnerData();

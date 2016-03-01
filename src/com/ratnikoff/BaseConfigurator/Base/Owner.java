@@ -10,6 +10,12 @@ public class Owner {
     private String Address;
     private String Comment;
 
+//    private String ID;
+//    private String nameOwner; // Наименование Заказчика
+//    private String InnOwner;
+//    private String CommentOwner;
+//    private String AddressOwner;
+
     public Owner(int id, String name, int inn, String address, String comment) {
         this.ID = id;
         this.Name = name;

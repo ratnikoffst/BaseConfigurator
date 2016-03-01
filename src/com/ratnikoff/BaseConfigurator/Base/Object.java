@@ -4,27 +4,37 @@ package com.ratnikoff.BaseConfigurator.Base;
  * Created by SM on 26.02.2016.
  */
 public class Object {
-    private int idObject;
-    private int idOwwner;// -ключ заказчика integer
+    private int ID_OBJECT;
+    private int ID_OWNER;// -ключ заказчика integer
     private String NAME_OBJECT;// - Название Обьекта TEXT
     private String DOGOVOR_OBJECT;// - договор по обьекту Integer
     private String ADDRESS_OBJECT;// - адрес обьекта TEXT
     private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
 
+    public Object(int idobject, int idowner, String name, String dog, String adress, String comment) {
+
+        this.ID_OBJECT = idobject;
+        this.ID_OWNER = idowner;
+        this.NAME_OBJECT = name;
+        this.DOGOVOR_OBJECT = dog;
+        this.ADDRESS_OBJECT = adress;
+        this.COMMENT_OBJECT = comment;
+    }
+
     public int getIdObject() {
-        return idObject;
+        return ID_OBJECT;
     }
 
     public void setIdObject(int idObject) {
-        this.idObject = idObject;
+        this.ID_OBJECT = idObject;
     }
 
     public int getIdOwwner() {
-        return idOwwner;
+        return ID_OWNER;
     }
 
     public void setIdOwwner(int idOwwner) {
-        this.idOwwner = idOwwner;
+        this.ID_OWNER = idOwwner;
     }
 
     public String getNAME_OBJECT() {

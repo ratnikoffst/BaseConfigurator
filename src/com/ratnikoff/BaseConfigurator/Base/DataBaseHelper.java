@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test5.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 12;
     private static final String KEY_ID = "_id";
 
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
@@ -26,11 +26,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_OBJECT = "BASE_OBJECT"; // Таблица обьектов заказчика
     public static final String ID_OWNER = "ID_OWNER"; // ID заказчика для связи с первой таблицей
-    //    public static final String ID_OWNER_OBJECT = "ID_OBJECT"; // ID OWNER  OBJECT ключ для связи с третьей таблицой
     public static final String DOGOVOR_OBJECT = "DOGOVOR_OBJECT"; //Номер договора со сбытом
     public static final String NAME_OBJECT = "NAME_OWNER"; //ИНН заказчика
     public static final String ADDRESS_OBJECT = "ADDRESS_OBJECT"; //Адрес заказчика
-    public static final String COMMENT_OBJECT = "COMMENT_OBJECT"; //Комментарий о  заказчике
+    public static final String COMMENT_OBJECT = "COMMENT_OBJECT"; //Комментарий о Обьекте
 
     public static final String TABLE_PRIBOR = "BASE_PRIBOR";
 
@@ -47,6 +46,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TCP_IP = "TCP_IP";// text,
     public static final String PORT = "PORT";//integer
     //private List<Object> allObject;
+    SQLiteDatabase db = this.getWritableDatabase();
 
     public DataBaseHelper(Activity context) {
 
@@ -66,11 +66,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_OBJECT + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 ID_OWNER + " INTEGER," +
-                //   ID_OWNER_OBJECT + " INTEGER," +
+                NAME_OBJECT + " TEXT," +
                 DOGOVOR_OBJECT + " TEXT," +
                 ADDRESS_OBJECT + " TEXT," +
-                COMMENT_OBJECT + " TEXT," +
-                NAME_OBJECT + " TEXT);");
+                COMMENT_OBJECT + " TEXT);");
 
         db.execSQL("CREATE TABLE " + TABLE_PRIBOR +
                 "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -81,10 +80,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 BAUD_PRIBOR + " INTEGER," +
                 PASSWORD_USER + " INTEGER," +
                 PASSWORD_ADMIN + " INTEGER," +
-                PU_PRIBOR + "INTEGER," +
+                PU_PRIBOR + " INTEGER," +
                 PI_PRIBOR + " INTEGER," +
                 TYPE_CONNECT + " INTEGER," +
-                TCP_IP + "TEXT," +
+                TCP_IP + " TEXT," +
                 PORT + " INTEGER);");
 
     }
@@ -167,6 +166,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 OwnerList.add(owner);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return OwnerList;
     }
 
@@ -181,15 +181,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor;
         SQLiteDatabase db = this.getWritableDatabase();
+
+
         cursor = db.rawQuery(selectQuery, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                int ido = Integer.parseInt(cursor.getString(0));
+                int idow = Integer.parseInt(cursor.getString(1));
+                String name = cursor.getString(2);
+                String dog = cursor.getString(3);
+                String ad = cursor.getString(4);
+                String com = cursor.getString(5);
 //
-//        if (cursor.moveToFirst()) {
-//            do {
-//                Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-//                        Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
-//                OwnerList.add(owner);
-//            } while (cursor.moveToNext());
-//        }
+//                ID_OWNER + " INTEGER," +
+//                        //   ID_OWNER_OBJECT + " INTEGER," +
+//                        DOGOVOR_OBJECT + " TEXT," +
+//                ADDRESS_OBJECT + " TEXT," +
+//                COMMENT_OBJECT + " TEXT," +
+//                        NAME_OBJECT + " TEXT);");
+
+                Object object = new Object(ido, idow,
+                        name, dog, ad, com);
+                ObjectList.add(object);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
         return ObjectList;
 
     }
@@ -200,7 +219,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     *   ADDRESS_OBJECT - адрес обьекта TEXT
     *   COMMENT_OBJECT - Комментарий к обьекту TEXT
     */
-    public void addObject(int idOwner, String NameObject, int dogovor, String address, String comment) {
+    public void addObject(int idOwner, String NameObject, String dogovor, String address, String comment) {
 
         ContentValues values = new ContentValues();
         values.put(ID_OWNER, idOwner);
@@ -213,8 +232,4 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_OBJECT, null, values);
         db.close();
     }
-
-//    public List<Object> getAllObject() {
-//        return allObject;
-//    }
 }
