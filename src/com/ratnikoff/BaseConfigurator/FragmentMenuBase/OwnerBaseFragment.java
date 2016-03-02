@@ -39,7 +39,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
         db = new DataBaseHelper(getActivity());
 
-        //   CreateTestBase();
+        // CreateTestBase();
         CreateOwnerList();// Тестовое создание объектов
         return root;
     }
@@ -55,12 +55,12 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             db.addOwner("Заказчик " + i, inncreat, "Адрес " + i, "Комментарий " + i);
 
         }
-        //       List<Owner> ownerList = db.getAllOwner();
-//        for (int j = 0; j < ownerList.size(); j++) {
-//
-//            for (int k = 0; k < 10; k++) {
-//                db.addObject(ownerList.get(j).getID(), "Подстанция " + i + j, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
-//            }
+        List<Owner> ownerList = db.getAllOwner();
+        for (int j = 0; j < ownerList.size(); j++) {
+
+            for (int k = 0; k < 10; k++) {
+                db.addObject(ownerList.get(j).getID(), "Подстанция ", " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
+            }
 
         //  ownerList.get(j).getID();
 //            private int idObject;+++
@@ -69,7 +69,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 //            private String DOGOVOR_OBJECT;// - договор по обьекту Integer
 //            private String ADDRESS_OBJECT;// - адрес обьекта TEXT
 //            private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
-//     }
+        }
     }
 
     // Заполнение адаптера основного вида
@@ -215,7 +215,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             case 2:
                 db.addOwner(nameOwner, inn, address, commentObject);
                 CreateOwnerList();
-                ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
+                //       ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 lvRegistryOwner.setSelection(lvRegistryOwner.getCount());
                 break;
         }

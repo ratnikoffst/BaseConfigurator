@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test5.db";
-    public static final int DATABASE_VERSION = 13;
+    public static final int DATABASE_VERSION = 15;
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
     public static final String NAME_OWNER = "NAME_OWNER"; //Наименование заказчика
     public static final String INN_OWNER = "INN_OWNER"; //ИНН заказчика
