@@ -59,7 +59,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         for (int j = 0; j < ownerList.size(); j++) {
 
             for (int k = 0; k < 10; k++) {
-                db.addObject(ownerList.get(j).getID(), "Подстанция ", " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
+                db.addObject(ownerList.get(j).getID(), "Подстанция " + j, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
             }
 
         //  ownerList.get(j).getID();
