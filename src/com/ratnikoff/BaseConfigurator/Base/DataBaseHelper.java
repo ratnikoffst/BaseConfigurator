@@ -145,6 +145,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.update(TABLE_OWNER, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
+        db.close();
     }
 
     // Получение всего списка заказчиков

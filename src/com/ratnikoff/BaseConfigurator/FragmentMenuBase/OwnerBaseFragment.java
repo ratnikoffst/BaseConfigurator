@@ -46,29 +46,16 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
     // Временный класс для теста
     private void CreateTestBase() {
-
         int i;
-
         for (i = 1; i < 50; i++) {
             int inncreat = 772 * i * 15;
-
             db.addOwner("Заказчик " + i, inncreat, "Адрес " + i, "Комментарий " + i);
-
         }
         List<Owner> ownerList = db.getAllOwner();
         for (int j = 0; j < ownerList.size(); j++) {
-
             for (int k = 0; k < 10; k++) {
                 db.addObject(ownerList.get(j).getID(), "Подстанция " + j, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
             }
-
-        //  ownerList.get(j).getID();
-//            private int idObject;+++
-//            private int idOwwner;// -ключ заказчика integer
-//            private String NAME_OBJECT;// - Название Обьекта TEXT
-//            private String DOGOVOR_OBJECT;// - договор по обьекту Integer
-//            private String ADDRESS_OBJECT;// - адрес обьекта TEXT
-//            private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
         }
     }
 
@@ -113,11 +100,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         addBase = new ObjectBaseFragment();//AddEditFrag();
         owner = (Owner) lvRegistryOwner.getAdapter().getItem(position);// Летить здесь !!!!
         bundle = new Bundle();
-        // bundle.putString("TYPE", "EditOwner");
         bundle.putInt("ID", owner.getID());
-        //   bundle.putString("AddressOwner", owner.getAddress());
-        //   bundle.putInt("InnOwner", owner.getInn());
-        //    bundle.putString("CommentOwner", owner.getComment());
         bundle.putString("NameOwner", owner.getName());
         addBase.setArguments(bundle);
         act.addFragment(OWNER_OBJECT, addBase, false);
@@ -209,7 +192,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             case 1:
                 db.editOwner(id, nameOwner, inn, address, commentObject);
                 CreateOwnerList();
-                lvRegistryOwner.setSelection(id - 1);
+                lvRegistryOwner.setSelection(CurrentItem - 2);
                 ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 break;
             case 2:
