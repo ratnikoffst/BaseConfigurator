@@ -21,7 +21,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/drawable_gradient_base"
-                    android:src="@drawable/drawable_base3"
+                    android:src="@drawable/drawable_base"
                     android:id="@+id/button_base"
                     android:onClick="OnClick"
 
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/drawable_gradient_config"
-                    android:src="@drawable/drawable_config2"
+                    android:src="@drawable/drawable_config"
                     android:id="@+id/button_config"
                     android:onClick="OnClick"/>
 
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/drawable_gradient_shop"
-                    android:src="@drawable/drawable_shop2"
+                    android:src="@drawable/drawable_shop"
                     android:id="@+id/button_shop"
                     android:onClick="OnClick"
                     />
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/drawable_gradient_helpmy"
-                    android:src="@drawable/drawable_helpmy2"
+                    android:src="@drawable/drawable_helpmy"
                     android:id="@+id/button_helpmy"
                     android:onClick="OnClick"/>
 

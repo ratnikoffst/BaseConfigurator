@@ -7,9 +7,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import com.ratnikoff.BaseConfigurator.Base.DataBaseHelper;
+import com.ratnikoff.BaseConfigurator.Base.Object;
 import com.ratnikoff.BaseConfigurator.Base.Owner;
+import com.ratnikoff.BaseConfigurator.Base.Pribor;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFrag;
+import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFragment;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
 
@@ -37,26 +39,56 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         root = inflater.inflate(R.layout.ownerfragment, container, false);
         lvRegistryOwner = (ListView) root.findViewById(R.id.listOwner);
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
+
         db = new DataBaseHelper(getActivity());
 
-        // CreateTestBase();
+        //      CreateTestBase();
+
+        //      TestBase();
+
         CreateOwnerList();// Тестовое создание объектов
+
         return root;
+    }
+
+    private void TestBase() {
+        List<Owner> ownerList = db.getAllOwner();
+        //  List<Object> list = db.getAllObjectOwner(idOwner);
+        for (int j = 0; j < ownerList.size(); j++) {
+
+            List<Object> objectList = db.getAllObjectOwner(ownerList.get(j).getID());
+
+            for (int i = 0; i < objectList.size(); i++) {
+                List<Pribor> pri = db.getAllObjectPribor(objectList.get(j).getIdObject());
+            }
+        }
     }
 
     // Временный класс для теста
     private void CreateTestBase() {
         int i;
-        for (i = 1; i < 50; i++) {
+        for (i = 1; i < 10; i++) {
             int inncreat = 772 * i * 15;
             db.addOwner("Заказчик " + i, inncreat, "Адрес " + i, "Комментарий " + i);
         }
         List<Owner> ownerList = db.getAllOwner();
         for (int j = 0; j < ownerList.size(); j++) {
             for (int k = 0; k < 10; k++) {
-                db.addObject(ownerList.get(j).getID(), "Подстанция " + j, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + k);
+                db.addObject(ownerList.get(j).getID(), "Подстанция " + k, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + i * 10 + j);
             }
         }
+//
+        List<Object> objectList = db.getAllObjectOwner(1);
+
+        for (int a = 0; a < objectList.size(); a++) {
+            for (i = 0; i < 10; i++) {
+                db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
+            }
+        }
+        // objectList = db.getAllObject();
+        // for (int a = 1; a < objectList.size(); a++) {
+        //      List<Pribor> l = db.getAllObjectPribor(a);
+        //  }
     }
 
     // Заполнение адаптера основного вида
@@ -144,14 +176,14 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
     // Установка изменений после применения AddEdit
 
     public void enterFAB(int type) {
-        OwnerAddEditFrag addBase;
+        OwnerAddEditFragment addBase;
         Bundle bundle;
         Owner owner;
         BaseConfigurator act = (BaseConfigurator) getActivity();
 
         switch (type) {
             case TYPE_EDIT:
-                addBase = new OwnerAddEditFrag();
+                addBase = new OwnerAddEditFragment();
                 owner = (Owner) lvRegistryOwner.getAdapter().getItem(CurrentItem);
                 bundle = new Bundle();
                 bundle.putString("TYPE", "EditOwner");
@@ -174,7 +206,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             case TYPE_CANCEL:
                 break;
             case TYPE_ADD:
-                addBase = new OwnerAddEditFrag();
+                addBase = new OwnerAddEditFragment();
                 bundle = new Bundle();
                 bundle.putString("TYPE", "AddOwner");
                 addBase.setArguments(bundle);
@@ -198,7 +230,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             case 2:
                 db.addOwner(nameOwner, inn, address, commentObject);
                 CreateOwnerList();
-                //       ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
+                ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 lvRegistryOwner.setSelection(lvRegistryOwner.getCount());
                 break;
         }

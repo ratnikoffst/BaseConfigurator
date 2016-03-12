@@ -7,17 +7,21 @@
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:text="@string/AdressOwner"
             android:background="@drawable/drawable_owner_text_gradient"
-            android:id="@+id/NameOwnerObject"
-
+            android:id="@+id/TextNameOwnerObject"
     />
+
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
+
         <ListView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:id="@+id/listobject"
+                  android:id="@+id/listPribor"
+
         />
-        <ImageButton android:layout_width="@dimen/round_button_diameter"
+        <ImageButton android:id="@+id/PriborADD"
+                     android:layout_width="@dimen/round_button_diameter"
                      android:layout_height="@dimen/round_button_diameter"
                      android:layout_gravity="end|bottom"
                      android:layout_marginBottom="@dimen/add_button_margin"
@@ -25,8 +29,7 @@
                      android:src="@android:drawable/ic_input_add"
                      android:tint="@android:color/white"
                      android:background="@drawable/fab_background"
-                     android:id="@+id/objectFAB"
-
+                     android:onClick="OnClick"
         />
     </FrameLayout>
 </LinearLayout>

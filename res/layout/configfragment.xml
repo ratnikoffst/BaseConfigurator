@@ -3,9 +3,14 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <TextView android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center_vertical"
-              android:text="Тест !!!"/>
+    <Button android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:text="Выбор Производителя и типа прибора"/>
+    <ListView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/configTypePribor">
+
+    </ListView>
 
 </LinearLayout>

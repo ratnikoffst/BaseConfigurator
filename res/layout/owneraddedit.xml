@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal">
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/NameTextOwner"
+                android:text="@string/EnterNewOwner"
+                android:focusable="false"
+        />
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/yes"
+                android:id="@+id/OwnerAdd"/>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Cancel"
+                android:id="@+id/OwnerNo"/>
+    </LinearLayout>
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/InnOwner"
+              android:layout_gravity="center_horizontal"
+
+    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/editNameInn"
+                android:inputType="number"
+                android:lines="1"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+                android:numeric="integer"
+                android:hint="@string/NumberZnakInn"/>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/innSearch"/>
+    </LinearLayout>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/NameOwner"
+              android:layout_gravity="center_horizontal"
+    />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editNameOwner"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+    />
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/AdressObject"
+              android:layout_gravity="center_horizontal"
+    />
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editNameAdress"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+
+
+    />
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/CommentObject"
+              android:layout_gravity="center_horizontal"
+    />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editNameComment"
+
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+
+
+    />
+</LinearLayout>
