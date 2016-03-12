@@ -1,5 +1,6 @@
 package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -41,7 +42,7 @@ public class PriborListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            //  convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_pribor_item, null);
+            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_pribor_item, null);
 
         }
         fillView(convertView, position);
@@ -49,17 +50,17 @@ public class PriborListAdapter extends BaseAdapter {
     }
 
     private void fillView(View convertView, int position) {
-        final Pribor ObjectPosition = getItem(position); // Обьект по позиции .
+        final Pribor PribortPosition = getItem(position); // Обьект по позиции .
 
-        TextView temp = (TextView) convertView.findViewById(R.id.NameObject); // Поиск соотвестmвующего объекта для заполнения
-        //  String s = ObjectPosition.getNAME_OBJECT();
-        //  temp.setText(ObjectPosition.getNAME_OBJECT()); // Установка имени заказчика
+        TextView temp = (TextView) convertView.findViewById(R.id.typeNumber); // Поиск соотвестmвующего объекта для заполнения
+        String s = PribortPosition.getTypePribor() + "    №" + PribortPosition.getNumberPribor();
+        temp.setText(s); // Установка имени заказчика
 
-        temp = (TextView) convertView.findViewById(R.id.AdressObject); // Поиск соотвестmвующего объекта для заполнения
+        //temp = (TextView) convertView.findViewById(R.id.AdressObject); // Поиск соотвестmвующего объекта для заполнения
         //s = ObjectPosition.getIdOwner();
 //        temp.setText(ObjectPosition.getADDRESS_OBJECT());
 
-        temp = (TextView) convertView.findViewById(R.id.DogObject); // Поиск соотвестmвующего объекта для заполнения
+        //temp = (TextView) convertView.findViewById(R.id.DogObject); // Поиск соотвестmвующего объекта для заполнения
         //s = ObjectPosition.getIdOwner();
 //        temp.setText(ObjectPosition.getCOMMENT_OBJECT());
 

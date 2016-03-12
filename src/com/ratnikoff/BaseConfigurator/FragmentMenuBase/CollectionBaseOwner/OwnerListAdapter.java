@@ -42,7 +42,7 @@ public class OwnerListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_item_owner, null);
+            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_owner_item_, null);
 
         }
         fillView(convertView, position);

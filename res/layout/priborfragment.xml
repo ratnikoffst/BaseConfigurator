@@ -8,10 +8,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/AdressOwner"
-            android:background="@drawable/drawable_owner_text_gradient"
+            android:background="@drawable/drawable_pribor_item_gradient_normal"
             android:id="@+id/TextNameOwnerObject"
     />
-
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
 

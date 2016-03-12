@@ -43,7 +43,7 @@ public class PriborBaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootpribor = inflater.inflate(R.layout.priborfragment, container, false);
-        lvRegistryPribor = (ListView) rootpribor.findViewById(R.id.listobject);
+        lvRegistryPribor = (ListView) rootpribor.findViewById(R.id.listPribor);
         dbPribor = new DataBaseHelper(getActivity());
 
         // rootpribor.findViewById(R.id.objectFAB).setOnClickListener((View.OnClickListener) this);  // Регистрация FAB
@@ -81,6 +81,22 @@ public class PriborBaseFragment extends Fragment {
         }
         PriborListAdapter adapter = new PriborListAdapter(RegistryPribor, this);//ListAdapter(RegistryObject, this);
         lvRegistryPribor.setAdapter(adapter);
+//        List<Object> list = dbObject.getAllObjectOwner(idOwner);
+//        RegistryObject = new ArrayList<Object>();
+//        for (int i = 0; i < list.size(); i++) {
+//            Object v = new Object(list.get(i).getIdObject()
+//                    , list.get(i).getIdOwwner()
+//                    , list.get(i).getNAME_OBJECT()
+//                    , list.get(i).getDOGOVOR_OBJECT()
+//                    , list.get(i).getADDRESS_OBJECT()
+//                    , list.get(i).getCOMMENT_OBJECT());
+//            RegistryObject.add(v);
+//        }
+//
+//        ObjectListAdapter adapter = new ObjectListAdapter(RegistryObject, this);
+//        lvRegistryObject.setAdapter(adapter);
+//        lvRegistryObject.setOnItemClickListener(this);
+//        lvRegistryObject.setOnItemLongClickListener(this);
     }
 //        public int idObject;// ID_OBJECT;// = "ID_OWNER_OBJECT";
 //        public String TYPE_PRIBOR;// = "TYPE_PRIBOR";
