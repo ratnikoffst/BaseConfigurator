@@ -1,6 +1,5 @@
 package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -42,7 +41,7 @@ public class PriborListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_pribor_item, null);
+            //  convertView = LayoutInflater.from(c.getActivity()).inflate(R.layout.list_pribor_item, null);
 
         }
         fillView(convertView, position);
