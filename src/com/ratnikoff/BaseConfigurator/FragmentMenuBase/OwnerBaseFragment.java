@@ -42,7 +42,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
         db = new DataBaseHelper(getActivity());
 
-        //      CreateTestBase();
+        //   CreateTestBase();
 
         //      TestBase();
 
@@ -78,11 +78,13 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             }
         }
 //
-        List<Object> objectList = db.getAllObjectOwner(1);
-
-        for (int a = 0; a < objectList.size(); a++) {
-            for (i = 0; i < 10; i++) {
-                db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
+        List<Owner> ownerList1 = db.getAllOwner();
+        for (int j = 0; j < ownerList1.size(); j++) {
+            List<Object> objectList = db.getAllObjectOwner(ownerList1.get(j).getID());
+            for (int a = 0; a < objectList.size(); a++) {
+                for (i = 0; i < 10; i++) {
+                    db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
+                }
             }
         }
         // objectList = db.getAllObject();
@@ -99,11 +101,12 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         RegistryOwner = new ArrayList<Owner>();
 
         for (int i = 0; i < list.size(); i++) {
-            Owner v = new Owner(list.get(i).getID(),
-                    list.get(i).getName(),
-                    list.get(i).getInn(),
-                    list.get(i).getAddress(),
-                    list.get(i).getComment());
+            Owner v = list.get(i);
+//                    new Owner(list.get(i).getID(),
+//                    list.get(i).getName(),
+//                    list.get(i).getInn(),
+//                    list.get(i).getAddress(),
+//                    list.get(i).getComment());
             RegistryOwner.add(v);
         }
         OwnerListAdapter adapter;

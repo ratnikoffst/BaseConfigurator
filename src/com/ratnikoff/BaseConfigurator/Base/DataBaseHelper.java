@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test6.db";
-    public static final int DATABASE_VERSION = 9;
+    public static final int DATABASE_VERSION = 14;
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
     public static final String NAME_OWNER = "NAME_OWNER"; //Наименование заказчика
     public static final String INN_OWNER = "INN_OWNER"; //ИНН заказчика
@@ -109,23 +109,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     // получение данных о одном заказчике
-    public Owner getOwner(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.query(TABLE_OWNER, new String[]{KEY_ID,
-                        NAME_OWNER, INN_OWNER, ADDRESS_OWNER, COMMENT_OWNER}, KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-                Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
-        return owner;
-    }
+//    public Owner getOwner(int id) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        Cursor cursor = db.query(TABLE_OWNER, new String[]{KEY_ID,
+//                        NAME_OWNER, INN_OWNER, ADDRESS_OWNER, COMMENT_OWNER}, KEY_ID + "=?",
+//                new String[]{String.valueOf(id)}, null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//
+//        Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
+//                Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
+//        return owner;
+//    }
 
     // Класс удаления Owner
     // Добавить уничтожение субьобектов и приборов
     public void removeOwner(int id) {
+
+        List<Object> object = getAllObjectOwner(id);
+        for (int i = 0; i < object.size(); i++) {
+
+            removeObject(object.get(i).getIdObject());
+        }
 
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_OWNER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
@@ -172,32 +178,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // Классы для работы с object
 
 
-    public List<Object> getAllObject() {
-        List<Object> ObjectList = new ArrayList<Object>();
-
-        String selectQuery = "SELECT * FROM " + TABLE_OBJECT;
-        Cursor cursor;
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-
-                int ido = Integer.parseInt(cursor.getString(0));
-                int idow = Integer.parseInt(cursor.getString(1));
-                String name = cursor.getString(2);
-                String dog = cursor.getString(3);
-                String ad = cursor.getString(4);
-                String com = cursor.getString(5);
-                Object object = new Object(ido, idow,
-                        name, dog, ad, com);
-                ObjectList.add(object);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return ObjectList;
-    }
+//    public List<Object> getAllObject() {
+//        List<Object> ObjectList = new ArrayList<Object>();
+//
+//        String selectQuery = "SELECT * FROM " + TABLE_OBJECT;
+//        Cursor cursor;
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        cursor = db.rawQuery(selectQuery, null);
+//
+//        if (cursor.moveToFirst()) {
+//            do {
+//
+//                int ido = Integer.parseInt(cursor.getString(0));
+//                int idow = Integer.parseInt(cursor.getString(1));
+//                String name = cursor.getString(2);
+//                String dog = cursor.getString(3);
+//                String ad = cursor.getString(4);
+//                String com = cursor.getString(5);
+//                Object object = new Object(ido, idow,
+//                        name, dog, ad, com);
+//                ObjectList.add(object);
+//            } while (cursor.moveToNext());
+//        }
+//        cursor.close();
+//        return ObjectList;
+//    }
 
     public List<Object> getAllObjectOwner(int idOwner) {
         List<Object> ObjectList = new ArrayList<Object>();
@@ -270,6 +276,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // Удаление из таблицы обьектов добавить удаление приборов
     public void removeObject(int idObject) {
+        List<Pribor> pribor = getAllObjectPribor(idObject);
+        for (int i = 0; i < pribor.size(); i++) {
+            removePribor(pribor.get(i).getIdPribor());
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_OBJECT, KEY_ID + " = ?", new String[]{String.valueOf(idObject)});
         db.close();
@@ -375,4 +385,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //    public int port;//T = "PORT";//integer
 //    private int idPribor;
 //}
+public void removePribor(int idPribor) {
+    SQLiteDatabase db = this.getWritableDatabase();
+    db.delete(TABLE_PRIBOR, KEY_ID + " = ?", new String[]{String.valueOf(idPribor)});
+    db.close();
+}
 }
