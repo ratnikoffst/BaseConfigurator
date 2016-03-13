@@ -87,10 +87,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
                 }
             }
         }
-        // objectList = db.getAllObject();
-        // for (int a = 1; a < objectList.size(); a++) {
-        //      List<Pribor> l = db.getAllObjectPribor(a);
-        //  }
+
     }
 
     // Заполнение адаптера основного вида
@@ -102,11 +99,6 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
         for (int i = 0; i < list.size(); i++) {
             Owner v = list.get(i);
-//                    new Owner(list.get(i).getID(),
-//                    list.get(i).getName(),
-//                    list.get(i).getInn(),
-//                    list.get(i).getAddress(),
-//                    list.get(i).getComment());
             RegistryOwner.add(v);
         }
         OwnerListAdapter adapter;
