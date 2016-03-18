@@ -4,19 +4,22 @@ package com.ratnikoff.BaseConfigurator.Base;
  * Created by SM on 26.02.2016.
  */
 public class Owner {
-    private int ID;
-    private String Name;
-    private int Inn;
-    private String Address;
-    private String Comment;
+    private int ID = 0;
+    private String Name = "";
+    private String Inn = "";
+    private String Address = "";
+    private String Comment = "";
 
-//    private String ID;
+    //    private String ID;
 //    private String nameOwner; // Наименование Заказчика
 //    private String InnOwner;  // ИНН Заказчика
 //    private String CommentOwner; // Комментарий Заказчику
 //    private String AddressOwner; // Адресс Заказчика
+    public Owner() {
+        //  this.Name = name;
+    }
 
-    public Owner(int id, String name, int inn, String address, String comment) {
+    public Owner(int id, String name, String inn, String address, String comment) {
         this.ID = id;
         this.Name = name;
         this.Inn = inn;
@@ -29,15 +32,16 @@ public class Owner {
     }
 
     public void setName(String name) {
-        Name = name;
+
+        this.Name = name;
     }
 
-    public int getInn() {
+    public String getInn() {
         return Inn;
     }
 
-    public void setInn(int inn) {
-        Inn = inn;
+    public void setInn(String inn) {
+        this.Inn = inn;
     }
 
     public String getAddress() {

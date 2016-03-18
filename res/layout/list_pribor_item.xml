@@ -35,7 +35,8 @@
                   android:focusable="false"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:text="Имя Обьекта: "
+                  android:text="ID: "
+                  android:id="@+id/idPribor"
                   android:textColor="@color/red"
         />
         <TextView android:paddingBottom="5dp"

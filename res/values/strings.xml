@@ -19,5 +19,6 @@
     <string name="objectName">Наименование обьекта:</string>
     <string name="numberDogovor">Номер Договора:</string>
     <string name="EnterEditObject">Редактирование обьекта:</string>
+    <string name="NoInternet">Нет подключения к интернету</string>
 
 </resources>

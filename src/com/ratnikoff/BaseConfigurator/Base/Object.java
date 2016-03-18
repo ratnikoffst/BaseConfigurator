@@ -4,68 +4,68 @@ package com.ratnikoff.BaseConfigurator.Base;
  * Created by SM on 26.02.2016.
  */
 public class Object {
-    private int ID_OBJECT;
-    private int ID_OWNER;// -ключ заказчика integer
-    private String NAME_OBJECT;// - Название Обьекта TEXT
-    private String DOGOVOR_OBJECT;// - договор по обьекту Integer
-    private String ADDRESS_OBJECT;// - адрес обьекта TEXT
-    private String COMMENT_OBJECT;// - Комментарий к обьекту TEXT
+    private int idObject;
+    private int idOwner;// -ключ заказчика integer
+    private String nameObject;// - Название Обьекта TEXT
+    private String dogovorObject;// - договор по обьекту Integer
+    private String addressObject;// - адрес обьекта TEXT
+    private String commentObject;// - Комментарий к обьекту TEXT
 
     public Object(int idobject, int idowner, String name, String dog, String adress, String comment) {
 
-        this.ID_OBJECT = idobject;
-        this.ID_OWNER = idowner;
-        this.NAME_OBJECT = name;
-        this.DOGOVOR_OBJECT = dog;
-        this.ADDRESS_OBJECT = adress;
-        this.COMMENT_OBJECT = comment;
+        this.idObject = idobject;
+        this.idOwner = idowner;
+        this.nameObject = name;
+        this.dogovorObject = dog;
+        this.addressObject = adress;
+        this.commentObject = comment;
     }
 
     public int getIdObject() {
-        return ID_OBJECT;
+        return idObject;
     }
 
     public void setIdObject(int idObject) {
-        this.ID_OBJECT = idObject;
+        this.idObject = idObject;
     }
 
     public int getIdOwwner() {
-        return ID_OWNER;
+        return idOwner;
     }
 
     public void setIdOwwner(int idOwwner) {
-        this.ID_OWNER = idOwwner;
+        this.idOwner = idOwwner;
     }
 
-    public String getNAME_OBJECT() {
-        return NAME_OBJECT;
+    public String getNameObject() {
+        return nameObject;
     }
 
-    public void setNAME_OBJECT(String NAME_OBJECT) {
-        this.NAME_OBJECT = NAME_OBJECT;
+    public void setNameObject(String nameObject) {
+        this.nameObject = nameObject;
     }
 
-    public String getDOGOVOR_OBJECT() {
-        return DOGOVOR_OBJECT;
+    public String getDogovorObject() {
+        return dogovorObject;
     }
 
-    public void setDOGOVOR_OBJECT(String DOGOVOR_OBJECT) {
-        this.DOGOVOR_OBJECT = DOGOVOR_OBJECT;
+    public void setDogovorObject(String dogovorObject) {
+        this.dogovorObject = dogovorObject;
     }
 
-    public String getADDRESS_OBJECT() {
-        return ADDRESS_OBJECT;
+    public String getAddressObject() {
+        return addressObject;
     }
 
-    public void setADDRESS_OBJECT(String ADDRESS_OBJECT) {
-        this.ADDRESS_OBJECT = ADDRESS_OBJECT;
+    public void setAddressObject(String addressObject) {
+        this.addressObject = addressObject;
     }
 
-    public String getCOMMENT_OBJECT() {
-        return COMMENT_OBJECT;
+    public String getCommentObject() {
+        return commentObject;
     }
 
-    public void setCOMMENT_OBJECT(String COMMENT_OBJECT) {
-        this.COMMENT_OBJECT = COMMENT_OBJECT;
+    public void setCommentObject(String commentObject) {
+        this.commentObject = commentObject;
     }
 }

@@ -23,11 +23,10 @@ public class BaseConfigurator extends Activity {
     private final static String Set_Shop_Tag = "Shop";      // Тег Fragment Shop
     private final static int Set_HelpMy_Fragment = 4;      // Установлен fragment c помощью
     private final static String Set_HelpMy_Tag = "Help";  // Тег Fragment помощь
-
-    private int current_fragment = 0; // Номер текущего fragment
-    private ArrayList<String> fragmentTag = new ArrayList<String>();
     String currentTag = "";           // Текущий Тег fragment
     Drawable c; // Тестовая переменная !!!
+    private int current_fragment = 0; // Номер текущего fragment
+    private ArrayList<String> fragmentTag = new ArrayList<String>();
 
     /**
      * Called when the activity is first created.
@@ -39,6 +38,7 @@ public class BaseConfigurator extends Activity {
         setContentView(R.layout.main);
         c = findViewById(R.id.line_free_color).getBackground();
     }
+
 
     // Общий слушатель основных кнопок задан через layout
     public void OnClick(View view) {
@@ -184,7 +184,6 @@ public class BaseConfigurator extends Activity {
         df.show();
     }
 
-
     /* Классы для управления fragment
        * tag - тэг вновь устанавливаемого обьекта
        * frag - вновь устанавливаемый фрагмент
@@ -221,26 +220,21 @@ public class BaseConfigurator extends Activity {
         do {
             deleteFragment(i);
             i--;
-
         } while (i != -1);
-
     }
 
     // Удаление последнего fragmenta
     public void deleteCurrentFragment() {
         int i = fragmentTag.size() - 1;
         String tag = fragmentTag.get(i);
-
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))
                 .commit();
         fragmentTag.remove(i);
-
     }
 
     // Удаление fragmenta по номеру
     private void deleteFragment(int i) {
-
         String tag = fragmentTag.get(i);
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))

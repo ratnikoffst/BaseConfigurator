@@ -8,14 +8,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/AdressOwner"
-            android:background="@drawable/drawable_pribor_item_gradient_normal"
             android:id="@+id/TextNameOwnerObject"
+            android:background="@drawable/priborownerobject"
     />
     <FrameLayout android:layout_width="match_parent"
                  android:layout_height="match_parent">
 
         <ListView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
+
                   android:id="@+id/listPribor"
 
         />

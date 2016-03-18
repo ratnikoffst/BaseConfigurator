@@ -42,7 +42,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
         db = new DataBaseHelper(getActivity());
 
-        //   CreateTestBase();
+        //      CreateTestBase();
 
         //      TestBase();
 
@@ -53,7 +53,6 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
     private void TestBase() {
         List<Owner> ownerList = db.getAllOwner();
-        //  List<Object> list = db.getAllObjectOwner(idOwner);
         for (int j = 0; j < ownerList.size(); j++) {
 
             List<Object> objectList = db.getAllObjectOwner(ownerList.get(j).getID());
@@ -69,7 +68,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         int i;
         for (i = 1; i < 10; i++) {
             int inncreat = 772 * i * 15;
-            db.addOwner("Заказчик " + i, inncreat, "Адрес " + i, "Комментарий " + i);
+            db.addOwner("Заказчик " + i, "" + inncreat, "Адрес " + i, "Комментарий " + i);
         }
         List<Owner> ownerList = db.getAllOwner();
         for (int j = 0; j < ownerList.size(); j++) {
@@ -88,6 +87,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             }
         }
 
+        i = 1;
     }
 
     // Заполнение адаптера основного вида
@@ -184,7 +184,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
                 bundle.putString("TYPE", "EditOwner");
                 bundle.putInt("ID", owner.getID());
                 bundle.putString("AddressOwner", owner.getAddress());
-                bundle.putInt("InnOwner", owner.getInn());
+                bundle.putString("InnOwner", owner.getInn());
                 bundle.putString("CommentOwner", owner.getComment());
                 bundle.putString("NameOwner", owner.getName());
                 addBase.setArguments(bundle);
@@ -214,16 +214,16 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
     * Первая переменная указывает редактирование=1 или добавление=2 !!!
     *
      */
-    public void setNewDataItem(int operation, int id, String nameOwner, int inn, String address, String commentObject) {
+    public void setNewDataItem(int operation, Owner owner) {
         switch (operation) {
             case 1:
-                db.editOwner(id, nameOwner, inn, address, commentObject);
+                db.editOwner(owner.getID(), owner.getName(), owner.getInn(), owner.getAddress(), owner.getComment());
                 CreateOwnerList();
                 lvRegistryOwner.setSelection(CurrentItem - 2);
                 ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 break;
             case 2:
-                db.addOwner(nameOwner, inn, address, commentObject);
+                db.addOwner(owner.getName(), owner.getInn(), owner.getAddress(), owner.getComment());
                 CreateOwnerList();
                 ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
                 lvRegistryOwner.setSelection(lvRegistryOwner.getCount());
@@ -231,4 +231,6 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         }
         CurrentItem = -1;
     }
+
+
 }

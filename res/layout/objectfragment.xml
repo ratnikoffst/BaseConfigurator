@@ -7,7 +7,7 @@
     <Button android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/drawable_object_item_gradient_normal"
+            android:background="@drawable/objectowner"
             android:id="@+id/NameOwnerObject"
 
     />

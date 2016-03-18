@@ -56,13 +56,9 @@ public class PriborListAdapter extends BaseAdapter {
         String s = PribortPosition.getTypePribor() + "    №" + PribortPosition.getNumberPribor();
         temp.setText(s); // Установка имени заказчика
 
-        //temp = (TextView) convertView.findViewById(R.id.AdressObject); // Поиск соотвестmвующего объекта для заполнения
-        //s = ObjectPosition.getIdOwner();
-//        temp.setText(ObjectPosition.getADDRESS_OBJECT());
-
-        //temp = (TextView) convertView.findViewById(R.id.DogObject); // Поиск соотвестmвующего объекта для заполнения
-        //s = ObjectPosition.getIdOwner();
-//        temp.setText(ObjectPosition.getCOMMENT_OBJECT());
+        temp = (TextView) convertView.findViewById(R.id.idPribor); // Поиск соотвестmвующего объекта для заполнения
+        s = "ID: " + String.valueOf(PribortPosition.getIdPribor());
+        temp.setText(s);
 
 
     }

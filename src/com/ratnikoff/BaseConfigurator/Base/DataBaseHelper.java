@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test6.db";
-    public static final int DATABASE_VERSION = 14;
+    public static final int DATABASE_VERSION = 19;
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
     public static final String NAME_OWNER = "NAME_OWNER"; //Наименование заказчика
     public static final String INN_OWNER = "INN_OWNER"; //ИНН заказчика
@@ -43,7 +43,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String PORT = "PORT";//integer
     private static final String KEY_ID = "_id";
     //private List<Object> allObject;
-    SQLiteDatabase db = this.getWritableDatabase();
+    SQLiteDatabase db;// = this.getWritableDatabase();
 
     public DataBaseHelper(Activity context) {
 
@@ -57,7 +57,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + TABLE_OWNER + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 NAME_OWNER + " TEXT," +
-                INN_OWNER + " INTEGER," +
+                INN_OWNER + " TEXT," +
                 ADDRESS_OWNER + " TEXT," +
                 COMMENT_OWNER + " TEXT);");
 
@@ -96,32 +96,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     // Классы для работы с таблицей заказчиков
     // Класс для добавления заказчика
-    public void addOwner(String nameOwner, Integer innOwner, String addressOwner, String commentOwner) {
+    public void addOwner(String nameOwner, String innOwner, String addressOwner, String commentOwner) {
         ContentValues values = new ContentValues();
         values.put(NAME_OWNER, nameOwner);
         values.put(INN_OWNER, innOwner);
         values.put(ADDRESS_OWNER, addressOwner);
         values.put(COMMENT_OWNER, commentOwner);
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.insert(TABLE_OWNER, null, values);
         db.close();
     }
-
-    // получение данных о одном заказчике
-//    public Owner getOwner(int id) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        Cursor cursor = db.query(TABLE_OWNER, new String[]{KEY_ID,
-//                        NAME_OWNER, INN_OWNER, ADDRESS_OWNER, COMMENT_OWNER}, KEY_ID + "=?",
-//                new String[]{String.valueOf(id)}, null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-//                Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
-//        return owner;
-//    }
 
     // Класс удаления Owner
     // Добавить уничтожение субьобектов и приборов
@@ -133,17 +118,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             removeObject(object.get(i).getIdObject());
         }
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.delete(TABLE_OWNER, KEY_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 
     // Редактирование элемента первой таблицы
-    public void editOwner(int id, String nameOwner, int nameInn, String nameAddress, String commentOwner) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void editOwner(int id, String nameOwner, String nameInn, String nameAddress, String commentOwner) {
+//   SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+
         values.put(NAME_OWNER, nameOwner);
         values.put(INN_OWNER, nameInn);
         values.put(ADDRESS_OWNER, nameAddress);
@@ -160,50 +145,24 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String selectQuery = "SELECT * FROM " + TABLE_OWNER;
         Cursor cursor;
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Owner owner = new Owner(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-                        Integer.parseInt(cursor.getString(2)), cursor.getString(3), cursor.getString(4));
+                        cursor.getString(2), cursor.getString(3), cursor.getString(4));
                 OwnerList.add(owner);
             } while (cursor.moveToNext());
         }
         cursor.close();
+        db.close();
         return OwnerList;
     }
 
 
     // Классы для работы с object
 
-
-//    public List<Object> getAllObject() {
-//        List<Object> ObjectList = new ArrayList<Object>();
-//
-//        String selectQuery = "SELECT * FROM " + TABLE_OBJECT;
-//        Cursor cursor;
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        cursor = db.rawQuery(selectQuery, null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//
-//                int ido = Integer.parseInt(cursor.getString(0));
-//                int idow = Integer.parseInt(cursor.getString(1));
-//                String name = cursor.getString(2);
-//                String dog = cursor.getString(3);
-//                String ad = cursor.getString(4);
-//                String com = cursor.getString(5);
-//                Object object = new Object(ido, idow,
-//                        name, dog, ad, com);
-//                ObjectList.add(object);
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        return ObjectList;
-//    }
 
     public List<Object> getAllObjectOwner(int idOwner) {
         List<Object> ObjectList = new ArrayList<Object>();
@@ -232,6 +191,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         cursor.close();
+        db.close();
         return ObjectList;
 
     }
@@ -251,7 +211,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(ADDRESS_OBJECT, address);
         values.put(COMMENT_OBJECT, comment);
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.insert(TABLE_OBJECT, null, values);
         db.close();
     }
@@ -259,7 +219,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // Редактирование элемента первой таблицы
     public void editObject(int id, int idOwner, String nameObject, String dogovor, String address, String comment) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        //      SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
@@ -280,7 +240,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         for (int i = 0; i < pribor.size(); i++) {
             removePribor(pribor.get(i).getIdPribor());
         }
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.delete(TABLE_OBJECT, KEY_ID + " = ?", new String[]{String.valueOf(idObject)});
         db.close();
     }
@@ -305,20 +265,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_PRIBOR, null, values);
         db.close();
 
-//    public int idObject;// ID_OBJECT;/      / = "ID_OWNER_OBJECT";
-//    public String typePribor;// = "TYPE_PRIBOR";
-//    public int numberPribor;// = "NUMBER_PRIBOR"INTEGER;
-//    public int addressPribor;// = "ADRESS_PRIBOR"; integer
-//    public int baudPribor;// = "BAUD_PRIBOR";//integer,
-//    public int passwordUser;// = "PASSWORD_USER";// integer,
-//    public int passwordAdmin;// = "PASSWORD_ADMIN";// integer,
-//    public int puPribor;// = "PU_PRIBOR";// integer,
-//    public int piPribor;// = "PI_PRIBOR";// integer,
-//    public int typeConnectPribor;// = "TYPE_CONNECT";// integer,
-//    public String tcpIp;// = "TCP_IP";// text,
-//    public int port;//T = "PORT";//integer
-//    private int idPribor;
-
     }
 
     public List<Pribor> getAllObjectPribor(int a) {
@@ -329,7 +275,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 //        String selectQuery = "SELECT * FROM " + TABLE_OBJECT + " WHERE " + ID_OWNER + "=" + idOwner;
 
         Cursor cursor;
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
 
         cursor = db.rawQuery(selectQuery, null);
 
@@ -360,34 +306,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 pribor.setPiPribor(a5); // Тип конекат
                 int a6 = Integer.parseInt(cursor.getString(10)); // Тип соединения
                 pribor.setTypeConnectPribor(a6);
-                String a7 = cursor.getString(11);
+                String a7 = cursor.getString(11);  // TCp Ip адрес
                 pribor.setTcpIp(a7);
-                int a8 = Integer.parseInt(cursor.getString(12));
+                int a8 = Integer.parseInt(cursor.getString(12)); // Порт
                 pribor.setPort(a8);
                 //String a2=cursor.getString(6);
                 PriborList.add(pribor);
             } while (cursor.moveToNext());
         }
         cursor.close();
+        db.close();
         return PriborList;
     }
-//    public int idObject;// ID_OBJECT;/      / = "ID_OWNER_OBJECT";
-//    public String typePribor;// = "TYPE_PRIBOR";
-//    public int numberPribor;// = "NUMBER_PRIBOR"INTEGER;
-//    public int addressPribor;// = "ADRESS_PRIBOR"; integer
-//    public int baudPribor;// = "BAUD_PRIBOR";//integer,
-//    public int passwordUser;// = "PASSWORD_USER";// integer,
-//    public int passwordAdmin;// = "PASSWORD_ADMIN";// integer,
-//    public int puPribor;// = "PU_PRIBOR";// integer,
-//    public int piPribor;// = "PI_PRIBOR";// integer,
-//    public int typeConnectPribor;// = "TYPE_CONNECT";// integer,
-//    public String tcpIp;// = "TCP_IP";// text,
-//    public int port;//T = "PORT";//integer
-//    private int idPribor;
-//}
-public void removePribor(int idPribor) {
-    SQLiteDatabase db = this.getWritableDatabase();
-    db.delete(TABLE_PRIBOR, KEY_ID + " = ?", new String[]{String.valueOf(idPribor)});
-    db.close();
-}
+
+    public void removePribor(int idPribor) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PRIBOR, KEY_ID + " = ?", new String[]{String.valueOf(idPribor)});
+        db.close();
+    }
 }
