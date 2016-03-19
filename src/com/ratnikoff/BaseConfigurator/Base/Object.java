@@ -21,6 +21,10 @@ public class Object {
         this.commentObject = comment;
     }
 
+    public Object() {
+
+    }
+
     public int getIdObject() {
         return idObject;
     }

@@ -134,6 +134,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(ADDRESS_OWNER, nameAddress);
         values.put(COMMENT_OWNER, commentOwner);
 
+        db = this.getWritableDatabase();
         db.update(TABLE_OWNER, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
         db.close();
@@ -145,7 +146,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String selectQuery = "SELECT * FROM " + TABLE_OWNER;
         Cursor cursor;
-        db = this.getWritableDatabase();
+        db = this.getReadableDatabase();//Database();
         cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
@@ -169,11 +170,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String selectQuery = "SELECT * FROM " + TABLE_OBJECT + " WHERE " + ID_OWNER + "=" + idOwner;
 
-        Cursor cursor;
-        SQLiteDatabase db = this.getWritableDatabase();
+        //Cursor cursor;
+        db = this.getWritableDatabase();
+        //SQLiteDatabase db = this.getWritableDatabase();
 
 
-        cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
 
         if (cursor.moveToFirst()) {
@@ -219,7 +221,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // Редактирование элемента первой таблицы
     public void editObject(int id, int idOwner, String nameObject, String dogovor, String address, String comment) {
 
-        //      SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
@@ -229,6 +230,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(ADDRESS_OBJECT, address);
         values.put(COMMENT_OBJECT, comment);
 
+        db = this.getWritableDatabase();
         db.update(TABLE_OBJECT, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
         db.close();
@@ -261,10 +263,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         values.put(TYPE_CONNECT, 1);  // 10
         values.put(TCP_IP, "172.172.172.1 "); // 11
         values.put(PORT, 1010); // 12
-        SQLiteDatabase db = this.getWritableDatabase();
+
+        // SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         db.insert(TABLE_PRIBOR, null, values);
         db.close();
-
     }
 
     public List<Pribor> getAllObjectPribor(int a) {
@@ -272,10 +275,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String selectQuery = "SELECT * FROM " + TABLE_PRIBOR + " WHERE " + ID_OWNEROBJECT + "=" + a;
 
-//        String selectQuery = "SELECT * FROM " + TABLE_OBJECT + " WHERE " + ID_OWNER + "=" + idOwner;
 
         Cursor cursor;
-        db = this.getWritableDatabase();
+
+        db = this.getReadableDatabase();//Database();
 
         cursor = db.rawQuery(selectQuery, null);
 
@@ -310,7 +313,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 pribor.setTcpIp(a7);
                 int a8 = Integer.parseInt(cursor.getString(12)); // Порт
                 pribor.setPort(a8);
-                //String a2=cursor.getString(6);
                 PriborList.add(pribor);
             } while (cursor.moveToNext());
         }
@@ -320,7 +322,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     public void removePribor(int idPribor) {
-        SQLiteDatabase db = this.getWritableDatabase();
+
+        db = this.getWritableDatabase();
         db.delete(TABLE_PRIBOR, KEY_ID + " = ?", new String[]{String.valueOf(idPribor)});
         db.close();
     }

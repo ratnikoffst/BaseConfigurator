@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import com.ratnikoff.BaseConfigurator.Base.Object;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.ObjectBaseFragment;
 import com.ratnikoff.BaseConfigurator.R;
@@ -55,56 +56,51 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        EditText temp = (EditText) root.findViewById(R.id.ObjectNameEditAdd);
-
-        String nameObject = String.valueOf(temp.getText());
-
-        ///int Inn = Integer.parseInt(inn);
-
-        imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
-
-        temp = (EditText) root.findViewById(R.id.ObjectDogovor);
-        String objectDogovor = String.valueOf(temp.getText());
-        imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
-
-        temp = (EditText) root.findViewById(R.id.ObjectAddress);
-        String objectAdress = String.valueOf(temp.getText());
-        imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
-
-        temp = (EditText) root.findViewById(R.id.ObjectComment);
-        String CommentObject = String.valueOf(temp.getText());
-
-        imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
 
         switch (v.getId()) {
             case R.id.ObjectAdd:
-                ObjectBaseFragment b = (ObjectBaseFragment) getFragmentManager().findFragmentByTag("OBJECT_FRAGMENT");
-                if (currentTagFragment == "AddObject") {
-                    b.setNewItemObject(Current_Operation_Add,
-                            0,
-                            idOwner,
-                            nameObject,
-                            objectDogovor,
-                            objectAdress,
-                            CommentObject);
-                    // b.setNewItemObject(Current_Operation_Add,);
-                    // b.setNewDataItem(Current_Operation_Add, 0, NameOwner, Inn, NameAddress, CommentObject);//  добавления в Basefragment
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                EditText temp = (EditText) root.findViewById(R.id.ObjectNameEditAdd);
+                if (temp.getText().length() != 0) {
+                    Object object = new Object();
+                    object.setIdObject(id);
+                    object.setIdOwwner(idOwner);
+                    object.setNameObject(String.valueOf(temp.getText()));
+
+
+                    imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
+
+                    temp = (EditText) root.findViewById(R.id.ObjectDogovor);
+                    object.setDogovorObject(String.valueOf(temp.getText()));
+                    imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
+
+                    temp = (EditText) root.findViewById(R.id.ObjectAddress);
+                    object.setAddressObject(String.valueOf(temp.getText()));
+                    imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
+
+                    temp = (EditText) root.findViewById(R.id.ObjectComment);
+                    object.setCommentObject(String.valueOf(temp.getText()));
+
+                    imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
+                    ObjectBaseFragment b = (ObjectBaseFragment) getFragmentManager().findFragmentByTag("OBJECT_FRAGMENT");
+                    if (currentTagFragment == "AddObject") {
+                        b.setNewItemObject(Current_Operation_Add, object);
+                    } else {
+                        b.setNewItemObject(Current_Operation_Edit, object);//(Current_Operation_Edit, id, NameOwner, Inn, NameAddress, CommentObject); // Установка нового значения
+                    }
+                    BaseConfigurator act = (BaseConfigurator) getActivity();
+                    act.removePopFragment();
                 } else {
-                    b.setNewItemObject(Current_Operation_Edit,
-                            id,
-                            idOwner,
-                            nameObject,
-                            objectDogovor,
-                            objectAdress,
-                            CommentObject);//(Current_Operation_Edit, id, NameOwner, Inn, NameAddress, CommentObject); // Установка нового значения
+                    temp.setError("Наименование Обьекта не може быть пустым !!!");
                 }
                 break;
+            case R.id.ObjectNo:
+                BaseConfigurator act = (BaseConfigurator) getActivity();
+                act.removePopFragment();
+                break;
         }
-        BaseConfigurator act = (BaseConfigurator) getActivity();
-        act.removePopFragment();
-
 
     }
 }

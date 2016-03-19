@@ -32,20 +32,21 @@
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <EditText
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/editNameInn"
                 android:inputType="number"
-                android:lines="1"
+                android:lines="3"
                 android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:numeric="integer"
                 android:hint="@string/NumberZnakInn"/>
-        <Button android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="..."
-                android:id="@+id/innSearch"/>
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:background="@color/red"
+                     android:src="@drawable/ico_supplier_search"
+                     android:id="@+id/innSearch"/>
     </LinearLayout>
 
     <TextView android:layout_width="match_parent"

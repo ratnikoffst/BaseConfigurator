@@ -37,6 +37,9 @@ public class BaseConfigurator extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         c = findViewById(R.id.line_free_color).getBackground();
+        if (current_fragment != 0) {
+            removeAllFragment();
+        }
     }
 
 
@@ -158,7 +161,7 @@ public class BaseConfigurator extends Activity {
                 removePopFragment();
             } else {
                 setDefaultMenu();
-                deleteCurrentFragment();///Fragment();
+                removeCurrentFragment();///Fragment();
             }
         }
     }
@@ -193,7 +196,7 @@ public class BaseConfigurator extends Activity {
         int i;
         i = fragmentTag.size();
         if (del == true && i != 0) {
-            deleteAllFragment();
+            removeAllFragment();
         }
         if (fragmentTag.size() != 0) {
             i--;
@@ -214,17 +217,17 @@ public class BaseConfigurator extends Activity {
     }
 
     // Удаление  всех fragment
-    public void deleteAllFragment() {
+    public void removeAllFragment() {
         int i = fragmentTag.size() - 1;
 
         do {
-            deleteFragment(i);
+            removeFragment(i);
             i--;
         } while (i != -1);
     }
 
     // Удаление последнего fragmenta
-    public void deleteCurrentFragment() {
+    public void removeCurrentFragment() {
         int i = fragmentTag.size() - 1;
         String tag = fragmentTag.get(i);
         getFragmentManager().beginTransaction()
@@ -234,7 +237,7 @@ public class BaseConfigurator extends Activity {
     }
 
     // Удаление fragmenta по номеру
-    private void deleteFragment(int i) {
+    private void removeFragment(int i) {
         String tag = fragmentTag.get(i);
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))

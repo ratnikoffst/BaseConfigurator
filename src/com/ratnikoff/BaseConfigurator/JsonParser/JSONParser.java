@@ -46,8 +46,6 @@ public class JSONParser {
             StringBuilder sb = new StringBuilder();
             String line = null;
 
-            //  String s=new String("UTF-8",line);
-
 
             while ((line = reader.readLine()) != null) {
                 line = new String(line.getBytes(), "UTF-8");

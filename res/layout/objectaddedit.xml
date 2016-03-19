@@ -60,17 +60,21 @@
               android:text="@string/AdressObject"
               android:layout_gravity="center_horizontal"
     />
-
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ObjectAddress"
-
-            android:singleLine="true"
-            android:imeOptions="actionDone"
-
-
-    />
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/ObjectAddress"
+                android:singleLine="true"
+                android:imeOptions="actionDone"
+        />
+        <ImageButton android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/settingslocationicon"/>
+    </LinearLayout>
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:text="@string/CommentObject"
