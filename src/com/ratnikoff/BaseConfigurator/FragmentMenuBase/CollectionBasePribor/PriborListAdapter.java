@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.ratnikoff.BaseConfigurator.Base.Pribor;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.PriborBaseFragment;
 import com.ratnikoff.BaseConfigurator.R;
 

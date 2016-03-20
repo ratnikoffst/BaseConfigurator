@@ -44,7 +44,7 @@
                 android:hint="@string/NumberZnakInn"/>
         <ImageButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:background="@color/red"
+                     android:background="@drawable/drawable_search_no"
                      android:src="@drawable/ico_supplier_search"
                      android:id="@+id/innSearch"/>
     </LinearLayout>

@@ -3,14 +3,16 @@ package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseObject;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import com.ratnikoff.BaseConfigurator.Base.Object;
+import android.widget.Toast;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Object;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.ObjectBaseFragment;
 import com.ratnikoff.BaseConfigurator.R;
 
@@ -69,7 +71,6 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
                     object.setIdOwwner(idOwner);
                     object.setNameObject(String.valueOf(temp.getText()));
 
-
                     imm.hideSoftInputFromWindow(temp.getWindowToken(), 0);
 
                     temp = (EditText) root.findViewById(R.id.ObjectDogovor);
@@ -94,6 +95,7 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
                     act.removePopFragment();
                 } else {
                     temp.setError("Наименование Обьекта не може быть пустым !!!");
+                    toastedit("Наименование Обьекта не може быть пустым !!!");
                 }
                 break;
             case R.id.ObjectNo:
@@ -102,5 +104,12 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
                 break;
         }
 
+    }
+
+    private void toastedit(String text) {
+        Toast toast = Toast.makeText(getActivity(),
+                text, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }

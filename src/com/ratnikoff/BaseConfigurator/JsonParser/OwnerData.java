@@ -1,6 +1,6 @@
 package com.ratnikoff.BaseConfigurator.JsonParser;
 
-import com.ratnikoff.BaseConfigurator.Base.Owner;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Owner;
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -3,10 +3,12 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
     <TabHost
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/tabHost">
+            android:layout_height="wrap_content"
+            android:id="@+id/tabHost"
+            android:layout_gravity="center_horizontal">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -20,39 +22,135 @@
                     android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                 <LinearLayout
-                        android:id="@+id/linearLayout3"
+                        android:id="@+id/menuMercury"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                    <Button android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/grpz"/>
-                </LinearLayout>
-                <LinearLayout
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="match_parent"
+                                  android:id="@+id/tvTab1"
+                                  android:orientation="vertical">
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/mercury_selector"
+                                android:text="Меркурий 200"
+                                android:id="@+id/mercury200"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 202"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury202"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 203"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury203"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 206"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury206"/>
 
-                        android:id="@+id/linearLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_gravity="center_horizontal|top">
-                    <Button android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/test"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 230"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury230"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 231"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury231"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 233"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury233"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 234"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury234"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 235"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/mercury235"/>
+                        <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Меркурий 236"
+                                android:background="@drawable/mercury_selector"
+                                android:id="@+id/button14"/>
+                    </LinearLayout>
+
                 </LinearLayout>
                 <LinearLayout
-                        android:id="@+id/linearLayout4"
+                        android:id="@+id/linearTab2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
-                    <Button android:layout_width="wrap_content"
+                    <Button
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="СЭТ3"
+                            android:background="@drawable/grpz_selector"
+                            android:id="@+id/button15"/>
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ГАММА 1"
+                            android:background="@drawable/grpz_selector"
+                            android:id="@+id/button16"/>
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ГАММА 3"
+                            android:background="@drawable/grpz_selector"
+                            android:id="@+id/button17"/>
 
-                            android:id="@+id/inkot"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:id="@+id/linearTab33"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="СЭБ 2А"
+                            android:background="@drawable/nzif_selector"
+                            android:id="@+id/button18"/>
+                    <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ПСЧ 3"
+                            android:background="@drawable/nzif_selector"
+                            android:id="@+id/button19"/>
+                    <Button
+                            android:id="@+id/button20"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/nzif_selector"
+                            android:text="МАЯК"/>
+                    <Button
+                            android:id="@+id/button21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/nzif_selector"
+                            android:text="CЭТ 4"/>
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
     </TabHost>
-
 </LinearLayout>

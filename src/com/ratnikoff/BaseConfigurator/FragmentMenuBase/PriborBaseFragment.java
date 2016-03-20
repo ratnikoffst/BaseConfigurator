@@ -7,9 +7,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import com.ratnikoff.BaseConfigurator.Base.DataBaseHelper;
-import com.ratnikoff.BaseConfigurator.Base.Pribor;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.DataBaseHelper;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor.PriborListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
 

@@ -1,4 +1,4 @@
-package com.ratnikoff.BaseConfigurator.Base;
+package com.ratnikoff.BaseConfigurator.BaseSQLite;
 
 /**
  * Created by SM on 02.03.2016.

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
+import android.widget.TextView;
 import com.ratnikoff.BaseConfigurator.R;
 
 /**
@@ -20,10 +21,17 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
         root = inflater.inflate(R.layout.configfragment, container, false);
         //       root.setOnClickListener(this);
         createFillTab();
+        createSetOnclick();
 
-        // root.findViewById(R.id.mercury).setOnClickListener(this);
 
         return root;
+    }
+
+    private void createSetOnclick() {
+        root.findViewById(R.id.mercury200).setOnClickListener(this);
+        root.findViewById(R.id.mercury202).setOnClickListener(this);
+        root.findViewById(R.id.mercury230).setOnClickListener(this);
+        root.findViewById(R.id.mercury234).setOnClickListener(this);
     }
 
     private void createFillTab() {
@@ -31,72 +39,54 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
 
         tabs.setup();
 
-        TabHost.TabSpec spec = tabs.newTabSpec("tag1");
+        //   android:id="@+id/tabsLayout"
 
-        spec.setContent(R.id.inkot);
-        spec.setIndicator("ИНКОТЕКС");
+        View view = LayoutInflater.from(tabs.getContext()).inflate(R.layout.tab_mercury, null);
+        TextView tv = (TextView) view.findViewById(R.id.tabsText);
+        tv.setText("ИНКОТЕКС");
+
+        TabHost.TabSpec spec = tabs.newTabSpec("tag1");
+        spec.setContent(R.id.menuMercury); // R.layout.menu_mercuriy
+        spec.setIndicator(view);
         tabs.addTab(spec);
 
-//        spec.setContent(R.id.inkotex);
-//        spec.setIndicator("Инкотекс");
-//        tabs.addTab(spec);
+        view = LayoutInflater.from(tabs.getContext()).inflate(R.layout.tab_grpz, null);
+        tv = (TextView) view.findViewById(R.id.tabsText);
+        tv.setText("ГРПЗ");
 
         spec = tabs.newTabSpec("tag2");
-        spec.setContent(R.id.grpz);
-        spec.setIndicator("ГРПЗ");
+        spec.setContent(R.id.linearTab2);
+        spec.setIndicator(view);
         tabs.addTab(spec);
 
+        view = LayoutInflater.from(tabs.getContext()).inflate(R.layout.tab_nzif, null);
+        tv = (TextView) view.findViewById(R.id.tabsText);
+        tv.setText("НЗИФ");
+
         spec = tabs.newTabSpec("tag3");
-        spec.setContent(R.id.test);
-        spec.setIndicator("МЗИП");
+        spec.setContent(R.id.linearTab33);
+        spec.setIndicator(view);
         tabs.addTab(spec);
 
         tabs.setCurrentTab(0);
-    }
+        tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
 
+            }
+
+        });
+    }
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.mercury:
-//                LinearLayout l = (LinearLayout) root.findViewById(R.id.mercuryButton);
-//                if (FLAG_OPEN_CLOSE_MERCURY == false) {
-//                   // LinearLayout l = (LinearLayout) root.findViewById(R.id.mercuryButton);
-//                    for (int i = 0; i < 5; i++) {
-//
-//                        Button b = new Button(this.getActivity());
-//                        b.setText("" + i);
-//                        l.addView(b);
-//                        FLAG_OPEN_CLOSE_MERCURY=true;
-//                    }
-//                } else
-//                {
-//
-//                    l.removeAllViews();
-//                    FLAG_OPEN_CLOSE_MERCURY=false;
-//                }
-////
-//                LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                View rootView= layoutInflater.inflate(R.layout.main_activity_progress_element, this);
-//
-//                ProgressBar progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar_friend);
-//                progressBar.setMax(100);
-//                progressBar.setProgress(55);
-//l.addView(mercurylinear);
-//                Inflater inflater = null;
-//                if (inflater != null) {
-//                    root=inflater.inflate(mercurylinear,root.findViewById(R.id.mercuryButton),false);
-//                }
-//
-//                LinearLayout l2 = (LinearLayout) getResources().getLayout(mercurylinear);
-//                ///l.(l2);
-        /// Button b=Button(this);
-
-        //l=inflater.inflate(R.layout.configfragment, container, false);;//addView();
-
-//                break;
-//        }
-
-
+        switch (v.getId()) {
+            case R.id.mercury200:
+                break;
+            case R.id.mercury230:
+                break;
+            case R.id.mercury234:
+                break;
+        }
     }
 }

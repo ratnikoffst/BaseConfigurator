@@ -6,11 +6,11 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import com.ratnikoff.BaseConfigurator.Base.DataBaseHelper;
-import com.ratnikoff.BaseConfigurator.Base.Object;
-import com.ratnikoff.BaseConfigurator.Base.Owner;
-import com.ratnikoff.BaseConfigurator.Base.Pribor;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.DataBaseHelper;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Object;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Owner;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFragment;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
@@ -212,7 +212,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
 
     /*
     * Первая переменная указывает редактирование=1 или добавление=2 !!!
-    *
+    * Переделать класс
      */
     public void setNewDataItem(int operation, Owner owner) {
         switch (operation) {

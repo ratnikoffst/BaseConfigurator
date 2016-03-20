@@ -1,4 +1,4 @@
-package com.ratnikoff.BaseConfigurator.Base;
+package com.ratnikoff.BaseConfigurator.BaseSQLite;
 
 import android.app.Activity;
 import android.content.ContentValues;
