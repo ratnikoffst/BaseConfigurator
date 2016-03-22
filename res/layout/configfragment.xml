@@ -31,28 +31,37 @@
                                   android:layout_height="match_parent"
                                   android:id="@+id/tvTab1"
                                   android:orientation="vertical">
-                        <Button
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/mercury_selector"
-                                android:text="Меркурий 200"
-                                android:id="@+id/mercury200"/>
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:orientation="horizontal"
+
+                                      android:layout_height="wrap_content">
+
+                            <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/mercury_selector"
+                                    android:text="Меркурий 200"
+                                    android:id="@+id/mercury200"/>
+                        </LinearLayout>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 202"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury202"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 203"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury203"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 206"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury206"/>
 
@@ -66,30 +75,35 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 231"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury231"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 233"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury233"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 234"
+
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury234"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 235"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/mercury235"/>
                         <Button
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Меркурий 236"
+                                android:textColor="@color/red"
                                 android:background="@drawable/mercury_selector"
                                 android:id="@+id/button14"/>
                     </LinearLayout>

@@ -7,19 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
+import com.ratnikoff.BaseConfigurator.BaseConfigurator;
+import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.mercuryfragment.mercuryfragment23х;
 import com.ratnikoff.BaseConfigurator.R;
 
 /**
  * Created by SM on 17.02.2016.
  */
 public class ConfigFragment extends Fragment implements View.OnClickListener {
+    private final static String CONFIG_PRIBOR = "CONFIG_FRAGMENT_MERCURY20";
     private View root;
     private Boolean FLAG_OPEN_CLOSE_MERCURY = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.configfragment, container, false);
-        //       root.setOnClickListener(this);
+        //      root.setOnClickListener(this);
         createFillTab();
         createSetOnclick();
 
@@ -84,6 +87,15 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
             case R.id.mercury200:
                 break;
             case R.id.mercury230:
+                BaseConfigurator act = (BaseConfigurator) getActivity();
+                mercuryfragment23х addconfigmerc = new mercuryfragment23х();//AddEditFrag();
+//                object = (Object) lvRegistryObject.getAdapter().getItem(position);// Летить здесь !!!!
+//                bundle = new Bundle();
+//                bundle.putInt("ID", object.getIdObject());
+//                bundle.putString("NameObject", object.getNameObject());
+//                bundle.putString("NameOwner", NameOwner);
+//                addPribor.setArguments(bundle);
+                act.addFragment(CONFIG_PRIBOR, addconfigmerc, false);
                 break;
             case R.id.mercury234:
                 break;

@@ -6,19 +6,28 @@
     <uses-sdk android:minSdkVersion="15"/>
     <application android:label="@string/app_name"
                  android:theme="@android:style/Theme.Holo"
-                 android:icon="@drawable/rea_launcher">
+                 android:icon="@drawable/rea_launcher"
+                 android:debuggable="true"
+    >
         <activity android:name="BaseConfigurator"
                   android:configChanges="orientation|screenSize"
+                  android:debuggable="true"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
             </intent-filter>
+            <meta-data android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                       android:resource="@xml/device_filter"/>
+
         </activity>
     </application>
+    <uses-feature android:name="android.hardware.usb.host"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 </manifest>
