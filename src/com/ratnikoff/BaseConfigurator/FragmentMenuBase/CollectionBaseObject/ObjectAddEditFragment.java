@@ -2,6 +2,7 @@ package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseObject;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Object;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.ObjectBaseFragment;
+import com.ratnikoff.BaseConfigurator.GPS.GpsAddress;
 import com.ratnikoff.BaseConfigurator.R;
 
 /**
@@ -32,6 +34,9 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
         root = inflater.inflate(R.layout.objectaddedit, container, false);
         root.findViewById(R.id.ObjectAdd).setOnClickListener(this);
         root.findViewById(R.id.ObjectNo).setOnClickListener(this);
+
+        root.findViewById(R.id.addressGps).setOnClickListener(this);
+
         idOwner = getArguments().getInt("ID_OWNER");
 
         currentTagFragment = getArguments().getString("TYPE"); // Присваиваен Tag fragment для
@@ -101,6 +106,18 @@ public class ObjectAddEditFragment extends Fragment implements View.OnClickListe
             case R.id.ObjectNo:
                 BaseConfigurator act = (BaseConfigurator) getActivity();
                 act.removePopFragment();
+                break;
+            case R.id.addressGps:
+                BaseConfigurator gpsact = (BaseConfigurator) getActivity();
+                LocationManager lm = (LocationManager) gpsact.getSystemService(Context.LOCATION_SERVICE);
+
+                //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, (LocationListener) this);
+                GpsAddress g = new GpsAddress(lm);
+                //gpsObject g2 = g.gpsLocation();
+
+
+                int i;
+                i = 1;
                 break;
         }
 

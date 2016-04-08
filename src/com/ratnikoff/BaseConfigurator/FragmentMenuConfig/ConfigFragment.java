@@ -15,7 +15,7 @@ import com.ratnikoff.BaseConfigurator.R;
  * Created by SM on 17.02.2016.
  */
 public class ConfigFragment extends Fragment implements View.OnClickListener {
-    private final static String CONFIG_PRIBOR = "CONFIG_FRAGMENT_MERCURY20";
+    private final static String CONFIG_PRIBOR = "MERCURY23";
     private View root;
     private Boolean FLAG_OPEN_CLOSE_MERCURY = false;
 

@@ -3,29 +3,52 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Меркурий 230"
-            android:id="@+id/button6"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <LinearLayout
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+
+                android:text="Меркурий 230"
+                android:id="@+id/button6"/>
+        <Button android:layout_width="wrap_content"
+                android:id="@+id/connect"
+                android:layout_height="wrap_content"
+                android:text="поиск"
+                android:layout_gravity="right"/>
+    </LinearLayout>
+
+    <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Адрес счетчика: "/>
-        <EditText android:layout_width="match_parent"
-                  android:layout_weight="1"
-                  android:layout_height="wrap_content"/>
-        <Button android:layout_width="wrap_content"
-                android:id="@+id/connect"
-                android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <TextView android:layout_width="match_parent"
+        <NumberPicker android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/startAddress"
+                      android:orientation="horizontal">
+
+        </NumberPicker>
+        <NumberPicker android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_centerVertical="true"
+                      android:layout_alignParentRight="true"
+                      android:orientation="horizontal"
+                      android:id="@+id/endAddress">
+
+        </NumberPicker>
+        <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/numberPicker2"
+                android:layout_toLeftOf="@+id/numberPicker"/>
+    </RelativeLayout>
+
+    <ListView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:id="@+id/testUsb"/>
+              android:id="@+id/AddSearch"/>
 </LinearLayout>

@@ -135,4 +135,6 @@ public class Pribor {
     public void setTcpIp(String tcpIp) {
         this.tcpIp = tcpIp;
     }
+
+
 }

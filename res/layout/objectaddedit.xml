@@ -74,6 +74,7 @@
         <ImageButton android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:src="@drawable/settingslocationicon"
+                     android:id="@+id/addressGps"
                      android:background="@drawable/search_selector"/>
     </LinearLayout>
     <TextView android:layout_width="match_parent"
@@ -85,10 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ObjectComment"
-
             android:singleLine="true"
             android:imeOptions="actionDone"
-
-
     />
 </LinearLayout>

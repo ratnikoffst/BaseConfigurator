@@ -1,12 +1,12 @@
 package com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor;
 
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
-import com.ratnikoff.BaseConfigurator.FragmentMenuBase.PriborBaseFragment;
 import com.ratnikoff.BaseConfigurator.R;
 
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class PriborListAdapter extends BaseAdapter {
     private ArrayList<Pribor> Pribor;
-    private PriborBaseFragment c;
+    private Fragment c;
 
-    public PriborListAdapter(ArrayList<Pribor> pribor, PriborBaseFragment c) {
+    public PriborListAdapter(ArrayList<Pribor> pribor, Fragment c) {
         this.Pribor = pribor;
         this.c = c;
     }
