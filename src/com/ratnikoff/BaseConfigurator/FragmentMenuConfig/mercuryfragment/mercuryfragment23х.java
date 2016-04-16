@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
+import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor.PriborListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
@@ -35,10 +36,9 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
     int progress;
     //private View rootpribor;
     Mercury23 me;
-    NumberPicker sAdr;
-    NumberPicker eAdr;
     ProgressBar progressBar;
-
+    private NumberPicker sAdr;
+    private NumberPicker eAdr;
     private ArrayList<Pribor> SearchRegistryPribor;
     private View rootmerc23;
     private UsbManager mUsbManager;
@@ -71,13 +71,9 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
 
     private void CreateFillList() {
 
-//        List<Pribor> list = dbPribor.getAllObjectPribor(idObject);
-        SearchRegistryPribor = new ArrayList<Pribor>();
-        //for (int i = 0; i < list.size(); i++) {
-        //    Pribor v = list.get(i);
 
-        //     RegistryPribor.add(v);
-        // }
+        SearchRegistryPribor = new ArrayList<Pribor>();
+
         PriborListAdapter adapter = new PriborListAdapter(SearchRegistryPribor, this); ///new PriborListAdapter(RegistryPribor, this); //ListAdapter(RegistryObject, this);
         lvRegistryPribor.setAdapter(adapter);
 
@@ -103,8 +99,18 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
 //        manager = new UsbManager(getActivity().getSystemService(Context.USB_SERVICE));
 
 
-        OpenTask op = new OpenTask();
+        int i = sAdr.getValue();
+        int i2 = eAdr.getValue();
 
+        SearchRegistryPribor.clear();
+        //SearchRegistryPribor.removeAll((Collection<?>) lvRegistryPribor);
+
+        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
+
+        BaseConfigurator act = (BaseConfigurator) getActivity();
+        act.changeFragmennt = false;
+
+        OpenTask op = new OpenTask();
         op.execute();
 
     }
@@ -112,32 +118,34 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
     public void addNewItem(Pribor prib) {
 
         SearchRegistryPribor.add(prib);
-        //(/)lvRegistryPribor.getAdapter().notifyDataSetChanged();
         ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
     }
 
-//    private void addNewItem(Pribor[] pribors) {
-//        int i;
-//        i = 1;
-//        SearchRegistryPribor.add(pribors[0]);
-//        //(/)lvRegistryPribor.getAdapter().notifyDataSetChanged();
-//        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
-//        //  progressBar.setProgress(progress);
-//    }
 
-    class OpenTask extends AsyncTask<Void, Pribor, Integer> {
-
+    class OpenTask extends AsyncTask<Void, Pribor, Void> {
+        int start;
+        int end;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            start = sAdr.getValue();
+            end = eAdr.getValue();
+            progressBar.setMax(end - start);
+
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            BaseConfigurator act = (BaseConfigurator) getActivity();
+            act.changeFragmennt = true;
         }
 
 
         @Override
-        protected Integer doInBackground(Void... params) {
+        protected Void doInBackground(Void... params) {
 
-            ArrayList<Pribor> pribors = new ArrayList<Pribor>();
             String addressStr;
             byte[] write;
             byte[] read;
@@ -152,7 +160,7 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
                 e.printStackTrace();
             }
 
-            for (progress = 1; progress <= 240; progress++) {
+            for (progress = start; progress <= end; progress++) {
                 write = Mercury23.WRITE_SEARCH;
                 read = Mercury23.READ_SEARCH;
 
@@ -193,8 +201,6 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
                     prib.setPiPribor(pupi);// ток
                     prib.setPuPribor(Pu);// напряжение
 
-                    ///   publishProgress(prib);
-
                 }
                 publishProgress(prib);
             }
@@ -210,12 +216,11 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
 
                 ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
 
-                progressBar.setProgress(progress);
+                progressBar.setProgress(progress - start);
             } else {
-                progressBar.setProgress(progress);
+                progressBar.setProgress(progress - start);
             }
         }
-
     }
 }
 

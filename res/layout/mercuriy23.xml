@@ -30,11 +30,16 @@
                       android:orientation="horizontal">
         </NumberPicker>
         <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@android:color/background_dark"
+
                 android:id="@+id/progressBar"
-                android:layout_centerVertical="true" android:layout_toRightOf="@+id/startAddress"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/startAddress"
                 android:layout_toLeftOf="@+id/endAddress"/>
         <NumberPicker android:layout_width="wrap_content"
                       android:layout_height="wrap_content"

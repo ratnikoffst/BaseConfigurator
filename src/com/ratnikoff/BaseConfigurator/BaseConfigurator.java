@@ -23,6 +23,7 @@ public class BaseConfigurator extends Activity {
     private final static String Set_Shop_Tag = "Shop";      // Тег Fragment Shop
     private final static int Set_HelpMy_Fragment = 4;      // Установлен fragment c помощью
     private final static String Set_HelpMy_Tag = "Help";  // Тег Fragment помощь
+    public boolean changeFragmennt = true; // Флаг разрешения переключений !!!
     String currentTag = "";           // Текущий Тег fragment
     Drawable c; // Тестовая переменная !!!
     private int current_fragment = 0; // Номер текущего fragment
@@ -45,19 +46,21 @@ public class BaseConfigurator extends Activity {
 
     // Общий слушатель основных кнопок задан через layout
     public void OnClick(View view) {
-        switch (view.getId()) {
-            case R.id.button_base:
-                SetFragment(Set_Base_Fragment);
-                break;
-            case R.id.button_config:
-                SetFragment(Set_Config_Fragment);
-                break;
-            case R.id.button_shop:
-                SetFragment(Set_Shop_Fragment);
-                break;
-            case R.id.button_helpmy:
-                SetFragment(Set_HelpMy_Fragment);
-                break;
+        if (changeFragmennt == true) {
+            switch (view.getId()) {
+                case R.id.button_base:
+                    SetFragment(Set_Base_Fragment);
+                    break;
+                case R.id.button_config:
+                    SetFragment(Set_Config_Fragment);
+                    break;
+                case R.id.button_shop:
+                    SetFragment(Set_Shop_Fragment);
+                    break;
+                case R.id.button_helpmy:
+                    SetFragment(Set_HelpMy_Fragment);
+                    break;
+            }
         }
     }
 
