@@ -11,8 +11,9 @@
             android:id="@+id/TextNameOwnerObject"
             android:background="@drawable/priborownerobject"
     />
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipChildren="false">
 
         <ListView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -20,16 +21,38 @@
                   android:id="@+id/listPribor"
 
         />
-        <ImageButton android:id="@+id/PriborADD"
+
+        <ImageButton
+                android:tint="@android:color/white"
+                android:layout_width="@dimen/add_button_margin"
+                android:layout_height="@dimen/add_button_margin"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/fab_background"
+                android:src="@drawable/ico_supplier_search"
+                android:id="@+id/AutoSearch"
+                android:visibility="invisible" android:layout_above="@+id/HandleSearch"
+                android:layout_alignLeft="@+id/HandleSearch"/>
+        <ImageButton
+                android:layout_width="@dimen/add_button_margin"
+                android:layout_height="@dimen/add_button_margin"
+                android:background="@drawable/fab_background"
+                android:id="@+id/HandleSearch"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_above="@+id/PriborAdd"
+                android:layout_alignLeft="@+id/PriborAdd" android:visibility="invisible"/>
+        <ImageButton android:id="@+id/PriborAdd"
                      android:layout_width="@dimen/round_button_diameter"
                      android:layout_height="@dimen/round_button_diameter"
+                     android:layout_marginBottom="16dp"
+                     android:layout_marginRight="16dp"
                      android:layout_gravity="end|bottom"
-                     android:layout_marginBottom="@dimen/add_button_margin"
-                     android:layout_marginRight="@dimen/add_button_margin"
+                     android:background="@drawable/fab_background"
+
                      android:src="@android:drawable/ic_input_add"
                      android:tint="@android:color/white"
-                     android:background="@drawable/fab_background"
                      android:onClick="OnClick"
-        />
-    </FrameLayout>
+                     android:layout_alignParentBottom="true" android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 </LinearLayout>

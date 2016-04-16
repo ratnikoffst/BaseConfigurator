@@ -73,8 +73,6 @@ public class Mercury23 {
 
     public void searchAll(int address, int addressend) throws InterruptedException {
         ArrayList<Pribor> pribors = new ArrayList<Pribor>();
-        //      RegistryObject = new ArrayList<Object>();
-        // private ArrayList<Object> RegistryObject;
         String addressStr;
         byte[] write;
         byte[] read;

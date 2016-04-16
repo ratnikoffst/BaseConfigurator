@@ -3,10 +3,7 @@ package com.ratnikoff.BaseConfigurator.FragmentMenuBase;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.*;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.DataBaseHelper;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
@@ -19,7 +16,7 @@ import java.util.List;
 /**
  * Created by SM on 02.03.2016.
  */
-public class PriborBaseFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+public class PriborBaseFragment extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener, View.OnClickListener {
     // private final static String OWNER_OBJECT = "OBJECT_FRAGMENT";
     private final static int TYPE_EDIT = 1;
     private final static int TYPE_DELETE = 2;
@@ -34,6 +31,15 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
     private String NameOwner;
     // Переменные контекстного меню и кнопки +(FAB)
     private int CurrentItem = -1;
+    private View fab1View;
+    private View fab2View;
+//    private View fab3View;
+
+    private float mOffset1;
+    private float mOffset2;
+    private float mOffset3;
+    private boolean mIsExpanded = false;
+
     //public java.lang.Object setNewItem;
     // private DataBaseHelper db;
     //     private LayoutInflater menuInflater;
@@ -46,13 +52,12 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
         lvRegistryPribor = (ListView) rootpribor.findViewById(R.id.listPribor);
         dbPribor = new DataBaseHelper(getActivity());
 
-        // rootpribor.findViewById(R.id.objectFAB).setOnClickListener((View.OnClickListener) this);  // Регистрация FAB
+        // rootpribor.findViewById(R.id.PriborADD).setOnClickListener((View.OnClickListener) this);  // Регистрация FAB
 
         registerForContextMenu(rootpribor); // Регистрация контекстного меню
 
         idObject = getArguments().getInt("ID");
         NameObject = getArguments().getString("NameObject");
-
 
         NameOwner = getArguments().getString("NameOwner");
 
@@ -65,6 +70,17 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
 
         String s = "Заказчик: " + NameOwner + " Обьект: " + NameObject;
         ButtonOwnerObject.setText(s);
+
+        //  final ViewGroup fabContainer= (ViewGroup) rootpribor.findViewById(R.id.fab_container);
+
+
+        rootpribor.findViewById(R.id.PriborAdd).setOnClickListener(this);
+
+
+        rootpribor.findViewById(R.id.AutoSearch).setOnClickListener(this);
+        //rootpribor.findViewById(R.id.AutoSearch).;
+        rootpribor.findViewById(R.id.HandleSearch).setOnClickListener(this);
+        //  rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.VISIBLE);
 
         CreateFillList();
         return rootpribor;
@@ -106,7 +122,7 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
     //   }
 //
 //
-//    @Override
+//  @Override
 //    public void onClick(View v) {
 //        int i;
 //        i = 1;
@@ -191,6 +207,32 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         CurrentItem = position;
         return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+        ///    mIsExpanded = !mIsExpanded;
+        switch (v.getId()) {
+            case R.id.PriborAdd:
+                ImageButton im = (ImageButton) rootpribor.findViewById(R.id.PriborAdd);
+                if (mIsExpanded) {
+
+                    rootpribor.findViewById(R.id.AutoSearch).setVisibility(View.INVISIBLE);
+                    rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.INVISIBLE);
+
+                    im.setImageResource(R.drawable.ic_input_add);
+                    mIsExpanded = false; //   expandFab();
+                } else {
+                    rootpribor.findViewById(R.id.AutoSearch).setVisibility(View.VISIBLE);
+                    rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.VISIBLE);
+
+                    im.setImageResource(R.drawable.ic_input_minus);
+                    mIsExpanded = true; // collapseFab();
+                }
+                break;
+        }
+
+
     }
 
     /*

@@ -104,8 +104,6 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
     }
 
     public void addNewItem(Pribor prib) {
-        int i;
-        i = 0;
 
         SearchRegistryPribor.add(prib);
         //(/)lvRegistryPribor.getAdapter().notifyDataSetChanged();
