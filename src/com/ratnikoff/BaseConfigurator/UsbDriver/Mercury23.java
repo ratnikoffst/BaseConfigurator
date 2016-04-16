@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.hardware.usb.UsbManager;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.mercuryfragment.mercuryfragment23х;
-import com.ratnikoff.BaseConfigurator.UsbDriver.test.FTDriver;
+import com.ratnikoff.BaseConfigurator.UsbDriver.USBDriver.FTDriver;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +22,9 @@ public class Mercury23 {
     public static final int PAUSE = 200;
     public static final byte[] OPEN_CANAL_PASSWORD1 = {0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00};
     public static final byte[] OPEN_CANAL_PASSWORD31 = {0x00, 0x01, 0x01, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x00, 0x00};
+    public static final byte[] WRITE_SEARCH = {0x00, 0x00, 0x00, 0x00};
+    public static final byte[] READ_SEARCH = {0x00, 0x00, 0x00, 0x00};
     private static final String ACTION_USB_PERMISSION = "";
-    private static final byte[] WRITE_SEARCH = {0x00, 0x00, 0x00, 0x00};
-    private static final byte[] READ_SEARCH = {0x00, 0x00, 0x00, 0x00};
     private static final byte[] WRITE_CLOSE_CANAL = {0x00, 0x02, 0x00, 0x00};
     private static final byte[] READ_CLOSE_CANAL = {0x00, 0x02, 0x00, 0x00};
     private static final byte[] POST_OPEN = {0x00, 0x00, 0x00, 0x00};
@@ -122,7 +122,7 @@ public class Mercury23 {
     }
 
 
-    private String getName(int address) throws InterruptedException {
+    public String getName(int address) throws InterruptedException {
         byte[] write = WRITE_NAME;
         byte[] read = READ_NAME;
 
@@ -195,7 +195,7 @@ public class Mercury23 {
         return s;
     }
 
-    private int getPuPi(int address) throws InterruptedException {
+    public int getPuPi(int address) throws InterruptedException {
         int pupi;// = 0;
         byte[] write = WRITE_PUPI;
         byte[] read = READ_PUPI;
@@ -207,7 +207,7 @@ public class Mercury23 {
         return pupi;
     }
 
-    private int getNumber(int address) throws InterruptedException {
+    public int getNumber(int address) throws InterruptedException {
 
         byte[] write = WRITE_NUMBER;
         byte[] read = READ_NUMBER;
@@ -222,7 +222,7 @@ public class Mercury23 {
                 minStr = minStr + read[i];
             }
         }
-        //int result = Integer.parseInt(minStr);
+
 
         return Integer.parseInt(minStr);
     }
@@ -271,19 +271,29 @@ public class Mercury23 {
         return read;
     }
 
-    private void closePribor(int address) throws InterruptedException {
-        byte[] write = WRITE_PARAMETR_PRIBOR_ALL;
-        byte[] read = READ_PARAMETR_PRIBOR_ALL;
+    public byte[] getReadSearch(byte[] write, byte[] read) throws InterruptedException {
 
-
-        String s = toHexString(address);
-        read[0] = (byte) Integer.parseInt(s, 16);
-        write = crc16modbus(write);
 
         ftd.write(write);
         Thread.sleep(PAUSE);
         ftd.read(read);
 
+        return read;
+    }
+
+    private void closePribor(int address) throws InterruptedException {
+        byte[] write = WRITE_CLOSE_CANAL;
+        byte[] read = READ_CLOSE_CANAL;
+
+
+        String s = toHexString(address);
+        write[0] = (byte) Integer.parseInt(s, 16);
+        write = crc16modbus(write);
+
+        ftd.write(write);
+        Thread.sleep(PAUSE);
+        ftd.read(read);
+// Проверку crc сделать !!!
 
     }
 
@@ -330,4 +340,6 @@ public class Mercury23 {
         dataBuffer[dataBuffer.length - 2] = b5;
         return dataBuffer;
     }
+
+
 }

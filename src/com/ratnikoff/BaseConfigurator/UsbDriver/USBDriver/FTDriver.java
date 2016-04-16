@@ -1,4 +1,4 @@
-package com.ratnikoff.BaseConfigurator.UsbDriver.test;
+package com.ratnikoff.BaseConfigurator.UsbDriver.USBDriver;
 
 
 import android.app.PendingIntent;

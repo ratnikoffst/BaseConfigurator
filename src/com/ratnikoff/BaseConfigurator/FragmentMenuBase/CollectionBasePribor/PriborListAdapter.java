@@ -57,7 +57,7 @@ public class PriborListAdapter extends BaseAdapter {
         temp.setText(s); // Установка имени заказчика
 
         temp = (TextView) convertView.findViewById(R.id.idPribor); // Поиск соотвестmвующего объекта для заполнения
-        s = "ID: " + String.valueOf(PribortPosition.getIdPribor());
+        s = "Сетевой адрес: " + String.valueOf(PribortPosition.getAddressPribor());
         temp.setText(s);
 
 
