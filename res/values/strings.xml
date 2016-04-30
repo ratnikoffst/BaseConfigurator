@@ -24,5 +24,9 @@
     <string name="TypeMercuriy230">Меркурий 230 А</string>
     <string name="noaddpribor">Добавлять нечего !!!</string>
     <string name="nocurrentusb">Устройство не подключено !!!</string>
+    <string name="curentstop">Дождитесь окончания работы !!!</string>
+    <string name="nopribor">Счетчиков нет !!!</string>
+    <string name="nosave">Сохранять нечего !!!</string>
+    <string name="noport">Невозможно открыть порт</string>
 
 </resources>

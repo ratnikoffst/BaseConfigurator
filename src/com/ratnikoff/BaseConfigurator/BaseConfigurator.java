@@ -266,15 +266,11 @@ public class BaseConfigurator extends Activity {
                 .remove(getFragmentManager().findFragmentByTag(tag))
                 .show(getFragmentManager().findFragmentByTag(fragmentTag.get(i)))
                 .commit();
-        //    tag=fragmentTag.get(fragmentTag.size()-1);
-
-        // getFragmentManager().findFragmentByTag(tag).onResume();
-        //f.obnovit();
     }
 
-    public void notifyViewFragment() {
-        String tag = fragmentTag.get(fragmentTag.size());
-        //   getFragmentManager().findFragmentByTag(tag).notify();
-
-    }
+//    public void notifyViewFragment() {
+//        String tag = fragmentTag.get(fragmentTag.size());
+//        //   getFragmentManager().findFragmentByTag(tag).notify();
+//
+//    }
 }
