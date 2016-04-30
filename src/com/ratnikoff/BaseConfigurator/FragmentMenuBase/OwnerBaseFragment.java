@@ -82,7 +82,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
             List<Object> objectList = db.getAllObjectOwner(ownerList1.get(j).getID());
             for (int a = 0; a < objectList.size(); a++) {
                 for (i = 0; i < 10; i++) {
-                    db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
+                    //       db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
                 }
             }
         }
@@ -230,6 +230,10 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
                 break;
         }
         CurrentItem = -1;
+    }
+
+    public void obnovit() {
+        ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
     }
 
 

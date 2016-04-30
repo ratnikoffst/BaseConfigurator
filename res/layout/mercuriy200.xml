@@ -9,13 +9,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-
-                android:text="Меркурий 230"
+                android:background="@drawable/mercurybuttonsearch"
+                android:text="Меркурий 200"
                 android:id="@+id/button6"/>
         <ImageButton android:layout_width="wrap_content"
                      android:id="@+id/connect"
                      android:layout_height="wrap_content"
                      android:src="@drawable/find"
+
                      android:layout_gravity="right"/>
         <ImageButton
                 android:layout_width="wrap_content"
@@ -24,10 +25,18 @@
                 android:src="@drawable/save"
         />
         <ImageButton
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/control"
-                android:id="@+id/button7"/>
+                android:id="@+id/button8"/>
+        <ImageButton android:layout_width="wrap_content"
+                     android:id="@+id/writenumber"
+                     android:layout_height="wrap_content"
+                     android:src="@drawable/write"
+
+                     android:layout_gravity="right"/>
+
     </LinearLayout>
 
     <RelativeLayout
@@ -39,7 +48,7 @@
                       android:layout_height="wrap_content"
                       android:id="@+id/startAddress"
                       android:background="@drawable/spinner"
-                      android:orientation="horizontal" android:baselineAligned="true">
+                      android:orientation="horizontal">
         </NumberPicker>
         <ProgressBar
                 style="@android:style/Widget.ProgressBar.Horizontal"
@@ -57,18 +66,22 @@
                       android:layout_height="wrap_content"
                       android:layout_centerVertical="true"
                       android:layout_alignParentRight="true"
-                      android:orientation="horizontal"
                       android:background="@drawable/spinner"
+                      android:orientation="horizontal"
                       android:id="@+id/endAddress">
 
         </NumberPicker>
         <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HEX"
-                android:id="@+id/switch2" android:layout_alignParentTop="true"
+                android:id="@+id/switch1"
+                android:text=" Наладчик+"
+                android:background="@drawable/spinner"
+                android:textStyle="italic"
+                android:theme="@android:style/MediaButton.Play" android:typeface="monospace" android:textOn="Вкл."
+                android:textOff="Вык." android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/startAddress"
-        />
+                android:singleLine="true"/>
 
     </RelativeLayout>
 

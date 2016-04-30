@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String BASE_NAME = "test6.db";
-    public static final int DATABASE_VERSION = 19;
+    public static final int DATABASE_VERSION = 20;
+
     public static final String TABLE_OWNER = "BASE_OWNER"; // Таблица базы заказчика
     public static final String NAME_OWNER = "NAME_OWNER"; //Наименование заказчика
     public static final String INN_OWNER = "INN_OWNER"; //ИНН заказчика
@@ -32,7 +33,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String ID_OWNEROBJECT = "ID_OWNER_OBJECT";
     public static final String TYPE_PRIBOR = "TYPE_PRIBOR";
     public static final String NUMBER_PRIBOR = "NUMBER_PRIBOR";
+
     public static final String ADDRESS_PRIBOR = "ADRESS_PRIBOR";
+    public static final String GADDRESS_PRIBOR = "GADRESS_PRIBOR";
+    public static final String TARIFF_PRIBOR = "TARIFF_PRIBOR";
     public static final String BAUD_PRIBOR = "BAUD_PRIBOR";//integer,
     public static final String PASSWORD_USER = "PASSWORD_USER";// integer,
     public static final String PASSWORD_ADMIN = "PASSWORD_ADMIN";// blob,
@@ -81,7 +85,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 PI_PRIBOR + " INTEGER," +
                 TYPE_CONNECT + " INTEGER," +
                 TCP_IP + " TEXT," +
-                PORT + " INTEGER);");
+                PORT + " INTEGER," +
+                GADDRESS_PRIBOR + " INTEGER," +
+                TARIFF_PRIBOR + " INTEGER);");
 
     }
 
@@ -246,24 +252,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_OBJECT, KEY_ID + " = ?", new String[]{String.valueOf(idObject)});
         db.close();
     }
+// Классы для работы с приборами
 
-    public void addPribor(int idObject, String typePribor, int numberPribor, int address) {
+    public void addPribor(Pribor pribor) {//int idObject, String typePribor, int numberPribor, int address) {
 
 
         ContentValues values = new ContentValues();
-        values.put(ID_OWNEROBJECT, idObject); // 1
-        values.put(TYPE_PRIBOR, typePribor);  // 2
-        values.put(NUMBER_PRIBOR, numberPribor); //3
-        values.put(ADDRESS_PRIBOR, address); //4
-        values.put(BAUD_PRIBOR, 9600); //5
-        values.put(PASSWORD_USER, 111111); // 6
-        values.put(PASSWORD_ADMIN, 222222); //7
-        values.put(PU_PRIBOR, 1); // 8
-        values.put(PI_PRIBOR, 1); // 9
-        values.put(TYPE_CONNECT, 1);  // 10
-        values.put(TCP_IP, "172.172.172.1 "); // 11
-        values.put(PORT, 1010); // 12
+        values.put(ID_OWNEROBJECT, pribor.idObject); // 1
+        values.put(TYPE_PRIBOR, pribor.getTypePribor());  // 2
+        values.put(NUMBER_PRIBOR, pribor.getNumberPribor()); //3
+        values.put(ADDRESS_PRIBOR, pribor.getAddressPribor()); //4
 
+        values.put(BAUD_PRIBOR, pribor.getBaudPribor()); //5
+        values.put(PASSWORD_USER, pribor.getPasswordUser()); // 6
+        values.put(PASSWORD_ADMIN, pribor.getPasswordAdmin()); //7
+        values.put(PU_PRIBOR, pribor.getPuPribor()); // 8)
+        values.put(PI_PRIBOR, pribor.getPiPribor()); // 9
+        values.put(TYPE_CONNECT, pribor.getTypeConnectPribor());  // 10
+        values.put(TCP_IP, pribor.getTcpIp()); // 11
+        values.put(PORT, pribor.getPort()); // 12
+        values.put(GADDRESS_PRIBOR, pribor.getGaddressPribor()); // 13
+        values.put(TARIFF_PRIBOR, pribor.getTariff()); // 14
         // SQLiteDatabase db = this.getWritableDatabase();
         db = this.getWritableDatabase();
         db.insert(TABLE_PRIBOR, null, values);
@@ -313,6 +322,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 pribor.setTcpIp(a7);
                 int a8 = Integer.parseInt(cursor.getString(12)); // Порт
                 pribor.setPort(a8);
+                int gAddress = Integer.parseInt(cursor.getString(13)); // Групповой адрес
+                pribor.setGaddressPribor(gAddress);
+                int tariff = Integer.parseInt(cursor.getString(14)); // Тарифф
+                pribor.setTariff(tariff);
                 PriborList.add(pribor);
             } while (cursor.moveToNext());
         }

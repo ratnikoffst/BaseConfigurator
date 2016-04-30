@@ -23,15 +23,16 @@
         />
 
         <ImageButton
-                android:tint="@android:color/white"
+
                 android:layout_width="@dimen/add_button_margin"
                 android:layout_height="@dimen/add_button_margin"
                 android:layout_marginBottom="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/fab_background"
-                android:src="@drawable/ico_supplier_search"
+                android:src="@drawable/computersearch"
                 android:id="@+id/AutoSearch"
-                android:visibility="invisible" android:layout_above="@+id/HandleSearch"
+                android:visibility="invisible"
+                android:layout_above="@+id/HandleSearch"
                 android:layout_alignLeft="@+id/HandleSearch"/>
         <ImageButton
                 android:layout_width="@dimen/add_button_margin"
@@ -40,6 +41,7 @@
                 android:id="@+id/HandleSearch"
                 android:layout_marginBottom="16dp"
                 android:layout_marginRight="16dp"
+                android:src="@drawable/hand"
                 android:layout_above="@+id/PriborAdd"
                 android:layout_alignLeft="@+id/PriborAdd" android:visibility="invisible"/>
         <ImageButton android:id="@+id/PriborAdd"
@@ -50,9 +52,10 @@
                      android:layout_gravity="end|bottom"
                      android:background="@drawable/fab_background"
 
-                     android:src="@android:drawable/ic_input_add"
+                     android:src="@drawable/plus"
                      android:tint="@android:color/white"
                      android:onClick="OnClick"
-                     android:layout_alignParentBottom="true" android:layout_alignParentRight="true"/>
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentRight="true"/>
     </RelativeLayout>
 </LinearLayout>

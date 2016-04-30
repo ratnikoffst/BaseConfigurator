@@ -240,7 +240,7 @@ public class BaseConfigurator extends Activity {
     }
 
     // Удаление fragmenta по номеру
-    private void removeFragment(int i) {
+    public void removeFragment(int i) {
         String tag = fragmentTag.get(i);
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))
@@ -248,6 +248,14 @@ public class BaseConfigurator extends Activity {
         fragmentTag.remove(i);
     }
 
+    // Удаление по TAG
+    public void removeFragment(String tag) {
+        //String tag = fragmentTag.get(i);
+        getFragmentManager().beginTransaction()
+                .remove(getFragmentManager().findFragmentByTag(tag))
+                .commit();
+        fragmentTag.remove(tag);
+    }
     // удаление текущего со всплытием
     public void removePopFragment() {
         int i = fragmentTag.size() - 1;
@@ -258,5 +266,15 @@ public class BaseConfigurator extends Activity {
                 .remove(getFragmentManager().findFragmentByTag(tag))
                 .show(getFragmentManager().findFragmentByTag(fragmentTag.get(i)))
                 .commit();
+        //    tag=fragmentTag.get(fragmentTag.size()-1);
+
+        // getFragmentManager().findFragmentByTag(tag).onResume();
+        //f.obnovit();
+    }
+
+    public void notifyViewFragment() {
+        String tag = fragmentTag.get(fragmentTag.size());
+        //   getFragmentManager().findFragmentByTag(tag).notify();
+
     }
 }

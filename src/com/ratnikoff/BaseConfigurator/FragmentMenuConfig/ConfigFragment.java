@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.TextView;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
+import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
+import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.mercuryfragment.mercuryfragment200;
 import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.mercuryfragment.mercuryfragment23х;
 import com.ratnikoff.BaseConfigurator.R;
 
@@ -16,13 +18,42 @@ import com.ratnikoff.BaseConfigurator.R;
  */
 public class ConfigFragment extends Fragment implements View.OnClickListener {
     private final static String CONFIG_PRIBOR = "MERCURY23";
+    private static final int MERCURY230 = 0;
+
+    private final static String CONFIG_PRIBOR200 = "MERCURY200";
+    private static final int MERCURY200 = 0;
+
+
+    int idObject;
+    String TypeFragment;
+    String TagFrament;
     private View root;
-    private Boolean FLAG_OPEN_CLOSE_MERCURY = false;
+    //  private Boolean FLAG_OPEN_CLOSE_MERCURY = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.configfragment, container, false);
         //      root.setOnClickListener(this);
+
+        idObject = getArguments().getInt("ID_OBJECT");
+        TypeFragment = getArguments().getString("TYPE");
+        TagFrament = getArguments().getString("TAG_CONFIGFRAGMENT");//tring("TAG_CONFIGFRAGMENT", "AddConfigPriborAuto");
+
+//        bundle.putString("TYPE", "AutoSearch");
+//        bundle.putInt("ID_OBJECT", idObject);
+//        bundle.putString("TAG_CONFIGFRAGMENT","AddConfigPriborAuto");
+//
+
+        // NameOwner = getArguments().getString("NameOwner");
+
+
+//        bundle.putString("TYPE", "AutoSearch");
+//        bundle.putInt("ID_OWNER", idObject);
+//        addObject.setArguments(bundle);
+//        BaseConfigurator act = (BaseConfigurator) getActivity();
+//        act.addFragment("AddObject", addObject, false);
+
+
         createFillTab();
         createSetOnclick();
 
@@ -83,12 +114,45 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Bundle bundle;
+        Pribor pribor;
+        BaseConfigurator act = (BaseConfigurator) getActivity();
+
         switch (v.getId()) {
             case R.id.mercury200:
+                mercuryfragment200 addconfigmerc200 = new mercuryfragment200();
+                bundle = new Bundle();
+                bundle.putString("TYPE", "AutoSearch");
+                bundle.putString("TAG", TagFrament);
+                bundle.putInt("Pribor", MERCURY200);
+                bundle.putInt("ID_OWNER", idObject);
+                addconfigmerc200.setArguments(bundle);
+                act.addFragment(CONFIG_PRIBOR, addconfigmerc200, false);
                 break;
             case R.id.mercury230:
-                BaseConfigurator act = (BaseConfigurator) getActivity();
-                mercuryfragment23х addconfigmerc = new mercuryfragment23х();//AddEditFrag();
+                act = (BaseConfigurator) getActivity();
+                mercuryfragment23х addconfigmerc = new mercuryfragment23х();
+                bundle = new Bundle();
+                bundle.putString("TYPE", "AutoSearch");
+                bundle.putString("TAG", TagFrament);
+                bundle.putInt("Pribor", MERCURY230);
+                bundle.putInt("ID_OWNER", idObject);
+                addconfigmerc.setArguments(bundle);
+
+
+//        BaseConfigurator act = (BaseConfigurator) getActivity();
+//        act.
+// addFragment("AddObject", addObject, false);
+
+
+                //               Bundle bundle.putString("TYPE", "AutoSearch");
+//        bundle.putInt("ID_OWNER", idObject);
+//        addObject.setArguments(bundle);
+//        BaseConfigurator act = (BaseConfigurator) getActivity();
+//        act.addFragment("AddObject", addObject, false);
+
+
+                //AddEditFrag();
 //                object = (Object) lvRegistryObject.getAdapter().getItem(position);// Летить здесь !!!!
 //                bundle = new Bundle();
 //                bundle.putInt("ID", object.getIdObject());

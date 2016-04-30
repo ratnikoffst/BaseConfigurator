@@ -22,7 +22,7 @@
                      android:layout_gravity="end|bottom"
                      android:layout_marginBottom="@dimen/add_button_margin"
                      android:layout_marginRight="@dimen/add_button_margin"
-                     android:src="@android:drawable/ic_input_add"
+                     android:src="@drawable/plus"
                      android:tint="@android:color/white"
                      android:background="@drawable/fab_background"
                      android:id="@+id/objectFAB"

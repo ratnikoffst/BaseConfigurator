@@ -8,12 +8,14 @@ public class Pribor {
     public String typePribor;// = "TYPE_PRIBOR";
     public int numberPribor;// = "NUMBER_PRIBOR"INTEGER;
     public int addressPribor;// = "ADRESS_PRIBOR"; integer
+    public int gaddressPribor;// = "ADRESS_PRIBOR"; integer
     public int baudPribor;// = "BAUD_PRIBOR";//integer,
     public int passwordUser;// = "PASSWORD_USER";// integer,
     public int passwordAdmin;// = "PASSWORD_ADMIN";// integer,
     public int puPribor;// = "PU_PRIBOR";// integer,
     public int piPribor;// = "PI_PRIBOR";// integer,
     public int typeConnectPribor;// = "TYPE_CONNECT";// integer,
+    public int Tariff;
     public String tcpIp;// = "TCP_IP";// text,
     public int port;//T = "PORT";//integer
     private int idPribor;
@@ -32,6 +34,7 @@ public class Pribor {
 //        this.addressPribor = AddressPribor;
 ////        this.baudPribor = baudPribor;
 //    }
+
     public int getIdPribor() {
         return idPribor;
     }
@@ -62,6 +65,22 @@ public class Pribor {
 
     public void setAddressPribor(int addressPribor) {
         this.addressPribor = addressPribor;
+    }
+
+    public int getGaddressPribor() {
+        return gaddressPribor;
+    }
+
+    public void setGaddressPribor(int gaddressPribor) {
+        this.gaddressPribor = gaddressPribor;
+    }
+
+    public int getTariff() {
+        return Tariff;
+    }
+
+    public void setTariff(int tariff) {
+        Tariff = tariff;
     }
 
     public int getBaudPribor() {

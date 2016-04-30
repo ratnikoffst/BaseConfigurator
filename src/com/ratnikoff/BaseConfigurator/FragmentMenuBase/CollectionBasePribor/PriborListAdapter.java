@@ -54,12 +54,15 @@ public class PriborListAdapter extends BaseAdapter {
 
         TextView temp = (TextView) convertView.findViewById(R.id.typeNumber); // Поиск соотвестmвующего объекта для заполнения
         String s = PribortPosition.getTypePribor() + "    №" + PribortPosition.getNumberPribor();
-        temp.setText(s); // Установка имени заказчика
+        temp.setText(s); //Установка типа прибора и номера
 
         temp = (TextView) convertView.findViewById(R.id.idPribor); // Поиск соотвестmвующего объекта для заполнения
         s = "Сетевой адрес: " + String.valueOf(PribortPosition.getAddressPribor());
         temp.setText(s);
 
+        temp = (TextView) convertView.findViewById(R.id.idTariff); // Поиск соотвестmвующего объекта для заполнения
+        s = "" + String.valueOf(PribortPosition.getTariff());
+        temp.setText(s);
 
     }
 }

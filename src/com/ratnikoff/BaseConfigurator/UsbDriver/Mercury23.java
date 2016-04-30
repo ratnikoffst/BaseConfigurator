@@ -5,11 +5,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
-import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
-import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.mercuryfragment.mercuryfragment23х;
 import com.ratnikoff.BaseConfigurator.UsbDriver.USBDriver.FTDriver;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static java.lang.Integer.toHexString;
@@ -22,9 +19,12 @@ public class Mercury23 {
     public static final int PAUSE = 200;
     public static final byte[] OPEN_CANAL_PASSWORD1 = {0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00};
     public static final byte[] OPEN_CANAL_PASSWORD31 = {0x00, 0x01, 0x01, 0x31, 0x31, 0x31, 0x31, 0x31, 0x31, 0x00, 0x00};
+
     public static final byte[] WRITE_SEARCH = {0x00, 0x00, 0x00, 0x00};
     public static final byte[] READ_SEARCH = {0x00, 0x00, 0x00, 0x00};
+
     private static final String ACTION_USB_PERMISSION = "";
+
     private static final byte[] WRITE_CLOSE_CANAL = {0x00, 0x02, 0x00, 0x00};
     private static final byte[] READ_CLOSE_CANAL = {0x00, 0x02, 0x00, 0x00};
     private static final byte[] POST_OPEN = {0x00, 0x00, 0x00, 0x00};
@@ -43,6 +43,9 @@ public class Mercury23 {
     private static final byte[] WRITE_NAME = {0x00, 0x08, 0x12, 0x00, 0x00};
     private static final byte[] READ_NAME = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
+    private static final byte[] WRITE_TARIF = {0x00, 0x08, 0x17, 0x00, 0x00};
+    private static final byte[] READ_TARIF = {0x00, 0x00, 0x00, 0x00, 0x00};
+
     FTDriver ftd;
     Context c;
     FragmentManager fmm;
@@ -57,7 +60,7 @@ public class Mercury23 {
         //return openport();
     }
 
-    private boolean openport() {
+    public boolean openport() {
         PendingIntent permissionIntent = PendingIntent.getBroadcast(c, 0, new Intent(
                 ACTION_USB_PERMISSION), 0);
         ftd.setPermissionIntent(permissionIntent);
@@ -71,80 +74,111 @@ public class Mercury23 {
 
     }
 
-    public void searchAll(int address, int addressend) throws InterruptedException {
-        ArrayList<Pribor> pribors = new ArrayList<Pribor>();
-        String addressStr;
-        byte[] write;
-        byte[] read;
+//    public void searchAll(int address, int addressend) throws InterruptedException {
+//        ArrayList<Pribor> pribors = new ArrayList<Pribor>();
+//        String addressStr;
+//        byte[] write;
+//        byte[] read;
+//
+//        Pribor prib;// = new Pribor();
+//        for (int i = 1; i <= 240; i++) {
+//            write = WRITE_SEARCH;
+//            read = READ_SEARCH;
+//
+//            addressStr = toHexString(i);
+//            write[0] = (byte) Integer.parseInt(addressStr, 16);
+//            write = crc16modbus(write);
+//
+//            ftd.write(write);
+//            Thread.sleep(PAUSE);
+//            ftd.read(read);
+//
+//            if (Arrays.equals(write, read)) {
+//                prib = new Pribor();
+//                prib.setAddressPribor(i);
+//                prib.setNumberPribor(getNumber(i));
+//                //   prib.setTypePribor(getName(i)); // Cделать метод
+//                prib.setBaudPribor(9600); // Захордкодено
+//                int pupi = getPuPi(i);//
+//                int Pu = pupi / 10000;
+//                pupi = pupi - Pu * 10000;
+//                prib.setPiPribor(pupi);// ток
+//                prib.setPuPribor(Pu);// напряжение
+//                //  pribors.add(prib);
+//
+//                //mercuryfragment23х manager = getActivity().getSystemService(Context.USB_SERVICE);
+//
+//                mercuryfragment23х b = (mercuryfragment23х) fmm.findFragmentByTag("MERCURY23");
+//                //  mercuryfragment23х b = (mercuryfragment23х) getActivity(Context).getFragmentManager.getFr.findFragmentByTag("MERCURY23");
+//                b.addNewItem(prib);
+//
+//                // b.setNewDataItem(prib);
+//
+//                //if (currentTagFragment == "AddOwner") {
+//                //  добавления в Basefragment
+//                //} else {
+//                //     b.setNewDataItem(Current_Operation_Edit, owner); // Установка нового значения
+//            }
+//
+//        }
 
-        Pribor prib;// = new Pribor();
-        for (int i = 1; i <= 240; i++) {
-            write = WRITE_SEARCH;
-            read = READ_SEARCH;
-
-            addressStr = toHexString(i);
-            write[0] = (byte) Integer.parseInt(addressStr, 16);
-            write = crc16modbus(write);
-
-            ftd.write(write);
-            Thread.sleep(PAUSE);
-            ftd.read(read);
-
-            if (Arrays.equals(write, read)) {
-                prib = new Pribor();
-                prib.setAddressPribor(i);
-                prib.setNumberPribor(getNumber(i));
-                prib.setTypePribor(getName(i)); // Cделать метод
-                prib.setBaudPribor(9600); // Захордкодено
-                int pupi = getPuPi(i);//
-                int Pu = pupi / 10000;
-                pupi = pupi - Pu * 10000;
-                prib.setPiPribor(pupi);// ток
-                prib.setPuPribor(Pu);// напряжение
-                //  pribors.add(prib);
-
-                //mercuryfragment23х manager = getActivity().getSystemService(Context.USB_SERVICE);
-
-                mercuryfragment23х b = (mercuryfragment23х) fmm.findFragmentByTag("MERCURY23");
-                //  mercuryfragment23х b = (mercuryfragment23х) getActivity(Context).getFragmentManager.getFr.findFragmentByTag("MERCURY23");
-                b.addNewItem(prib);
-
-                // b.setNewDataItem(prib);
-
-                //if (currentTagFragment == "AddOwner") {
-                //  добавления в Basefragment
-                //} else {
-                //     b.setNewDataItem(Current_Operation_Edit, owner); // Установка нового значения
-            }
-
-        }
-
-    }
+    //}
 
 
-    public String getName(int address) throws InterruptedException {
+    public String getName(int address, int typePribor) throws InterruptedException {
         byte[] write = WRITE_NAME;
         byte[] read = READ_NAME;
 
         read = readPribor(address, write, read);
 
-        return getCR(read);
+        return getCR(read, typePribor);
     }
 
-    private String getCR(byte[] read) {
+
+    // Отработать команду
+    public int getTarif(int address) throws InterruptedException {
+        byte[] write = WRITE_TARIF;
+        byte[] read = READ_TARIF;
+
+        read = readPribor(address, write, read);
+
+        int tarif = read[2] & 0xe;
+
+        return tarif;
+    }
+
+    // 0 - Меркурий 230 А
+    // 3-
+    // 4- Меркурий 234 А
+    private String getCR(byte[] read, int typePribor) {
+        String s = "";
+        switch (typePribor) {
+            case 0:
+                s = ocr230(read);
+                break;
+        }
+        //  Switch (typePribor) {
+        //    case 0:
+
+        //  break;
+        //}
+        return s;
+    }
+
+    private String ocr230(byte[] parameter) {
         String s = "Меркурий 230 А";
-        if ((read[3] & 0x30) == 0) {
+        if ((parameter[3] & 0x30) == 0) {
             s = s + "R";
         }
-        if ((read[3] & 0x40) != 0) {
+        if ((parameter[3] & 0x40) != 0) {
             s = s + "Т";
         }
-        if ((read[1] & 0x80) != 0) {
+        if ((parameter[1] & 0x80) != 0) {
             s = s + "(1)";
         } else {
             s = s + "(2)";
         }
-        switch (read[3] & 0x0f) {
+        switch (parameter[3] & 0x0f) {
             case 1:
                 s = s + "-00 ";
                 break;
@@ -158,14 +192,14 @@ public class Mercury23 {
                 s = s + "-03 ";
                 break;
         }
-        if ((read[2] & 0x20) != 0) {
+        if ((parameter[2] & 0x20) != 0) {
             s = s + "P";
         }
-        if ((read[5] & 0x02) != 0) {
+        if ((parameter[5] & 0x02) != 0) {
             s = s + "Q";
         }
         //byte b2= (byte) (read[3] & 0x0c);
-        switch (read[4] & 0x0c) {
+        switch (parameter[4] & 0x0c) {
             case 0:
                 s = s + "С";
                 break;
@@ -174,26 +208,28 @@ public class Mercury23 {
                 break;
 
         }
-        if ((read[5] & 0x04) != 0) {
+        if ((parameter[5] & 0x04) != 0) {
             s = s + "S";
         }
-        if ((read[4] & 0x10) != 0) {
+        if ((parameter[4] & 0x10) != 0) {
             s = s + "I";
         }
-        if ((read[6] & 0x10) != 0) {
+        if ((parameter[6] & 0x10) != 0) {
             s = s + "L";
         }
-        if ((read[4] & 0x20) != 0) {
+        if ((parameter[4] & 0x20) != 0) {
             s = s + "G";
         }
-        if ((read[4] & 0x02) != 0) {
+        if ((parameter[4] & 0x02) != 0) {
             s = s + "D";
         }
-        if ((read[4] & 0x01) != 0) {
+        if ((parameter[4] & 0x01) != 0) {
             s = s + "N";
         }
         return s;
+
     }
+
 
     public int getPuPi(int address) throws InterruptedException {
         int pupi;// = 0;
@@ -243,7 +279,7 @@ public class Mercury23 {
     private byte[] readPribor(int address, byte[] write, byte[] read) throws InterruptedException {
         if (openPribor(address)) {
             Byte b, b2, b3, b4 = 0;
-            // do {
+            //          do {
 //                for (int i=0;i<read.length;i++)
 //                {
 //                    read[i]=0;
@@ -262,7 +298,7 @@ public class Mercury23 {
             read = crc16modbus(read);
             b3 = read[read.length - 1];
             b4 = read[read.length - 2];
-            //  } while ((b != b3) && (b2 != b4));
+//            } while ((b != b3) && (b2 != b4));
             //read.len
             // вставить проверку контрольной суммы
             closePribor(address);

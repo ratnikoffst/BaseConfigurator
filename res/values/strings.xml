@@ -21,8 +21,8 @@
     <string name="EnterEditObject">Редактирование обьекта:</string>
     <string name="NoInternet">Нет подключения к интернету</string>
     <string name="nameOwnerNoZero">Имя Заказчика не может быть пустым !!!</string>
-    <string-array name="mercurytype">
-        <item></item>
-    </string-array>
+    <string name="TypeMercuriy230">Меркурий 230 А</string>
+    <string name="noaddpribor">Добавлять нечего !!!</string>
+    <string name="nocurrentusb">Устройство не подключено !!!</string>
 
 </resources>

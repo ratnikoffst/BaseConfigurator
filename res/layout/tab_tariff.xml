@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button9"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button10"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button11" android:layout_gravity="right"/>
+    </LinearLayout>
+
+    <TableLayout android:layout_width="match_parent" android:layout_height="match_parent">
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageButton android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:src="@drawable/work"/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Пн."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Вт."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Ср."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Чт."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Пт."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Сб."/>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Вс."/>
+        </TableRow>
+        <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <Button android:text="00:00-01:00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+            />
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

@@ -8,6 +8,7 @@ import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.DataBaseHelper;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBasePribor.PriborListAdapter;
+import com.ratnikoff.BaseConfigurator.FragmentMenuConfig.ConfigFragment;
 import com.ratnikoff.BaseConfigurator.R;
 
 import java.util.ArrayList;
@@ -31,13 +32,13 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
     private String NameOwner;
     // Переменные контекстного меню и кнопки +(FAB)
     private int CurrentItem = -1;
-    private View fab1View;
-    private View fab2View;
+    //   private View fab1View;
+    //   private View fab2View;
 //    private View fab3View;
 
-    private float mOffset1;
-    private float mOffset2;
-    private float mOffset3;
+    //   private float mOffset1;
+    //  private float mOffset2;
+    //   private float mOffset3;
     private boolean mIsExpanded = false;
 
     //public java.lang.Object setNewItem;
@@ -83,6 +84,9 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
         //  rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.VISIBLE);
 
         CreateFillList();
+
+        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
+
         return rootpribor;
     }
 
@@ -188,14 +192,18 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
                 break;
             case TYPE_ADD:
 //                addObject = new ObjectAddEditFragment();
-//                bundle = new Bundle();
-//                bundle.putString("TYPE", "AddObject");
+//                  bundle = new Bundle();
+//                  bundle.putString("TYPE", "AddObject");
 //                bundle.putInt("ID_OWNER",idOwner);
 //                addObject.setArguments(bundle);
 //                act.addFragment("AddObject", addObject, false);
 //                CurrentItem = -1;
                 break;
         }
+    }
+
+    public void changeVIew() {
+        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -212,6 +220,8 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
     @Override
     public void onClick(View v) {
         ///    mIsExpanded = !mIsExpanded;
+
+
         switch (v.getId()) {
             case R.id.PriborAdd:
                 ImageButton im = (ImageButton) rootpribor.findViewById(R.id.PriborAdd);
@@ -220,15 +230,29 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
                     rootpribor.findViewById(R.id.AutoSearch).setVisibility(View.INVISIBLE);
                     rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.INVISIBLE);
 
-                    im.setImageResource(R.drawable.ic_input_add);
+                    im.setImageResource(R.drawable.plus);
                     mIsExpanded = false; //   expandFab();
                 } else {
                     rootpribor.findViewById(R.id.AutoSearch).setVisibility(View.VISIBLE);
                     rootpribor.findViewById(R.id.HandleSearch).setVisibility(View.VISIBLE);
 
-                    im.setImageResource(R.drawable.ic_input_minus);
+                    im.setImageResource(R.drawable.onebit);
                     mIsExpanded = true; // collapseFab();
                 }
+                break;
+            case R.id.AutoSearch:
+                ConfigFragment addObject = new ConfigFragment();
+                Bundle bundle = new Bundle();
+
+                bundle.putString("TYPE", "AutoSearch");
+                bundle.putInt("ID_OBJECT", idObject);
+                bundle.putString("TAG_CONFIGFRAGMENT", "AddConfigPriborAuto");
+                addObject.setArguments(bundle);
+                BaseConfigurator act = (BaseConfigurator) getActivity();
+                act.addFragment("AddConfigPriborAuto", addObject, false);
+                CurrentItem = -1;
+                break;
+            case R.id.HandleSearch:
                 break;
         }
 
@@ -257,4 +281,13 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
 //        CurrentItem = -1;
 //
 //    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            CreateFillList();
+        }
+    }
 }
