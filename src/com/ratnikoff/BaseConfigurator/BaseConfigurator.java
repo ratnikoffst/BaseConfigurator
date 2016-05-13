@@ -78,13 +78,31 @@ public class BaseConfigurator extends Activity {
                     setLineBackground(R.color.green);
                     findViewById(R.id.button_config).setBackgroundResource(R.color.green);
                     //addTagFragment();
+
+                    ConfigFragment addObject = new ConfigFragment();
+                    Bundle bundle = new Bundle();
+
+                    ///Bundle bundle = new Bundle();
+
+                    bundle.putString("TYPE", "OneConnect");
+
+
+                    //bundle.putString("TYPE", "OneConnect");
+                    /// bundle.putInt("ID_OBJECT", idObject);
+                    bundle.putString("TAG_CONFIGFRAGMENT", "ConfigPribor");
+                    addObject.setArguments(bundle);
+                    // BaseConfigurator act = (BaseConfigurator) getActivity();
+                    /// act.addFragment("AddConfigPriborAuto", addObject, false);
+
                     currentTag = Set_Config_Tag; //Set_Config_Tag
-                    addFragment(Set_Config_Tag, new ConfigFragment(), true);
+                    addFragment(Set_Config_Tag, addObject, true);
                     break;
                 case Set_Shop_Fragment:
                     setLineBackground(R.color.yellow);
                     findViewById(R.id.button_shop).setBackgroundResource(R.color.yellow);
                     currentTag = Set_Shop_Tag;
+
+                    // Здесь внимание на new
                     addFragment(Set_Shop_Tag, new ShopFragment(), true);
                     break;
                 case Set_HelpMy_Fragment:

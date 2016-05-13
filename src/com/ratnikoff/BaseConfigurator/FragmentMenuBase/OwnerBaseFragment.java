@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import com.ratnikoff.BaseConfigurator.BaseConfigurator;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.DataBaseHelper;
-import com.ratnikoff.BaseConfigurator.BaseSQLite.Object;
 import com.ratnikoff.BaseConfigurator.BaseSQLite.Owner;
-import com.ratnikoff.BaseConfigurator.BaseSQLite.Pribor;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerAddEditFragment;
 import com.ratnikoff.BaseConfigurator.FragmentMenuBase.CollectionBaseOwner.OwnerListAdapter;
 import com.ratnikoff.BaseConfigurator.R;
@@ -41,54 +39,11 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
         root.findViewById(R.id.AddButton).setOnClickListener(this);  // Регистрация FAB
 
         db = new DataBaseHelper(getActivity());
-
-        //      CreateTestBase();
-
-        //      TestBase();
-
         CreateOwnerList();// Тестовое создание объектов
 
         return root;
     }
 
-    private void TestBase() {
-        List<Owner> ownerList = db.getAllOwner();
-        for (int j = 0; j < ownerList.size(); j++) {
-
-            List<Object> objectList = db.getAllObjectOwner(ownerList.get(j).getID());
-
-            for (int i = 0; i < objectList.size(); i++) {
-                List<Pribor> pri = db.getAllObjectPribor(objectList.get(j).getIdObject());
-            }
-        }
-    }
-
-    // Временный класс для теста
-    private void CreateTestBase() {
-        int i;
-        for (i = 1; i < 10; i++) {
-            int inncreat = 772 * i * 15;
-            db.addOwner("Заказчик " + i, "" + inncreat, "Адрес " + i, "Комментарий " + i);
-        }
-        List<Owner> ownerList = db.getAllOwner();
-        for (int j = 0; j < ownerList.size(); j++) {
-            for (int k = 0; k < 10; k++) {
-                db.addObject(ownerList.get(j).getID(), "Подстанция " + k, " " + i * j, "улица " + i + " дом " + j, "Охуеть " + i * 10 + j);
-            }
-        }
-//
-        List<Owner> ownerList1 = db.getAllOwner();
-        for (int j = 0; j < ownerList1.size(); j++) {
-            List<Object> objectList = db.getAllObjectOwner(ownerList1.get(j).getID());
-            for (int a = 0; a < objectList.size(); a++) {
-                for (i = 0; i < 10; i++) {
-                    //       db.addPribor(objectList.get(a).getIdObject(), "Меркурий 200.02", a * a * i, a * a * a * i);
-                }
-            }
-        }
-
-        i = 1;
-    }
 
     // Заполнение адаптера основного вида
     private void CreateOwnerList() {
@@ -145,7 +100,7 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
+// Пока блокирнул !!!
         menu.add(Menu.NONE, 101, Menu.NONE, R.string.edit);
         menu.add(Menu.NONE, 102, Menu.NONE, R.string.delete);
         menu.add(Menu.NONE, 103, Menu.NONE, R.string.Cancel);
@@ -230,10 +185,6 @@ public class OwnerBaseFragment extends Fragment implements View.OnClickListener,
                 break;
         }
         CurrentItem = -1;
-    }
-
-    public void obnovit() {
-        ((BaseAdapter) lvRegistryOwner.getAdapter()).notifyDataSetChanged();
     }
 
 

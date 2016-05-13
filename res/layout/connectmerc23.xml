@@ -6,14 +6,12 @@
 
     <TabHost
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tabHost2">
+            android:layout_height="wrap_content" android:id="@+id/tabHost3">
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
             <TabWidget
-                    android:id="@android:id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
             </TabWidget>
@@ -22,19 +20,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <LinearLayout
-                        android:id="@+id/tab1"
+                        android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
                 </LinearLayout>
                 <LinearLayout
-                        android:id="@+id/tab2"
+                        android:id="@+id/linearLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+                    <include layout="@layout/tab_tariff200"/>
                 </LinearLayout>
                 <LinearLayout
-                        android:id="@+id/tab3"
+                        android:id="@+id/linearLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">

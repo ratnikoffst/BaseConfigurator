@@ -28,7 +28,6 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
     ListView lvRegistryPribor;
     int progress;
 
-    boolean taskSearch = true;
 
     //private View rootpribor;
     Mercury200 me;
@@ -39,15 +38,17 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
     int idObject;
     String type;
     BaseConfigurator act;
+    boolean taskSearch = true;
     private NumberPicker sAdr;
     private NumberPicker eAdr;
     private ArrayList<Pribor> SearchRegistryPribor;
     private View rootmerc200;
     private boolean naladchik = false;
+    private boolean taskWrite = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootmerc200 = inflater.inflate(R.layout.mercuriy200, container, false);
+        rootmerc200 = inflater.inflate(R.layout.mercuriyautosearch200, container, false);
 
         rootmerc200.findViewById(R.id.connect).setOnClickListener(this);
         rootmerc200.findViewById(R.id.savePribor).setOnClickListener(this);
@@ -106,12 +107,6 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
         //   PowerManager mPowerManager = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
         // int mWakeLockState = 0;
         // PowerManager.WakeLock mWakeLock = mPowerManager.newWakeLock(mWakeLockState, "UMSE PowerTest");
-//        byte[] b = new byte[]{0x02, 0x00, 0x00, (byte) 0xD0, 0x02, 0x00, 0x00, (byte) 0xD0, 0x02, 0x01, 0x02, 0x02, 0x02, 0x02};
-//        UsbManager usb;
-//        usb = new UsbManager();
-//        UsbManager manager;
-//        manager = new UsbManager(getActivity().getSystemService(Context.USB_SERVICE));
-//        BaseConfigurator act;
 
         switch (v.getId()) {
             case R.id.savePribor:
@@ -136,7 +131,7 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
                 break;
             case R.id.connect:
 
-                if (taskSearch == true) {
+                if (taskSearch == true && taskWrite == true) {
 
                     SearchRegistryPribor.clear();
                     ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
@@ -151,13 +146,13 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
                 naladchik = naladchik != true;
                 break;
             case R.id.writenumber:
-                if (taskSearch == true) {
+                if (taskSearch == true && taskWrite == true) {
                     if (SearchRegistryPribor.size() != 0) {
-                        SearchRegistryPribor.clear();
-                        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
-                        op = new searchPriborTask();
+                        //     SearchRegistryPribor.clear();
+                        ///   ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
+                        reverseNaladchikTask opwrite = new reverseNaladchikTask();
 
-                        op.execute();
+                        opwrite.execute();
                     } else {
                         toastDisplay(act.getString(R.string.noport));
                     }
@@ -218,13 +213,15 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
             }
 
             if (mercury200.openport() == true) {
-
                 // Сделать задание наладчика++ отработать start и end;
+
                 int i = 1;
                 if (naladchik == true) {
                     i = end - start;
-                    String s = "4194304011";
-                    i = Integer.parseInt(s);
+
+                    String s = "4194304011"; // отработать этот момент
+
+                    start = Integer.parseInt(s);
                     end = start + (i * 8);
                     i = 8;
                 }
@@ -269,6 +266,8 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
                         prib.setBaudPribor(9600);
                         prib.setIdObject(idObject);
                         prib.setTypePribor("Меркурий 200");
+                        //prib.set`
+
                     }
                     publishProgress(prib);
                     if (isCancelled())
@@ -317,16 +316,8 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
 
         }
 
-//        private void toastDisplay(String text) {
-//            Toast toast = Toast.makeText(getActivity(),
-//                    text, Toast.LENGTH_LONG);
-//            toast.setGravity(Gravity.CENTER, 0, 0);
-//            toast.show();
-//
-//        }
 
         private void finish() {
-            //      act = (BaseConfigurator) getActivity();
             ImageButton im = (ImageButton) rootmerc200.findViewById(R.id.connect);
             im.setImageResource(R.drawable.find);
             act.changeFragmennt = true;
@@ -336,11 +327,20 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
 
     // класс замены адресов наладчика плюс на номера квартир
     class reverseNaladchikTask extends AsyncTask<Void, Pribor, Void> {
-        BaseConfigurator act;
+        /// BaseConfigurator act;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+
+
+            ImageButton im = (ImageButton) rootmerc200.findViewById(R.id.writenumber);
+            im.setImageResource(R.drawable.stop);
+            taskWrite = false;
+            //        act = (BaseConfigurator) getActivity();
+            act.changeFragmennt = false;
+
+
             //
         }
 
@@ -352,24 +352,28 @@ public class mercuryfragment200 extends Fragment implements View.OnClickListener
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            finish();
         }
 
         @Override
         protected void onProgressUpdate(Pribor... values) {
             super.onProgressUpdate(values);
+
         }
 
         @Override
         protected void onCancelled() {
             super.onCancelled();
+            finish();
         }
 
         private void finish() {
             act = (BaseConfigurator) getActivity();
-            ImageButton im = (ImageButton) rootmerc200.findViewById(R.id.connect);
+            ImageButton im = (ImageButton) rootmerc200.findViewById(R.id.writenumber);
             im.setImageResource(R.drawable.find);
             act.changeFragmennt = true;
             taskSearch = true;
+            taskWrite = true;
         }
     }
 }

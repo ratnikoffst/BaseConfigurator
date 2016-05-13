@@ -34,7 +34,6 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
     ListView lvRegistryPribor;
     int progress;
 
-
     //private View rootpribor;
     Mercury23 me;
     BaseConfigurator act;
@@ -57,7 +56,7 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootmerc23 = inflater.inflate(R.layout.mercuriy23, container, false);
+        rootmerc23 = inflater.inflate(R.layout.mercuriyautosearch23, container, false);
 
         rootmerc23.findViewById(R.id.connect).setOnClickListener(this);
         rootmerc23.findViewById(R.id.savePribor).setOnClickListener(this);
@@ -95,8 +94,7 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
         PriborListAdapter adapter = new PriborListAdapter(SearchRegistryPribor, this); ///new PriborListAdapter(RegistryPribor, this); //ListAdapter(RegistryObject, this);
         lvRegistryPribor.setAdapter(adapter);
 
-        // lvRegistryPribor.setOnItemClickListener(this);
-        //lvRegistryPribor.setOnItemLongClickListener(this);
+
     }
 
     @Override
@@ -200,9 +198,12 @@ public class mercuryfragment23х extends Fragment implements View.OnClickListene
             }
             if (me.openport() == true) {
                 for (progress = start; progress <= end; progress++) {
+                    write = new byte[]{0, 0, 0, 0};
                     write = Mercury23.WRITE_SEARCH;
+                    read = new byte[]{0, 0, 0, 0};
                     read = Mercury23.READ_SEARCH;
-
+                    //    write = new byte[]{0, 0, 0, 0};
+                    //   read = new byte[]{0, 0, 0, 0};
                     addressStr = toHexString(progress);
                     write[0] = (byte) Integer.parseInt(addressStr, 16);
                     write = me.crc16modbus(write);

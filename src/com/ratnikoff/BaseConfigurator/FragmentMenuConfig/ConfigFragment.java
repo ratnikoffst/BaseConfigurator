@@ -26,7 +26,8 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
 
     int idObject;
     String TypeFragment;
-    String TagFrament;
+    String TagFragment;
+    BaseConfigurator act;//
     private View root;
     //  private Boolean FLAG_OPEN_CLOSE_MERCURY = false;
 
@@ -35,16 +36,28 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
         root = inflater.inflate(R.layout.configfragment, container, false);
         //      root.setOnClickListener(this);
 
-        idObject = getArguments().getInt("ID_OBJECT");
         TypeFragment = getArguments().getString("TYPE");
-        TagFrament = getArguments().getString("TAG_CONFIGFRAGMENT");//tring("TAG_CONFIGFRAGMENT", "AddConfigPriborAuto");
+        TagFragment = getArguments().getString("TAG_CONFIGFRAGMENT");
+        int i;
+        i = 1;
+        act = (BaseConfigurator) getActivity();
 
+
+        switch (TypeFragment) {
+            case "AutoSearch":
+
+                idObject = getArguments().getInt("ID_OBJECT");
+                TagFragment = getArguments().getString("TAG_CONFIGFRAGMENT");//tring("TAG_CONFIGFRAGMENT", "AddConfigPriborAuto");
+                break;
+            case "OneConnect":
+
+                break;
 //        bundle.putString("TYPE", "AutoSearch");
 //        bundle.putInt("ID_OBJECT", idObject);
 //        bundle.putString("TAG_CONFIGFRAGMENT","AddConfigPriborAuto");
 //
 
-        // NameOwner = getArguments().getString("NameOwner");
+            // NameOwner = getArguments().getString("NameOwner");
 
 
 //        bundle.putString("TYPE", "AutoSearch");
@@ -53,7 +66,7 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
 //        BaseConfigurator act = (BaseConfigurator) getActivity();
 //        act.addFragment("AddObject", addObject, false);
 
-
+        }
         createFillTab();
         createSetOnclick();
 
@@ -116,53 +129,60 @@ public class ConfigFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         Bundle bundle;
         Pribor pribor;
-        BaseConfigurator act = (BaseConfigurator) getActivity();
+        //      BaseConfigurator act = (BaseConfigurator) getActivity();
 
         switch (v.getId()) {
             case R.id.mercury200:
                 mercuryfragment200 addconfigmerc200 = new mercuryfragment200();
                 bundle = new Bundle();
-                bundle.putString("TYPE", "AutoSearch");
-                bundle.putString("TAG", TagFrament);
-                bundle.putInt("Pribor", MERCURY200);
-                bundle.putInt("ID_OWNER", idObject);
-                addconfigmerc200.setArguments(bundle);
-                act.addFragment(CONFIG_PRIBOR, addconfigmerc200, false);
+                switch (TypeFragment) {
+                    case "AutoSearch":
+                        bundle.putString("TYPE", "AutoSearch");
+                        bundle.putString("TAG", TagFragment);
+                        bundle.putInt("ID_OWNER", idObject);
+                        addconfigmerc200.setArguments(bundle);
+                        act.addFragment(CONFIG_PRIBOR, addconfigmerc200, false);
+                        break;
+                    case "OneConnect":
+
+
+                        break;
+                }
                 break;
             case R.id.mercury230:
-                act = (BaseConfigurator) getActivity();
-                mercuryfragment23х addconfigmerc = new mercuryfragment23х();
-                bundle = new Bundle();
-                bundle.putString("TYPE", "AutoSearch");
-                bundle.putString("TAG", TagFrament);
-                bundle.putInt("Pribor", MERCURY230);
-                bundle.putInt("ID_OWNER", idObject);
-                addconfigmerc.setArguments(bundle);
+                //  act = (BaseConfigurator) getActivity();
 
+                switch (TypeFragment) {
+                    case "AutoSearch":
+                        // fragment и одиночное !!!
+                        mercuryfragment23х addconfigmerc = new mercuryfragment23х();
+                        bundle = new Bundle();
+                        bundle.putString("TYPE", "AutoSearch");
+                        bundle.putString("TAG", TagFragment);
+                        bundle.putInt("Pribor", MERCURY230);
+                        bundle.putInt("ID_OWNER", idObject);
+                        addconfigmerc.setArguments(bundle);
+                        act.addFragment(CONFIG_PRIBOR, addconfigmerc, false);
+                        break;
+                    case "OneConnect":
+                        break;
+                }
 
-//        BaseConfigurator act = (BaseConfigurator) getActivity();
-//        act.
-// addFragment("AddObject", addObject, false);
-
-
-                //               Bundle bundle.putString("TYPE", "AutoSearch");
-//        bundle.putInt("ID_OWNER", idObject);
-//        addObject.setArguments(bundle);
-//        BaseConfigurator act = (BaseConfigurator) getActivity();
-//        act.addFragment("AddObject", addObject, false);
-
-
-                //AddEditFrag();
-//                object = (Object) lvRegistryObject.getAdapter().getItem(position);// Летить здесь !!!!
-//                bundle = new Bundle();
-//                bundle.putInt("ID", object.getIdObject());
-//                bundle.putString("NameObject", object.getNameObject());
-//                bundle.putString("NameOwner", NameOwner);
-//                addPribor.setArguments(bundle);
-                act.addFragment(CONFIG_PRIBOR, addconfigmerc, false);
                 break;
             case R.id.mercury234:
                 break;
         }
+    }
+
+    private void vibor200() {
+
+    }
+
+    private void vibor230() {
+
+    }
+
+    private void vibor2334() {
+
     }
 }

@@ -202,9 +202,9 @@ public class PriborBaseFragment extends Fragment implements AdapterView.OnItemCl
         }
     }
 
-    public void changeVIew() {
-        ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
-    }
+//    public void changeVIew() {
+    //       ((BaseAdapter) lvRegistryPribor.getAdapter()).notifyDataSetChanged();
+    //   }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
