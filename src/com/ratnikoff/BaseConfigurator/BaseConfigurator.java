@@ -191,6 +191,7 @@ public class BaseConfigurator extends Activity {
     private void DialogExit() {
         AlertDialog.Builder df = new AlertDialog.Builder(this);
         df.setTitle(R.string.exitapplication);
+        //  df.setTitle(R.);
         df.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             // Тупая заглушк
             @Override
