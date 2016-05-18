@@ -282,13 +282,9 @@ public class BaseConfigurator extends Activity {
         i--;
         getFragmentManager().beginTransaction()
                 .remove(getFragmentManager().findFragmentByTag(tag))
+
                 .show(getFragmentManager().findFragmentByTag(fragmentTag.get(i)))
                 .commit();
     }
 
-//    public void notifyViewFragment() {
-//        String tag = fragmentTag.get(fragmentTag.size());
-//        //   getFragmentManager().findFragmentByTag(tag).notify();
-//
-//    }
 }
